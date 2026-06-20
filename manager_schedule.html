@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Schedule - Monthly View</title>
+    <style>
+        :root {
+            --calendar-bg: #fdfaf0;
+            --border-color: #d1c7ac;
+            --highlight-week: rgba(0, 255, 204, 0.2);
+            --header-bg: #4b2c15;
+            --neon-accent: #00ffcc;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Dark office wall texture using a radial gradient */
+            background-color: #1a1a1a;
+            background-image: radial-gradient(#333 1px, transparent 1px);
+            background-size: 20px 20px; 
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }        
+
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+            background: var(--header-bg);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        button:hover { background: #633a1c; }
+
+        #calendar-container {
+            background: var(--calendar-bg);
+            /* Subtle paper texture effect */
+            background-image: linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px);
+            background-size: 20px 20px;
+    
+            border: 8px solid #3d2b1f; /* Thick "wooden frame" border */
+            width: 95vw;
+            max-width: 1000px;
+            margin: 0 auto;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8), inset 0 0 100px rgba(0,0,0,0.05);
+            border-radius: 4px;
+        }
+
+        .calendar-header {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            background: var(--header-bg);
+            color: white;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .day-label { padding: 10px 0; border: 1px solid #333; }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            width: 100%;
+        }
+
+        .calendar-day {
+            min-height: 120px;
+            border: 1px solid var(--border-color);
+            padding: 5px;
+            position: relative;
+        }
+
+        .day-number { font-weight: bold; margin-bottom: 5px; display: block; }
+
+        /* Highlight the current week */
+        .current-week { background-color: var(--highlight-week); }
+
+        textarea {
+            width: 90%;
+            height: 80px;
+            border: none;
+            background: transparent;
+            font-size: 0.8rem;
+            resize: none;
+            outline: none;
+        }
+        
+       /* Highlight for the current specific day */
+.today-highlight { 
+    border: 3px solid #d32f2f !important; 
+    background-color: #fff0f0 !important; 
+} 
+        
+        /* Style the container for each staff row */
+#shift-list > div {
+    background: rgba(255, 255, 255, 0.05); /* Very faint background */
+    padding: 10px;
+    border-radius: 6px;
+    border-left: 4px solid var(--neon-accent, #00ffcc); /* Accent bar on the side */
+    margin-bottom: 12px !important; /* Space between people */
+}
+
+/* Zebra striping: every second row gets a slightly lighter background */
+#shift-list > div:nth-child(even) {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Make the inputs look a bit more professional inside the rows */
+#shift-list input {
+    border: 1px solid #555;
+    background: #222;
+    color: white;
+    font-size: 1rem;
+}
+
+.nav-container {
+    padding: 20px;
+    background: #2c3e50;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.btn-return {
+    text-decoration: none;
+    color: white;
+    background: #009933;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: sans-serif;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn-return:hover {
+    background: #a93226;
+}
+
+@media screen and (max-width: 600px) {
+    .controls {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); 
+        width: 100%;
+        gap: 5px;
+    }
+
+    /* Target the class to match your desktop selector */
+    .calendar-grid {
+        display: block !important; /* Stack days vertically */
+        padding: 10px;
+    }
+
+    .calendar-day {
+        width: 100% !important;
+        box-sizing: border-box; /* Prevents horizontal scroll */
+        min-height: auto;
+        margin-bottom: 10px;
+        border: 2px solid var(--border-color);
+    }
+
+    .day-headers {
+        display: none !important; 
+    }
+
+    #day-modal > div {
+        width: 95%;
+        margin: 10px auto;
+    }
+}
+
+@media print {
+    /* Hide the manager tools */
+    .controls, button, #day-modal, #custom-settings {
+        display: none !important;
+    }
+    
+    body {
+        background: white !important;
+        background-image: none !important;
+        padding: 0 !important;
+    }
+
+    #calendar-container {
+        width: 100% !important;
+        max-width: none !important;
+        border: 1px solid #000 !important;
+        box-shadow: none !important;
+        background: white !important;
+    }
+
+    .calendar-header, .day-headers {
+        background: #eee !important;
+        color: black !important;
+        border-bottom: 2px solid #000 !important;
+    }
+
+    .calendar-day {
+        min-height: 100px !important;
+        border: 1px solid #ddd !important;
+    }
+}
+    </style>
+<link rel="apple-touch-icon" sizes="180x180" href="icon-512.png">
+<link rel="manifest" href="manifest.json">
+
+</head>
+<body>
+
+<div class="nav-container">
+    <a href="manager_office.html" class="btn-return">←EXIT</a>
+</div>
+
+    <div class="controls"> 
+        <button onclick="toggleViewMode()" style="background: #888;">VIEW MODE</button>
+        <button onclick="saveSchedule()">SAVE</button>
+        <button onclick="exportToPDF()">EXPORT TO PDF</button>
+        <button onclick="forwardSchedule()">FORWARD</button>
+        <button onclick="clearEntireSchedule()" style="background: #a00;">CLEAR ALL</button>
+        <button onclick="window.location.href='manager_office.html'" style="background: #888;">BACK</button>
+        <button onclick="copyPreviousWeek()" style="background: #2c3e50;">COPY PREVIOUS WEEK</button>
+    </div>
+
+<div id="calendar-container">
+    <div id="month-name" style="background: var(--header-bg); color: white; text-align: center; padding: 15px; font-size: 1.5rem;">
+        </div>
+
+    <div class="day-headers" style="display: grid; grid-template-columns: repeat(7, 1fr); background: var(--header-bg); color: white;">
+        <div class="day-label">Sun</div>
+        <div class="day-label">Mon</div>
+        <div class="day-label">Tue</div>
+        <div class="day-label">Wed</div>
+        <div class="day-label">Thu</div>
+        <div class="day-label">Fri</div>
+        <div class="day-label">Sat</div>
+    </div>
+
+    <div class="calendar-grid" id="days-grid">
+        </div>
+</div>
+
+<script>
+const grid = document.getElementById('days-grid');
+const monthLabel = document.getElementById('month-name');
+let currentEditingDay = null;
+
+function initCalendar() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth();
+    const today = now.getDate();
+
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"];
+    monthLabel.innerText = `${monthNames[month]} ${year}`;
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    // Current Week Range
+    const currentDayOfWeek = now.getDay();
+    const startOfWeek = today - currentDayOfWeek;
+    const endOfWeek = startOfWeek + 6;
+
+    grid.innerHTML = '';
+
+    for (let i = 0; i < firstDay; i++) {
+        const emptyDiv = document.createElement('div');
+        emptyDiv.classList.add('calendar-day');
+        emptyDiv.style.background = "#eee";
+        grid.appendChild(emptyDiv);
+    }
+
+        // Create the actual days
+        for (let day = 1; day <= daysInMonth; day++) {
+        const dayDiv = document.createElement('div');
+        dayDiv.classList.add('calendar-day');
+        dayDiv.style.cursor = "pointer";
+        dayDiv.setAttribute('onclick', `openModal(${day})`);
+
+// Highlight the current week
+        if (day >= startOfWeek && day <= endOfWeek) {
+            dayDiv.classList.add('current-week');
+        }
+
+        // Highlight TODAY specifically
+        if (day === today) {
+            dayDiv.classList.add('today-highlight');
+        }
+
+        // 1. Get Today's Data
+        const savedData = JSON.parse(localStorage.getItem(`shifts-${year}-${month}-${day}`) || "[]");
+        
+        // 2. NEW: Get Yesterday's Data to check for "Clopens"
+        const yesterdayData = day > 1 ? JSON.parse(localStorage.getItem(`shifts-${year}-${month}-${day - 1}`) || "[]") : [];
+        
+        // 3. Create a list of people who worked LATE yesterday (5p or Cl)
+        const workedLateYesterday = yesterdayData
+            .filter(s => s.time.toLowerCase().includes("5p") || s.time.toLowerCase().includes("cl"))
+            .map(s => s.name.trim().toLowerCase());
+
+        const staffCount = savedData.length;
+        const badgeHTML = staffCount > 0 ? `<span style="float:right; background:#4b2c15; color:white; font-size:0.6rem; padding:2px 5px; border-radius:10px;">${staffCount} Staff</span>` : '';
+
+        let shiftListHTML = '<div style="margin-top:5px; font-size:0.7rem; line-height:1.2; clear:both;">';
+        
+        const nameCounts = {};
+        savedData.forEach(s => {
+            const n = s.name.trim().toLowerCase();
+            nameCounts[n] = (nameCounts[n] || 0) + 1;
+        });
+        
+        // --- NEW: Calculate Total Hours Scheduled ---
+        let totalHours = 0;
+        savedData.forEach(shift => {
+            const time = shift.time.toLowerCase();
+            if (time.includes("7a-3p")) totalHours += 8;
+            else if (time.includes("11a-5p")) totalHours += 6;
+            else if (time.includes("5p-cl")) totalHours += 5; // Assuming Close is 10pm
+            else if (time !== "") totalHours += 4; // Default for custom labels
+        });
+
+        // Create the Budget Badge HTML
+        const budgetHTML = totalHours > 0 ? `<div style="font-size:0.6rem; color:#666; font-style:italic; margin-top:2px; border-top:1px solid #ddd; padding-top:2px;">Total: ${totalHours} hrs</div>` : '';
+        savedData.forEach(shift => {
+            const currentName = shift.name.trim().toLowerCase();
+            const currentTime = shift.time.toLowerCase();
+            
+            // --- NEW: CLOPEN LOGIC ---
+            // Trigger warning if they work an early shift (7a or 11a) AND worked late yesterday
+            const isEarlyToday = currentTime.includes("7a") || currentTime.includes("11a");
+            const isClopen = workedLateYesterday.includes(currentName) && isEarlyToday;
+
+            let bgColor = "#e2e2e2"; 
+            if (currentTime.includes("7a")) bgColor = "#d4f1f9"; 
+            if (currentTime.includes("5p")) bgColor = "#f9d4d4"; 
+            if (currentTime.includes("11a")) bgColor = "#d4f9e2"; 
+
+            const isDuplicate = nameCounts[currentName] > 1;
+            
+            // Priority: Clopen (Purple) takes precedence over Duplicate (Orange)
+            let borderColor = "none";
+            let shadowStyle = "none";
+            let finalBg = bgColor;
+
+            if (isDuplicate) {
+                finalBg = "#fff3e0";
+                borderColor = "2px solid #ff6600";
+            }
+            
+            if (isClopen) {
+                finalBg = "#f3e5f5"; // Light purple
+                borderColor = "2px solid #9c27b0"; // Deep purple
+                shadowStyle = "0 0 5px rgba(156,39,176,0.5)";
+            }
+
+            shiftListHTML += `
+                <div style="background:${finalBg}; 
+                            border:${borderColor}; 
+                            box-shadow:${shadowStyle};
+                            padding:2px 4px; margin-bottom:1px; border-radius:2px; color:#333;">
+                    ${isClopen ? '<strong>⚠️ </strong>' : ''}<strong>${shift.time}</strong> ${shift.name}
+                </div>`;
+        });
+        shiftListHTML += '</div>';
+        
+        const savedEvent = localStorage.getItem(`event-${year}-${month}-${day}`) || "";
+        let eventHTML = '';
+        if (savedEvent) {
+        dayDiv.style.background = "#fff9c4"; // Soft yellow for event days
+        eventHTML = `<div style="background:#fbc02d; color:#333; font-size:0.6rem; font-weight:bold; padding:2px; text-align:center; margin-top:2px; text-transform:uppercase;">${savedEvent}</div>`;
+        }
+        
+        dayDiv.innerHTML = `<span class="day-number">${day}</span>${badgeHTML}${eventHTML}${shiftListHTML}${budgetHTML}`;
+        grid.appendChild(dayDiv);
+    }
+}
+
+// MODAL LOGIC
+function openModal(day) {
+    currentEditingDay = day;
+    const now = new Date();
+    document.getElementById('modal-date-title').innerText = `${now.toLocaleString('default', { month: 'long' })} ${day}, ${now.getFullYear()}`;
+    
+    const list = document.getElementById('shift-list');
+    list.innerHTML = '';
+    
+    const savedData = JSON.parse(localStorage.getItem(`shifts-${now.getFullYear()}-${now.getMonth()}-${day}`) || "[]");
+    
+    if (savedData.length === 0) {
+        addShiftRow(); 
+    } else {
+        savedData.forEach(shift => addShiftRow(shift.name, shift.time));
+    }
+    document.getElementById('day-modal').style.display = 'block';
+    const savedEvent = localStorage.getItem(`event-${now.getFullYear()}-${now.getMonth()}-${day}`) || "";
+    document.getElementById('event-name').value = savedEvent;
+}
+
+function addShiftRow(name = '', time = '') {
+    const list = document.getElementById('shift-list');
+    const row = document.createElement('div');
+    
+    const c1 = localStorage.getItem('custom-label-1') || 'Custom 1';
+    const c2 = localStorage.getItem('custom-label-2') || 'Custom 2';
+    const c3 = localStorage.getItem('custom-label-3') || 'Custom 3';
+
+    row.innerHTML = `
+        <div style="display: flex; gap: 5px; margin-bottom: 8px;">
+            <input type="text" placeholder="Name" value="${name}" style="flex:2; padding:8px;">
+            <input type="text" class="time-input" placeholder="Time" value="${time}" 
+                   onfocus="this.parentElement.nextElementSibling.style.display='grid'" 
+                   style="flex:1; padding:8px;">
+            <button onclick="this.parentElement.parentElement.remove()" style="background:#a00; padding:5px 10px; border:none; color:white; border-radius:4px;">X</button>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px;">
+            <button type="button" onclick="selectTime(this, '7a-3p')" style="font-size:0.65rem; background:#444; padding:6px 2px;">7a-3p</button>
+            <button type="button" onclick="selectTime(this, '11a-5p')" style="font-size:0.65rem; background:#444; padding:6px 2px;">11a-5p</button>
+            <button type="button" onclick="selectTime(this, '5p-Cl')" style="font-size:0.65rem; background:#444; padding:6px 2px;">5p-Cl</button>
+            
+            <button type="button" onclick="selectTime(this, '${c1}')" style="font-size:0.65rem; background:#222; border:1px solid #555; padding:6px 2px;">${c1}</button>
+            <button type="button" onclick="selectTime(this, '${c2}')" style="font-size:0.65rem; background:#222; border:1px solid #555; padding:6px 2px;">${c2}</button>
+            <button type="button" onclick="selectTime(this, '${c3}')" style="font-size:0.65rem; background:#222; border:1px solid #555; padding:6px 2px;">${c3}</button>
+        </div>
+    `;
+    list.appendChild(row);
+}
+
+function saveDailyShifts() {
+    const list = document.getElementById('shift-list');
+    const rows = Array.from(list.children); 
+    const shiftData = [];
+    
+    rows.forEach(row => {
+        const inputs = row.querySelectorAll('input');
+        if(inputs[0] && inputs[0].value.trim() !== "") { 
+            shiftData.push({ 
+                name: inputs[0].value.trim(), 
+                time: inputs[1].value.trim() 
+            });
+        }
+    });
+
+    const now = new Date();
+    // Save shifts
+    localStorage.setItem(`shifts-${now.getFullYear()}-${now.getMonth()}-${currentEditingDay}`, JSON.stringify(shiftData));
+    
+    // Save event (Using currentEditingDay instead of 'day')
+    const eventVal = document.getElementById('event-name').value;
+    localStorage.setItem(`event-${now.getFullYear()}-${now.getMonth()}-${currentEditingDay}`, eventVal); 
+
+    closeModal();
+    initCalendar(); 
+}
+
+function selectTime(btn, timeValue) {
+    const row = btn.closest('#shift-list > div'); // More specific selector
+    const timeInput = row.querySelector('.time-input');
+    timeInput.value = timeValue;
+    btn.parentElement.style.display = 'none'; 
+}
+
+function closeModal() {
+    document.getElementById('day-modal').style.display = 'none';
+}
+
+function saveCustomLabels() {
+    const c1 = document.getElementById('custom-1').value;
+    const c2 = document.getElementById('custom-2').value;
+    const c3 = document.getElementById('custom-3').value;
+    
+    localStorage.setItem('custom-label-1', c1);
+    localStorage.setItem('custom-label-2', c2);
+    localStorage.setItem('custom-label-3', c3);
+    
+    alert("Labels saved! They will appear on new rows.");
+    document.getElementById('custom-settings').style.display = 'none';
+}
+
+function saveSchedule() {
+    // Collect all schedule data from localStorage
+    const allData = {};
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key.startsWith('shifts-') || key.startsWith('custom-label')) {
+            allData[key] = localStorage.getItem(key);
+        }
+    }
+
+    // Create a blob and download it as a JSON file
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(allData));
+    const downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href", dataStr);
+    downloadAnchorNode.setAttribute("download", "staff_schedule_backup.json");
+    document.body.appendChild(downloadAnchorNode);
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
+    
+    alert("Schedule Backup Downloaded!");
+}
+
+function exportToPDF() {
+    // Set a clean filename for when they save it
+    const month = document.getElementById('month-name').innerText;
+    const originalTitle = document.title;
+    document.title = `Staff_Schedule_${month.replace(/\s+/g, '_')}`;
+
+    // Open the system print dialog
+    window.print();
+
+    // Restore the original tab title
+    document.title = originalTitle;
+}
+
+
+// TOP CONTROLS
+function clearEntireSchedule() {
+    if (confirm("Are you sure? This will wipe the ENTIRE month.")) {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = now.getMonth();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+        for (let day = 1; day <= daysInMonth; day++) {
+            localStorage.removeItem(`shifts-${year}-${month}-${day}`);
+        }
+        initCalendar();
+    }
+}
+
+function forwardSchedule() {
+    const message = encodeURIComponent("The Staff Schedule has been updated in the Manager Portal. Please check the portal for your specific shifts.");
+    
+    // Using the 'send' API which is more aggressive at opening the desktop app
+    const whatsappUrl = `https://api.whatsapp.com/send?text=${message}`;
+    
+    window.open(whatsappUrl, '_blank');
+}
+
+function toggleViewMode() {
+    const isViewMode = confirm("Switch to View-Only mode? (Refresh the page to return to Manager mode)");
+    
+    if (isViewMode) {
+        // 1. Hide the top control buttons
+        document.querySelector('.controls').style.display = 'none';
+        
+        // 2. Disable clicking on the days
+        const days = document.querySelectorAll('.calendar-day');
+        days.forEach(day => {
+            day.onclick = null;
+            day.style.cursor = 'default';
+        });
+        
+        // 3. Add a small "View Only" indicator
+        const indicator = document.createElement('div');
+        indicator.innerHTML = "<strong>VIEW-ONLY MODE</strong>";
+        indicator.style.cssText = "color: white; background: #c00; padding: 5px 20px; border-radius: 20px; margin-bottom: 10px;";
+        document.body.prepend(indicator);
+    }
+}function copyPreviousWeek() {
+    if (!confirm("This will copy shifts from 7 days ago into the current days. Continue?")) return;
+
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth();
+    const today = now.getDate();
+    
+    // Find the start of the current week (Sunday)
+    const currentDayOfWeek = now.getDay();
+    const startOfThisWeek = today - currentDayOfWeek;
+
+    // Loop through the 7 days of the week
+    for (let i = 0; i < 7; i++) {
+        const targetDay = startOfThisWeek + i;
+        const sourceDay = targetDay - 7;
+
+        // Only copy if the source day exists in this month
+        if (sourceDay > 0) {
+            const sourceKey = `shifts-${year}-${month}-${sourceDay}`;
+            const targetKey = `shifts-${year}-${month}-${targetDay}`;
+            
+            const sourceData = localStorage.getItem(sourceKey);
+            const sourceEvent = localStorage.getItem(`event-${year}-${month}-${sourceDay}`);
+
+            if (sourceData) {
+                localStorage.setItem(targetKey, sourceData);
+            }
+            if (sourceEvent) {
+                localStorage.setItem(`event-${year}-${month}-${targetDay}`, sourceEvent);
+            }
+        }
+    }
+
+    alert("Shifts and Events copied from last week!");
+    initCalendar(); // Refresh the view
+}
+
+function copyPreviousWeek() {
+    if (!confirm("This will copy shifts from 7 days ago into the current days. Continue?")) return;
+
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth();
+    const today = now.getDate();
+    
+    // Find the start of the current week (Sunday)
+    const currentDayOfWeek = now.getDay();
+    const startOfThisWeek = today - currentDayOfWeek;
+
+    // Loop through the 7 days of the week
+    for (let i = 0; i < 7; i++) {
+        const targetDay = startOfThisWeek + i;
+        const sourceDay = targetDay - 7;
+
+        // Only copy if the source day exists in this month
+        if (sourceDay > 0) {
+            const sourceKey = `shifts-${year}-${month}-${sourceDay}`;
+            const targetKey = `shifts-${year}-${month}-${targetDay}`;
+            
+            const sourceData = localStorage.getItem(sourceKey);
+            const sourceEvent = localStorage.getItem(`event-${year}-${month}-${sourceDay}`);
+
+            if (sourceData) {
+                localStorage.setItem(targetKey, sourceData);
+            }
+            if (sourceEvent) {
+                localStorage.setItem(`event-${year}-${month}-${targetDay}`, sourceEvent);
+            }
+        }
+    }
+
+    alert("Shifts and Events copied from last week!");
+    initCalendar(); // Refresh the view
+}
+
+
+
+// Start
+initCalendar();
+
+</script>
+ 
+    <div id="day-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:20000; color:white; overflow-y:auto;">
+    <div style="max-width:500px; margin:40px auto; padding:20px; background:#333; border-radius:8px; position:relative;">
+        <span onclick="closeModal()" style="position:absolute; top:10px; right:20px; font-size:2rem; cursor:pointer;">&times;</span>
+        
+        <h2 id="modal-date-title" style="color:var(--neon-accent);">April 16, 2026</h2>
+        <hr>
+       <input type="text" id="event-name" placeholder="Special Event (e.g. Inventory, Holiday)" style="width:100%; padding:10px; margin-bottom:15px; background:#444; color:white; border:1px solid #666; border-radius:4px;"> 
+ <div id="shift-list">
+            </div>
+
+        <div id="custom-settings" style="margin-top:20px; padding:10px; border:1px dashed #666; border-radius:8px; display:none;">
+            <p style="font-size:0.8rem; margin-bottom:10px; color:#ccc;">Set your 3 custom shortcuts:</p>
+            <input type="text" id="custom-1" placeholder="Custom 1" style="width:30%; font-size:0.7rem; padding:5px;">
+            <input type="text" id="custom-2" placeholder="Custom 2" style="width:30%; font-size:0.7rem; padding:5px;">
+            <input type="text" id="custom-3" placeholder="Custom 3" style="width:30%; font-size:0.7rem; padding:5px;">
+            <button onclick="saveCustomLabels()" style="width:100%; margin-top:10px; background:#444; font-size:0.8rem;">Save Custom Labels</button>
+        </div>
+
+        <button onclick="document.getElementById('custom-settings').style.display='block'" style="background:none; color:var(--neon-accent); border:1px solid var(--neon-accent); width:100%; margin-top:20px; font-size:0.8rem;">⚙️ EDIT CUSTOM BUTTONS</button>
+        
+        <button onclick="addShiftRow()" style="background:#28a745; width:100%; margin-top:10px;">+ ADD STAFF MEMBER</button>
+        <button onclick="saveDailyShifts()" style="background:var(--neon-accent); color:#88aadd; width:100%; margin-top:10px;">SAVE DAY</button>       
+
+    </div>
+</div>
+</body>
+</html>

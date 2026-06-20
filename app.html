@@ -1,0 +1,2384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
+
+
+<title>Both</title>
+<style>
+:root {
+  --jar-scale-desktop: 0.8;
+  --jar-scale-mobile: 0.8;
+  --dashboard-scale: 0.8;
+} 
+
+.animation-wrapper {
+    position: relative; 
+    margin: 0 auto;
+    top: 20px;
+    width: 300px;
+    height: 260px;
+    z-index: 1;
+    pointer-events: none;
+    transform: scale(var(--jar-scale-desktop));
+    transition: transform 0.5s ease-in-out;
+}
+
+
+/* THE REST OF YOUR CSS... */
+
+body {
+    background: 
+        /* The Sun: Sharper, brighter, and higher up */
+        radial-gradient(circle at top right, #fff9e6 0%, #fff176 10%, rgba(255, 255, 255, 0) 50%),
+        /* The High Noon Sky to Grass transition */
+        linear-gradient(to bottom, 
+            #00b4ff 0%,    /* Sky Top */
+            #70d1ff 25vh,   /* Horizon Blue */
+            #44cc44 25vh,   /* Bright Summer Grass */
+            #228b22 100%   /* Deep Grass Shadow */
+        );
+    
+    background-size: 50vw 50vw, 100% 100vh; 
+    background-position: 120% -20%, center; 
+    background-repeat: no-repeat, no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* 1. GLOBAL & BASE STYLES */
+.secondary-table {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 95%;
+    max-width: 600px;
+    margin: 10px auto !important; 
+    position: relative;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    background: rgba(40, 50, 45, 0.85); 
+    border-radius: 12px; 
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.15), 
+                inset 0 0 15px rgba(255, 255, 255, 0.05);
+    padding: 15px; 
+}
+
+.secondary-table:focus-within { 
+    transform: scale(1.20); z-index: 10; 
+}
+
+/* --- CLEANED MOONLIGHT TABLE STYLING --- */
+th, td { 
+    text-align: center;
+    overflow: hidden; 
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Very thin light border */
+}
+
+th {
+    color: #e0e0e0 !important; /* Off-white for contrast against #2a0052 */
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
+    background: rgba(255, 255, 255, 0.05); /* Slight lift for headers */
+}
+
+td {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.hidden-column { 
+    display: none; 
+}
+
+.table-scroll-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    display: block;
+    margin: 0 auto;
+    -webkit-overflow-scrolling: touch; /* Smooth swiping on iPhone */
+    padding-bottom: 10px; /* Space for the scrollbar so it doesn't cover data */
+}
+
+h1  {
+  text-align:  center;
+  }
+
+table { 
+  margin-left: auto; 
+  margin-right: auto; 
+  width: 90%; max-width: 100vw;
+  border-collapse: collapse; 
+  margin-bottom: 5px; 
+  box-sizing: border-box; 
+}
+
+input { 
+  width: 80%; 
+  padding: 5px; 
+  border: 1px solid #ccc;
+  border-radius:  4px; 
+}
+
+input[readonly] { 
+  background-color:  #e9ecef; 
+  border: 1px solid #ced4da; 
+}  
+/* Buttons */
+button { 
+  padding: 10px 20px; 
+  cursor: pointer; 
+  border: none; 
+  border-radius: 4px; 
+  font-weight: bold; 
+  margin: 5px; 
+  }
+
+.main {
+  text-align:  center;
+  position:  absolute;
+  left: 50%;
+  transform:  translateX(-50%);
+  top: 60px; 
+  width: 100%;
+  z-index: 101; 
+}
+
+
+#tipInput {
+    text-align: center; /* Centers the text you type */
+}
+
+#tipInput::placeholder {
+    text-align: center; /* Centers the grey placeholder hint */
+    opacity: 0.6;
+}
+/* 2. THE JAR & SHELF */
+.jar {
+  opacity: 1 !important;
+  transform-style: preserve-3d; /* Keeps lid, jar, and legs together in 3D space */
+  transform-origin: bottom center; /* Keeps the "feet" on the ground during scale */
+  width: 200px !important;
+  max-width:  200px !important;
+  flex: 0 0 200px !important;
+  display: flex;
+  flex-direction:  column;
+  align-items: center;
+  height: 250px;
+  position: relative;
+  margin: 50px auto;
+  background-color: slategray;
+  box-shadow:  inset -10px -10px 30px rgba(0,0,0,0.5);
+  border-radius:  47px 47px 40px 40px; 
+  z-index: 10; /* rounded  bottom corners */
+  pointer-events: none;  
+}
+
+.jar.faded  {
+  opacity:  0.5 !important;
+  transition: opacity 2s ease-in-out;
+}
+
+
+
+.jar-top  {
+   width: 210px;
+   height: 50px;
+   background-color: slategray;
+   position: absolute; /* Changed from relative */
+   top: -25px;
+   left: 50%;
+   transform: translateX(-50%); /* Locks it to the exact middle of the jar */
+   box-shadow: inset -10px -10px 30px rgba(0,0,0,0.5);
+   border-radius: 50% / 100%;
+   border-bottom: 2px solid black;
+   z-index: 100;
+   pointer-events: auto !important;  
+}
+
+.jar input, .jar button {
+    pointer-events: auto; /* Re-enables clicking for the internal Jar input/button */
+}
+
+
+.tip-jar-title, #tipInput, #btn {
+    opacity: 0; /* Keep hidden initially */
+    animation: fadeIn 0.8s ease-out forwards;
+    animation-delay: 2.0s; /* Waits for the money to finish falling */
+}
+
+#btn {
+    opacity: 0;
+    /* First fade in, then pulse forever. 
+       Note: 2.8s delay (2.0s wait + 0.8s fade duration) */
+    animation: fadeIn 0.8s ease-out forwards 2.0s, 
+               steadyPulseGlow 2.5s ease-in-out infinite 2.8s;
+}
+
+#btn.clicked {
+     display: none;
+}
+
+/* The Shelf */
+.shelf {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%); /* Centers the shelf under the jar */
+    width: 150px;
+    height: 10px;
+    background: #8b4513; /* Wood brown */
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.5s;
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* Stickman Legs */
+.legs-container {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 30px;
+    opacity: 0; /* Hidden until jump */
+}
+
+.leg {
+    width: 4px;
+    height: 30px;
+    background: black;
+    position: relative;
+}
+
+.boot {
+    width: 15px;
+    height: 10px;
+    background: #4a2c2a;
+    border-radius: 5px 5px 2px 2px;
+    position: absolute;
+    bottom: -5px;
+    left: -5px;
+}
+
+.container {
+    position: relative; /* Ensure container is the reference point */
+    overflow: visible;  /* Allow the ground to be seen */
+}
+
+.container::after {
+    content: "";
+    position: absolute;
+    /* Position exactly where the dollar signs reach 100% (218px) */
+    top: 218px; 
+    left: 10%;
+    width: 80%;
+    height: 2px;
+    background: rgba(0, 0, 0, 0.1); /* Subtle horizontal line */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Soft ground shadow */
+    border-radius: 50%;
+    z-index: -1; /* Place behind the falling money */
+}
+
+.shrink-to-corner {
+    transform: scale(0.6);
+    transform-origin: top left;
+    opacity: 0.8;
+    transition: all 1s ease-in-out;
+}
+
+
+#bypassBtn {
+    display: none; /* JS will show it */
+    margin: 20px auto;
+    position: relative;
+    z-index: 5000; /* Ensure it stays above everything */
+    transform: translateX(-50%);
+}
+
+.top-row-container {
+    display: flex;
+    flex-direction: column; /* Forces the Jar -> Table 1 -> Table 2 stack */
+    align-items: center;
+    gap: 0;                 /* Tightens the space between items */
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 100;
+}
+
+.top-row-item {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transform: scale(0.65) !important;
+    transform-origin: top center;
+    margin: 0 auto !important; /* This forces the "Spine" stacking */
+    width: 95% !important;    /* Occupies the full width to prevent drifting left/right */
+    opacity: 1 !important;
+}
+
+
+/* Centering wrapper for buttons below tables */
+.action-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    gap: 10px;
+    position: relative; /* Allows z-index to work */
+    z-index: 10000;      /* Higher than the Jar (200) and Tables (10) */
+    pointer-events: auto;
+}
+
+
+/* Ensure ALL action buttons are centered and sized for fingers/touch */
+#bypassBtn, #finalFinishBtn {
+    display: none; /* Controlled by JS */
+    margin: 10px auto;
+    min-width: 200px; /* Makes it easier to tap on iPad */
+    padding: 15px 30px;
+    font-size: 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    position: relative !important;
+    z-index: 10000 !important;   /* Higher than the Jar and Table layers */
+    pointer-events: auto !important; 
+
+}
+
+/* Base styles for all tour popovers */
+.tour-popover {
+    position: absolute;
+    background: #ffffff;
+    border: 2px solid #333333;
+    border-radius: 12px;
+    padding: 14px 22px;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333333;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    z-index: 20000; /* Stays above your layout layers */
+    opacity: 0;     /* Starts invisible; JS will fade it in */
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none; /* Won't block clicks underneath it */
+    width: max-content;
+    max-width: 280px;
+    text-align: center;
+}
+
+/* Arrow Tail: Pointing DOWN (For Tip Jar and Bypass Button) */
+.tour-popover.arrow-down::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 10px 10px 0;
+    border-style: solid;
+    border-color: #ffffff transparent;
+    display: block;
+    width: 0;
+}
+.tour-popover.arrow-down::before {
+    content: '';
+    position: absolute;
+    bottom: -13px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 11px 11px 0;
+    border-style: solid;
+    border-color: #333333 transparent;
+    display: block;
+    width: 0;
+    z-index: -1;
+}
+
+/* Arrow Tail: Pointing RIGHT (For the Sun) */
+.tour-popover.arrow-right::after {
+    content: '';
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-width: 10px 0 10px 10px;
+    border-style: solid;
+    border-color: transparent #ffffff;
+    display: block;
+    width: 0;
+}
+.tour-popover.arrow-right::before {
+    content: '';
+    position: absolute;
+    right: -13px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-width: 11px 0 11px 11px;
+    border-style: solid;
+    border-color: transparent #333333;
+    display: block;
+    width: 0;
+    z-index: -1;
+}
+
+/* 3. ALL ANIMATIONS (@keyframes) */
+
+@keyframes  myAnimation  {
+  0%   {left:0%; top: -210px; opacity: 0;}
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% {left:0%; top:218px; opacity: 0; }
+}
+
+@keyframes flutterSmall {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-8px) rotate(-3deg); }
+  75% { transform: translateX(8px) rotate(3deg); }
+}
+
+@keyframes flutterMed {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-20px) rotate(-6deg); }
+  75% { transform: translateX(20px) rotate(6deg); }
+}
+
+@keyframes flutterLarge {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-35px) rotate(-10deg); }
+  75% { transform: translateX(35px) rotate(10deg); }
+}
+
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+  
+@keyframes steadyPulseGlow {
+    0% { 
+        transform: scale(1); 
+        box-shadow: 0 0 5px rgba(40, 167, 69, 0.4);
+    }
+    50% { 
+        transform: scale(1.03); 
+        box-shadow: 0 0 15px rgba(40, 167, 69, 0.7); 
+    }
+    100% { 
+        transform: scale(1); 
+        box-shadow: 0 0 0px rgba(40, 167, 69, 0.4);
+    }
+}
+
+/* JUMP ANIMATION */
+@keyframes jumpToShelf {
+    0% { top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1); }
+    20% { transform: translate(-50%, -40%) scaleY(0.8);} /* Bending down */
+    50% { transform: translate(-80px, -230px) scaleY(1.1); } /* Jumping up */
+    100% { top: -30px; left: 100px; transform: translate(0, 0) scale(0.5); opacity: 0.5;} /* Landing on shelf */
+}
+
+
+@keyframes dustCloud {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+        /* Creates a cluster of 3 dust particles */
+        box-shadow: 
+            0 0 8px 4px rgba(180, 160, 140, 0.8),
+            12px 2px 6px 2px rgba(180, 160, 140, 0.6),
+            -12px 2px 6px 2px rgba(180, 160, 140, 0.6);
+    }
+    20% { opacity: 1; } /* Quick impact pop */
+    100% {
+        opacity: 0;
+        transform: scale(2.5) translateY(-25px); /* Dust drifts UP */
+        box-shadow: 
+            0 -10px 20px 10px rgba(180, 160, 140, 0),
+            25px -15px 15px 5px rgba(180, 160, 140, 0),
+            -25px -15px 15px 5px rgba(180, 160, 140, 0);
+    }
+}
+
+
+@keyframes legSwing {
+    0%, 100% { transform: rotate(-15deg); }
+    50% { transform: rotate(15deg); }
+}
+
+
+/* Mist Animation: left-to-right floating */
+@keyframes mistPass {
+  0% { transform: translateX(-150px); opacity: 0.4; }
+  50% { transform: translateX(50px); opacity: 0.6; }
+  100% { transform: translateX(150px); opacity: 0.4; }
+}
+
+/* Gods float gently up and down */
+@keyframes ritualFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-10px) scale(1.05); }
+}
+
+/* 4. INTERACTIVE CLASSES & SMOKE */
+.content1  { animation: myAnimation 1.7s forwards 0.2s, flutterSmall 2s  infinite 0.2s;}
+.content2  { animation: myAnimation 1.5s forwards 0.5s, flutterMed 1.8s infinite 0.5s;}
+.content3  { animation: myAnimation 1.3s forwards 0.1s, flutterLarge 2.2s  infinite 0.1s;}
+.content4  { animation: myAnimation 1.4s forwards 0.7s, flutterSmall 1.5s infinite 0.7s;}
+.content5  { animation: myAnimation 1.6s forwards 1.0s, flutterMed 2.5s  infinite 1.9s;}
+.content6  { animation: myAnimation 1.9s forwards 0.9s, flutterLarge 1.9s  infinite 0.9s;}
+  
+.content1::before, .content2::before, .content3::before, .content4::before, .content5::before, .content6::before,
+.content1::after, .content2::after, .content3::after, .content4::after, .content5::after, .content6::after {   
+   position:  absolute;
+   content: "\0024";
+   padding: 2px 5px;
+   border-radius: 3px;
+   display: inline-block;
+}
+
+.content1::before  {left:  60px; transform:  rotate(-15deg); background-color:  #ebb1a7; } /* light pink */
+.content2::before  { left:  33px; transform:  rotate(-15deg); background-color:  pink; }
+.content3::before  { left:  49px; transform:  scale(1.8) rotate(-27deg); background-color:  #e1d5f5;  } /* light purple */
+.content4::before  { left:  22px; transform:  rotate(27deg); background-color:  #caa6e3; } /* light purple */
+.content5::before  { left:  80px; transform:  rotate(44deg); background-color:  lightblue; }
+.content6::before  { left: 90px; transform:  rotate(-31deg); background-color: #9cbf7d; } /* light green */
+.content1::after { right: 59px; transform: scale(1.5) rotate(15deg); background-color: #905424; }
+.content2::after { right: 17px; transform: rotate(15deg); background-color: #905424; }
+.content3::after { right: 33px; transform: rotate(15deg); background-color: #E1d5f5; }
+.content4::after { right: 49px; transform: rotate(27deg); background-color: #caa6e3; }
+.content5::after { right: 66px; transform: rotate(-27deg); background-color: lightblue; }
+.content6::after { left: 100px; transform: scale(1.5) rotate(72deg); background-color: #9cbf7d; }
+
+.smoke-puff {
+    position: absolute;
+    /* Position exactly where the jar lands (top: -30px, left: 100px in your jump) */
+    top: 90px;  /* Slightly above shelf height of 100px */
+    left: 145px; 
+    width: 2px;
+    height: 2px;
+    background: transparent;
+    border-radius: 50%;
+    opacity: 0;
+    z-index: 8; /* Higher than jar (7) and shelf (5) */
+    pointer-events: none;
+}
+
+.smoke-puff.active {
+    animation: dustCloud 1.2s ease-out forwards;
+}
+
+.jar.animated {
+    animation: jumpToShelf 1.2s forwards ease-in-out;
+    z-index: 7;
+    opacity: 0.6;
+}
+
+.jar.animated .legs-container {
+    opacity: 0.6;
+    transition: opacity 0.2s 0.8s; /* Appear just as it lands */
+}
+
+.jar.animated .leg {
+    animation: legSwing 1s ease-in-out infinite 1.2s; /* Swing after landing */
+    transform-origin: top;
+}
+
+.content > div {
+    position: relative;
+    animation-name: myAnimation;
+    animation-fill-mode: both;
+}
+
+.tableContainer.animated {
+    max-height: 2000px;
+    opacity: 1;
+    transition-delay: 1.5s;
+}
+
+
+/* 5. TABLE 1 (MAIN TABLE) */
+.tableContainer {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 95%;
+    max-width: 800px; /* Changed from 100vw to keep it from looking too wide */
+    margin: 20px auto; 
+    
+    /* THE GLOW & BACKGROUND WE DISCUSSED */
+    background: rgba(40, 50, 45, 0.85); 
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.15), 
+                inset 0 0 15px rgba(255, 255, 255, 0.05);
+    padding: 15px; 
+
+    /* YOUR EXISTING TRANSITION LOGIC */
+    overflow: hidden;
+    transition: all 1s ease-in-out;
+    z-index: 10;
+    /* Note: If your table isn't showing up, ensure your JS removes the 0 opacity/height below */
+    max-height: 0; 
+    opacity: 0;
+}
+
+
+/* Ensure the "Who worked?" headline is also visible */
+.tableContainer h2 {
+    color: #f0f0f0 !important;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+#finalFinishBtn {
+    background-color: #28a745; 
+    color: white; 
+    display: inline-block; /* Ensure it is visible when the table appears */
+    margin: 10px auto;
+    padding: 10px 20px;
+}
+
+#finishBtn  { background-color: #007bff; color: white; display: none; }
+#clearBtn  { background-color: #dc3545; color: white; display: none;}
+#printBtn  { background-color: #28a745; color:  white; display: none; }
+
+/* 6. SECONDARY TABLE & WARNING */
+.diamond-warning {
+    width: 120px;
+    height: 120px;
+    background: #ffcc00;
+    margin: 0; 
+    display: flex; /* Controlled by JS */
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(45deg);
+    border: 4px solid #000;
+    z-index: 100; 
+    flex-shrink: 0;
+}
+
+
+.diamond-warning:hover {
+    transform: rotate(45deg) scale(1.1); /* Slight grow on hover */
+    background: #ffdb4d;
+}
+
+/* Un-rotate the text inside so it's readable */
+.diamond-warning span {
+    transform: rotate(-45deg); 
+    font-weight: bold;
+    font-family: sans-serif;
+    font-size: 11px;
+    line-height: 1.2;
+    color: #000;
+    padding: 5px;
+}
+
+.secondary-table.active {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    max-height: none !important;
+    height: auto !important;
+    min-height: 200px !important;
+}
+
+
+#bypassBtn, .footer {
+    display: block;
+    margin: 15px auto; /* Centers the button and gives it some breathing room */
+    width: fit-content;
+}
+
+
+/* 7. THE FINAL DASHBOARD & GODS */
+.diamond-end {
+    width: 120px;
+    height: 120px;
+    background: #00703c; /* Roadside Green */
+    display: flex;        /* Hidden until Finish is clicked */
+    align-items: center;
+    justify-content: center;
+    transform: rotate(45deg);
+    border: 4px solid #ffffff; /* White border */
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    display: flex; 
+    flex-shrink: 0;
+}
+
+.diamond-end span {
+    display: block;
+    transform: rotate(-45deg); /* Un-rotates the text */
+    color: white;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+
+.top-dashboard {
+    position: fixed;
+    top: 10px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly; /* Perfectly spaces Jar, Table 1, Table 2 */
+    align-items: center;
+    z-index: 4000;
+    pointer-events: none; /* Let clicks pass to the gods in the center */
+}
+
+.dashboard-item {
+    pointer-events: auto;
+    transform: scale(0.4) !important;
+    transform-origin: top center;
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    margin: 0 !important;
+    opacity: 0.9;
+}
+
+/* FINAL GODLY MESSAGE STYLES */
+/* Full-screen anchor layer */
+
+/* 1. The Glass Layer - Forced to Viewport */
+#finale-layer {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    /* This handles the vertical sizing for mobile browser bars */
+    height: 100dvh !important; 
+    
+    z-index: 2147483647 !important; 
+    
+    /* THE CENTERING ENGINE */
+    display: none;           /* This will be 'flex' via JS */
+    flex-direction: column;  /* Stacks p tags vertically */
+    align-items: center;     /* Centers horizontally */
+    justify-content: center; /* PULLS IT TO THE VERTICAL CENTER */
+    
+    pointer-events: none;
+    background: transparent;
+}
+
+/* 1. Reset the Paragraphs - stop them from pushing the container */
+#finalMessage p {
+    margin: 0 !important;
+    padding: 0 !important;
+    position: static !important; /* Force them to stay inside their parent */
+    transform: none !important;
+}
+
+/* 2. The Message - Forced to Center */
+#finalMessage {
+    /* Reset everything to ensure no parent scaling affects it */
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    width: auto !important;
+    max-width: 90% !important;
+    text-align: center;
+    
+    /* Remove any positioning/transforms - let the parent Flexbox do the work */
+    position: relative !important;
+    transform: none !important; 
+    margin: 0 !important;
+    opacity: 1 !important;
+}
+
+/* Optional styling for the messages */
+.thank-you-note {
+  font-family: Arial, sans-serif !important;
+  font-size: 0.7rem !important;
+  letter-spacing: 1.5px;
+  color: #666 !important;
+  margin: 0 !important;
+}
+
+.outline-text  {
+  font-size: 0.6rem;
+  color: transparent;
+  -webkit-text-stroke: 0.1rem #666;
+}
+
+
+
+/* Lightning Bolt Base Style */
+.bolt {
+    font-size: 0.8rem;
+    opacity: 0; /* Hidden until they flash */
+    display: inline-block;
+    color: #fff176; /* Subtle lightning yellow */
+    text-shadow: 0 0 5px #fff;
+}
+
+/* Individual Flash Timings */
+.b1, .b2 { animation: stormFlash 4s infinite 0.5s; } /* Two together */
+.b3      { animation: stormFlash 4s infinite 1.5s; } /* One solo */
+.b4, .b5 { animation: stormFlash 4s infinite 1.8s; } /* Rapid succession */
+
+@keyframes stormFlash {
+    0%, 10%, 12%, 20%, 100% { opacity: 0; }
+    11%, 21% { opacity: 1; } /* The "Strobe" effect */
+}
+
+.gods-appeased {
+    font-family: 'Cinzel', serif !important;
+    font-size: 0.5vw !important;
+    letter-spacing: 3px;
+    color: #666666 !important;
+    text-align: center;
+    position: relative;
+    /* The Glow + The Blur (Mist Refraction) */
+    text-shadow: 0 0 8px rgba(255, 69, 0, 0.6); 
+    /* Combined: The flicker AND the "mist dance" */
+    animation: divineFlicker 3s infinite alternate ease-in-out, 
+               mistDance 5s infinite ease-in-out !important;
+}
+
+@keyframes divineFlicker {
+    0% { text-shadow: 0 3px 4px rgba(255, 69, 0, 0.4); opacity: 0.9; }
+    100% { text-shadow: 0 4px 15px rgba(255, 0, 0, 0.8), 0 0 10px rgba(255, 140, 0, 0.6); opacity: 1; }
+}
+
+@keyframes mistDance {
+    0%, 100% { transform: translateY(0) rotate(-0.5deg); }
+    25% { transform: translateY(-2px) rotate(0.5deg) translateX(1px); }
+    50% { transform: translateY(1px) rotate(-0.8deg) translateX(-1px); }
+    75% { transform: translateY(-1px) rotate(0.3deg); }
+}
+
+.hell-mist, .hell-mist::before, .hell-mist::after {
+    position: absolute;
+    width: 500px;
+    height: 180px;
+    background: radial-gradient(ellipse at center, 
+                rgba(20, 20, 20, 0.8) 0%, 
+                rgba(10, 10, 10, 0.4) 50%, 
+                transparent 80%);
+    filter: blur(40px);
+    pointer-events: none;
+    z-index: 20;
+}
+
+/* The Main Cloud - Drifts Left to Right */
+.hell-mist {
+    animation: mistPass 15s infinite linear;
+}
+
+/* Second Cloud Layer - Drifts Right to Left (Faster) */
+.hell-mist::before {
+    content: "";
+    width: 400px;
+    height: 140px;
+    top: -20px;
+    opacity: 0.6;
+    animation: mistPassReverse 10s infinite linear;
+}
+
+/* Third Cloud Layer - Drifts Left to Right (Slowest/Lowest) */
+.hell-mist::after {
+    content: "";
+    width: 600px;
+    top: 40px;
+    opacity: 0.4;
+    animation: mistPass 22s infinite linear;
+}
+
+@keyframes mistPass {
+    0% { transform: translateX(-150%) translateY(0); opacity: 0; }
+    20% { opacity: 0.7; }
+    80% { opacity: 0.7; }
+    100% { transform: translateX(150%) translateY(-20px); opacity: 0; }
+}
+
+@keyframes mistPassReverse {
+    0% { transform: translateX(150%) translateY(0); opacity: 0; }
+    20% { opacity: 0.5; }
+    80% { opacity: 0.5; }
+    100% { transform: translateX(-150%) translateY(20px); opacity: 0; }
+}
+
+/* 1. The Wrapper: Prevents the table from pushing off-screen */
+.table-scroll-wrapper {
+    width: 100%;
+    overflow-x: auto; /* Adds horizontal scroll ONLY if needed */
+    display: block;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */
+    margin: 0 auto;
+}
+
+/* 2. The Table: Ensure it doesn't have a fixed large width */
+#myTable {
+    width: 100%;
+    min-width: 300px; /* Minimum width to keep it readable */
+    max-width:  90vw;
+    margin: 0 auto;
+}
+
+
+/* Ensure the shelf stays pinned inside the jar when shrunken */
+#jar.top-row-item .shelf {
+    opacity: 1 !important;
+}
+
+.gods-footer {
+    font-family: 'Dancing Script', cursive;
+    font-size: 0.75rem;
+    text-align: center;
+    padding: 5px;
+    border: none !important;
+}
+
+#jar.top-row-item {
+    margin: 10px auto !important; /* Forces horizontal centering */
+    left: 0 !important;           /* Kills any leftover animation offsets */
+    right: 0 !important;
+    position: relative !important;
+    display: block !important;    /* Block + margin:auto is the most stable center */
+    transform: scale(0.6) !important; /* Keeps it small in the row */
+}
+
+/* 1. The Door & Built-in Knob (Clean & Single Block) */
+#managerDoorway {
+    display: inline-block;
+    text-decoration: none !important;
+    position: relative;
+    z-index: 10000;
+    width: 80px;
+    height: 100px;
+    margin-top: 20px;
+    border-radius: 40px 40px 0 0;
+    background: 
+        radial-gradient(circle at 70% 55%, #b8860b 0, #8b6508 2px, transparent 4px), /* The Knob */
+        repeating-linear-gradient(90deg, #4b2c15 0, #4b2c15 8px, #3d2310 9px, #3d2310 10px), /* Planks */
+        linear-gradient(to bottom, #2d1a0c, #4b2c15);
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.8), 0 4px 8px rgba(0,0,0,0.6);
+    border-bottom: 4px solid #1a0f06;
+    overflow: visible; 
+}
+
+/* 2. Grounded Brambles (Thick, Random, and Messy) */
+#managerDoorway::before {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: -15px;
+    right: -15px;
+    height: 65px;
+    /* Layering 4 different angles to break the 'grid' look */
+    background-image: 
+        repeating-linear-gradient(65deg, transparent 0, transparent 15px, #1a0f06 15px, #1a0f06 18px),
+        repeating-linear-gradient(-25deg, transparent 0, transparent 20px, #26150a 20px, #26150a 22px),
+        repeating-linear-gradient(110deg, transparent 0, transparent 12px, #1a0f06 12px, #1a0f06 14px),
+        repeating-linear-gradient(5deg, transparent 0, transparent 25px, #26150a 25px, #26150a 28px);
+    
+    /* A more 'jagged' fade-out mask */
+    -webkit-mask-image: radial-gradient(ellipse at bottom, black 30%, rgba(0,0,0,0.6) 60%, transparent 90%);
+    mask-image: radial-gradient(ellipse at bottom, black 30%, rgba(0,0,0,0.6) 60%, transparent 90%);
+    
+    z-index: 10001;
+    pointer-events: none;
+    filter: blur(0.3px); /* Softens the digital lines to look like wood */
+}
+
+/* 3. Detritus (Dead leaves, moss, and smaller sticks) */
+#managerDoorway::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: -5px;
+    right: -5px;
+    height: 25px;
+    /* Creating 'clumps' of dark matter at the base */
+    background-image: 
+        radial-gradient(circle at 20% 80%, #1a0f06 4px, transparent 10px),
+        radial-gradient(circle at 50% 90%, #000 6px, transparent 12px),
+        radial-gradient(circle at 80% 85%, #1a0f06 5px, transparent 10px),
+        linear-gradient(to top, #1a0f06, transparent);
+    opacity: 0.9;
+    z-index: 10002; /* Sits inside/on top of the main brambles */
+    pointer-events: none;
+}
+
+/* 3. Askew, Weathered Sign on a Nail */
+.door-sign {
+    position: absolute;
+    top: 22px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-8deg); 
+    width: 52px; 
+    background: #c3b091; 
+    color: rgba(61, 35, 16, 0.6); /* Worn, faded text */
+    font-family: 'Courier New', Courier, monospace; 
+    font-size: 7px;
+    font-weight: bold;
+    text-align: center;
+    padding: 2px;
+    border: 1px solid rgba(61, 35, 16, 0.5);
+    background-image: repeating-radial-gradient(circle, rgba(0,0,0,0.05), transparent 2px);
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+    z-index: 10010;
+    pointer-events: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* The Rusty Nail */
+.door-sign::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 3px;
+    background: #333; /* The nail head */
+    border-radius: 50%;
+}
+
+
+/* Unified Tablet & Small Desktop Query (601px to 1367px) */
+@media (min-width: 601px) and (max-width: 1367px) {
+    .animation-wrapper {
+        position: relative;
+        margin: 0 auto;
+        height: 320px;
+    }
+    .jar {
+        transform: scale(0.7); 
+        opacity: 0.8;
+    }
+    .gods-appeased { 
+        font-size: 0.5rem !important; 
+    }
+    .thank-you-note { 
+        font-size: 0.9rem !important; 
+    }
+    .hell-mist { 
+        width: 220px; 
+        height: 110px; 
+        top: -28px; 
+    }
+}
+
+/* Unified Phone Query (Up to 600px) */
+@media (max-width: 600px) {
+    .animation-wrapper {
+        position: relative;
+        margin: 0 auto;
+        height: 280px;
+    }
+    .jar {
+        opacity: 0.5;
+    }
+    table {
+        font-size: 14px;
+    }
+    .gods-appeased { 
+        font-size: 0.5rem !important; 
+    }
+    .thank-you-note { 
+        font-size: 0.9rem !important; 
+    }
+    .hell-mist { 
+        width: 180px; 
+        height: 90px; 
+        top: -25px; 
+    }
+}
+
+
+#coworkerContainer.active {
+    display: block !important; /* Tables behave better as blocks */
+    visibility: visible !important;
+    opacity: 1 !important;
+    max-height: none !important;
+    height: auto !important;
+    min-height: 100px !important;
+    width: 95% !important;
+    margin: 20px auto !important;
+}
+
+
+/* Also ensure the 'hidden' class isn't accidentally stuck on 'none' */
+.hidden {
+    display: none !important;
+}
+
+/* The Transition Curtain */
+#transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    z-index: 20000; /* Stays above everything */
+    opacity: 0;
+    pointer-events: none; /* Allows you to click things 'through' it until it activates */
+    transition: opacity 1.2s ease-in-out; /* Controls the speed of the fade */
+}
+
+/* When this class is added, the curtain closes */
+#transition-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+@media print  {
+    /* 1. Hide the Jar and Buttons */
+    button, .jar, .main, .diamond-warning, #finalMessage, .animation-wrapper, #skipToCoworker, .footer { 
+        display: none !important; 
+    }
+
+    /* 2. Force the Table to be a standard, visible element in Dark Blue */
+    .tableContainer, #myTable, .table-scroll-wrapper, .secondary-table { 
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        max-height: none !important;
+        transform: none !important; 
+        width: 100% !important;
+        position: static !important;
+        color: #00008B !important; /* Dark Blue */
+    }
+
+    /* 3. Make Inputs look like standard dark blue text */
+    input {
+        border: none !important;
+        background: transparent !important;
+        color: #00008B !important; /* Dark Blue */
+        font-size: 14pt !important;
+        font-weight: bold !important;
+        width: 100% !important;
+        text-align: center !important;
+        display: block !important
+        -webkit-appearance: none;
+    }
+
+    /* 4. Draw simple dark blue lines */
+    th, td {
+        border: 1px solid #00008B !important; /* Dark Blue */
+        padding: 8px !important;
+        visibility: visible !important;
+    }
+
+
+}
+
+/* 1. Add the faint hint text */
+#full-moon::after {
+    content: 'percentages';
+    position: absolute;
+    font-family: 'Dancing Script', cursive;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.2); /* Very faint */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s;
+}
+
+/* 1. THE MOON CONTAINER - Fixed size, acts as the anchor */
+#full-moon {
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle at 30% 30%, #fff, #e0e0e0);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 200;
+    cursor: pointer;
+    overflow: hidden;
+    transform-origin: right center;
+    transition: transform 0.6s ease-in-out;
+    box-shadow: 0 0 50px rgba(255, 255, 255, 0.5);
+}
+
+/* 2. THE CONTENT REVEAL - Everything inside stays hidden until hover */
+/* KEEP: This ensures the inner text starts invisible */
+#full-moon > * {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* NEW: This replaces the hover. When JS adds the 'is-engaged' class, the moon grows */
+#full-moon.is-engaged {
+    transform: scale(2.2);
+}
+
+/* NEW: When 'is-engaged', the inner text becomes visible */
+#full-moon.is-engaged > * {
+    opacity: 1;
+}
+
+/* NEW: When 'is-engaged', the background label disappears */
+#full-moon.is-engaged::after {
+    opacity: 0;
+}
+
+/* 3. THE MATH SENTENCE - This is the horizontal lock */
+.moon-math-sentence {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    width: auto;
+    transform: scale(0.6); /* Shrinks the whole row to fit the circle's width */
+    white-space: nowrap;
+}
+
+.moon-math-sentence span {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    color: #444;
+}
+
+/* 4. THE LUNAR INPUTS - Sized for the row */
+.lunar-input {
+    width: 50px;
+    height: 18px;
+    font-size: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background: #fff;
+}
+
+/* Removes arrows from number inputs for a cleaner look */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield; /* For Firefox */
+}
+
+
+/* 5. THE BUTTONS - Neatly stacked below the equator */
+#c-submit, #clearMoonBtn {
+    font-size: 8px;
+    padding: 2px 6px;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background: #eee;
+    position: relative;
+    z-index: 10;
+    color: #444;
+}
+
+#c-submit {
+    background: #222;
+    color: white;
+    border: none;
+}
+
+#moon-path {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(315deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 50%, transparent 85%);
+  z-index: 100; /* High enough to sit on top of the background layers */
+  pointer-events: none;
+  animation: moonShimmer 8s ease-in-out infinite alternate;
+}
+
+@keyframes moonShimmer {
+  0% { opacity: 0.3; }
+  100% { opacity: 0.7; }
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(315deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.1) 40%, transparent 75%);
+  z-index: 5;
+  pointer-events: none;
+  animation: moonShimmer 6s ease-in-out infinite alternate;
+}
+
+#star-sky-phrase {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    letter-spacing: 2px;
+}
+
+.star-letter {
+    display: inline-block;
+    color: white;
+    font-family: 'Georgia', serif; 
+    font-weight: 200;
+    font-size: 12px;
+    /* This creates the 'Emitting Light' effect */
+    text-shadow: 
+        0 0 4px #fff, 
+        0 0 10px #fff, 
+        0 0 20px rgba(255, 255, 255, 0.4),
+        0 0 40px rgba(255, 255, 255, 0.2);
+    transition: opacity 0.5s ease;
+    animation: twinkle var(--duration) ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+    0% { 
+        opacity: 0.3; 
+        transform: scale(0.9);
+        text-shadow: 0 0 2px #fff;
+    }
+    100% { 
+        opacity: 1; 
+        transform: scale(1.1);
+        /* The star 'pulses' light onto the page */
+        text-shadow: 0 0 8px #fff, 0 0 20px #fff, 0 0 35px rgba(255, 255, 255, 0.6);
+    }
+}
+
+/* New Twilight Starfield Styling */
+.random-star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 6;
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
+    /* This forces the phone/computer to use its graphics chip */
+    will-change: opacity, transform;
+    transform: translateZ(0); 
+    animation: randomTwinkle var(--duration) ease-in-out infinite alternate;
+}
+
+@keyframes randomTwinkle {
+    0% { opacity: 0.2; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 8px rgba(255, 255, 255, 1); }
+}
+
+#river-container {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 75vh; 
+    z-index: -2; 
+    overflow: hidden;
+    clip-path: polygon(45% 0%, 55% 0%, 100% 100%, 0% 100%);
+    background: linear-gradient(to bottom, #4da6ff 0%, #0066cc 100%);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@media screen and (max-width: 480px) {
+  #river-container { 
+    position: fixed; 
+    top: 23vh; 
+    bottom: auto; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    width: 100vw; 
+    height: 77vh; 
+    z-index: -2; 
+  }
+}
+
+.traveler {
+    position: absolute;
+    left: 50%;
+    user-select: none;
+    opacity: 0;
+    animation: floatAway var(--dur) linear infinite;
+    animation-delay: var(--delay);
+}
+
+@keyframes floatAway {
+    0% {
+        transform: translate(var(--drift), 75vh) scale(2.5);
+        opacity: 0;
+    }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% {
+        /* FIX: Keeps the horizontal lane drift consistent through the entire journey */
+        transform: translate(-50%, 0) scale(0);
+        opacity: 0;
+    }
+}
+
+/* Anchors the whole setup to the exact physical middle of your river container */
+.elephant-island-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column; /* Columns stack top-to-bottom naturally */
+    align-items: center;
+    justify-content: center;
+    z-index: 10; 
+    pointer-events: none; 
+}
+
+/* Tells the elephant to spin from back to front on its vertical axis */
+.spinning-elephant {
+    font-size: 28px; 
+    margin-bottom: -6px; /* Pulls the toe down onto the top of the island */
+    transform-origin: bottom center; /* Keeps the balancing toe locked in place */
+    animation: backFootPirouette 3s linear infinite;
+    z-index: 12;
+}
+
+/* Styles your rugged, rocky northern island base beneath the elephant */
+.island-base {
+    font-size: 36px; 
+    line-height: 1;
+    z-index: 11;
+    filter: drop-shadow(0 4px 6px rgba(19, 38, 19, 0.6)); 
+}
+
+/* The 3D Axis Rotation Loop anchoring the Rear/Back Foot */
+@keyframes backFootPirouette {
+    0% {
+        /* A minor forward pitch (rotateX) positions the visual weight onto the rear foot asset lines */
+        transform: perspective(400px) rotateX(8deg) rotateY(0deg);
+    }
+    100% {
+        transform: perspective(400px) rotateX(8deg) rotateY(360deg);
+    }
+}
+
+
+#printArea { 
+        display: none; 
+    }
+
+</style>  
+<link rel="apple-touch-icon" sizes="180x180" href="icon-512.png">
+<link rel="manifest" href="manifest.json">
+
+</head>
+
+<body>
+<div id="world-wrapper" style="position: relative; width: 100%; overflow: hidden;">
+<div id="river-container">
+    <!-- Reflection Glow -->
+    <div style="position:absolute; top:0; left:45%; width:10%; height:100%; 
+              background: linear-gradient(to bottom, rgba(255,255,255,0.2), transparent); filter: blur(20px);">
+    </div>
+<div class="elephant-island-wrapper">
+    <div class="spinning-elephant">🐘</div>
+    <div class="island-base">🌲</div>
+</div>
+<!-- Boat 1 Pre-Render Anchor (Launches instantly with the elephant) -->
+<div class="traveler" style="--drift: -18vw; --dur: 30s; --delay: 0s; opacity: 1; animation: floatAway 30s linear infinite;">
+    <div style="position: relative; display: flex; flex-direction: column; align-items: center;">
+        <img src="waiter1.png" style="width: 60px; height: auto;" alt="river item">
+    </div>
+</div>
+
+
+    
+</div>
+</div>
+<div id="moon-path"></div>
+
+<!-- PLACED AFTER moon-path AND BEFORE finale-layer -->
+<div id="moon-anchor">
+    <div id="full-moon">
+        <div class="moon-math-sentence">
+            <input type="number" id="c-pc" placeholder="%" class="lunar-input" min="0"> 
+            <span>of</span>
+            <input type="number" id="c-tot" placeholder="total" class="lunar-input" min="0"> 
+            <span>=</span>
+            <input type="number" id="c-res" placeholder="ans" class="lunar-input" min="0">
+        </div>
+        <button id="c-submit" onclick="runMoonMath(event)">Submit</button>
+        <button id="clearMoonBtn" onclick="clearMoonFields(event)">Clear</button>
+    </div>
+
+    <!-- THE STAR-CONSTELLATION PHRASE -->
+    <div id="star-sky-phrase">
+        <span class="star-letter">~</span>
+        <span class="star-letter">f</span><span class="star-letter">o</span><span class="star-letter">r</span>
+        &nbsp;
+        <span class="star-letter">t</span><span class="star-letter">h</span><span class="star-letter">o</span><span class="star-letter">s</span><span class="star-letter">e</span>
+        &nbsp;
+        <span class="star-letter">w</span><span class="star-letter">h</span><span class="star-letter">o</span>
+        &nbsp;
+        <span class="star-letter">f</span><span class="star-letter">l</span><span class="star-letter">o</span><span class="star-letter">u</span><span class="star-letter">n</span><span class="star-letter">d</span><span class="star-letter">e</span><span class="star-letter">r</span>
+        &nbsp;
+        <span class="star-letter">s</span><span class="star-letter">t</span><span class="star-letter">i</span><span class="star-letter">l</span><span class="star-letter">l</span>
+        <span class="star-letter">~</span>
+    </div>
+</div>
+
+
+    <div id="finale-layer">
+        <div id="finalMessage">
+            <div class="hell-mist"></div>
+            <p class="thank-you-note outline-text">Thank you for your hardwork</p>
+            <p class="gods-appeased">
+             <span class="bolt b1">⚡</span>
+             the restaurant
+             <span class="bolt b2">⚡</span>
+              gods  
+             <span class="bolt b3">⚡</span>
+             <span class="bolt b4">⚡</span>
+             are appeased
+             <span class="bolt b5">⚡</span>
+            </p>
+        </div>
+    </div>
+<div class="top-row-container"></div>
+
+<div class="animation-wrapper">
+  <div class="smoke-puff" id="smoke"></div>
+  <div class="jar" id="jar">
+  <div class="shelf" id="shelf"></div> <!-- Move shelf inside the jar div -->
+      <div class ="main"> 
+        <div class="tip-jar-title">TIP JAR</div>
+        <input type="text" id="tipInput" placeholder="$123.00" style="text-align: center; width: 120px;"><br>
+        <button id="btn">Submit</button>
+      </div>
+
+      
+  <div class ="content">
+         <div class="content1"></div><div class="content2"></div><div class="content3"></div>         
+         <div class="content4"></div><div class="content5"></div><div class="content6"></div>
+  </div>
+  
+      <!-- ADD LEGS HERE -->
+    <div class="legs-container">
+        <div class="leg left-leg"><div class="boot"></div></div>
+        <div class="leg right-leg"><div class="boot"></div></div>
+    </div>
+    
+  <div class="jar-top"></div>
+</div>
+</div>
+
+<div id="tableContainer" class="tableContainer">
+ <h2 style="text-align:center;">Who worked? How many hours?</h2>
+ <div class="table-scroll-wrapper">
+ <table id="myTable">
+  <thead>
+   <tr>
+    <th>Name</th>
+    <th>Hours</th>
+    <th class="hidden-column" id="headerResult">Yer Dough</th>
+  </tr>
+</thead>
+<tbody id="tableBody">
+  <tr>
+    <td><input type="text" class="row-input"></td>
+    <td><input type="number"  class="row-input"  min="0" step="any"></td>
+    <td class="hidden-column"><input type="text"  class="row-input" readonly></td>
+  </tr>
+ </tbody>
+ 
+  
+</table>
+</div>
+<div class="action-footer">
+<button id="bypassBtn" onclick="runBypass()" style="background-color: #6c757d; color: white; position: relative; z-index: 9999;">OR<br> Skip to TipOut</button>
+    <button id="finishBtn">Finish and Calculate</button>
+    <button id="printBtn">Print</button>
+    <button id="clearBtn">Clear All</button>   
+<a href="manager_office.html" id="managerDoorway" onclick="openManagerDoor(event)">
+    <div class="door-sign">Manager</div>
+</a>
+</div>
+
+
+
+<div id="result" style="text-align:center; font-weight:bold; margin-top:10px"></div>
+
+
+<!-- Centered Warning Overlay -->
+<div id="choiceContainer" style="display: none; align-items: center; justify-content: center; gap: 30px; margin: 20px 0; width: 100%; position: relative; left: 0; padding: 0;">
+    
+    <!-- Yellow Warning Diamond -->
+    <div id="coworkerTrigger" class="diamond-warning">
+      <span><center>WAIT!<center><br>Don't be a Stooge! <br> Press here to <br>tip your fellow coworkers!</span>
+    </div>
+
+    <!-- The OR Text -->
+    <div style="font-weight: bold; font-family: Arial; font-size: 1.5rem; color: black;">OR</div>
+
+    <!-- Green End Diamond -->
+    <div id="endTrigger" class="diamond-end">
+        <span>THE END</span>
+    </div>
+
+</div>
+
+
+<!-- The Coworker Table Container -->
+<div id="coworkerContainer" class="secondary-table hidden">
+  <table id="coworkerTable" border="1">
+    <thead>
+        <tr>
+          <th>Enter Sales</th>
+          <th>Enter %</th>
+          <th>TipOut</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Kitchen Row -->
+        <tr>
+          <td><input type="number" id="sales_kitchen" placeholder="Kitchen $" min="0" step="0.1" oninput="calculateTipOut('kitchen')" /></td>
+          <td><input type="number" id="tip_kitchen" placeholder="%" min="0" step="0.1" oninput="calculateTipOut('kitchen')" /></td>
+          <td><input type="text" id="tipout_kitchen" value="0.00" readonly /></td>
+        </tr>
+
+        <!-- Bartender Row -->
+        <tr>
+          <td><input type="number" id="sales_bartender" placeholder="Bartender $" min="0" step="0.1" oninput="calculateTipOut('bartender')" /></td>
+          <td><input type="number" id="tip_bartender" placeholder="%" min="0" step="0.1" oninput="calculateTipOut('bartender')" /></td>
+          <td><input type="text" id="tipout_bartender" value="0.00" readonly /></td>
+        </tr>
+
+        <!-- Hostess Row -->
+        <tr>
+          <td><input type="number" id="sales_hostess" placeholder="Hostess $" min="0" step="0.1" oninput="calculateTipOut('hostess')" /></td>
+          <td><input type="number" id="tip_hostess" placeholder="%" min="0" step="0.1" oninput="calculateTipOut('hostess')" /></td>
+          <td><input type="text" id="tipout_hostess" value="0.00" readonly /></td>
+        </tr>
+
+        <!-- Runner Row -->
+        <tr>
+          <td><input type="number" id="sales_runner" placeholder="Runner $" min="0" step="0.1" oninput="calculateTipOut('runner')" /></td>
+          <td><input type="number" id="tip_runner" placeholder="%" min="0" step="0.1" oninput="calculateTipOut('runner')" /></td>
+          <td><input type="text" id="tipout_runner" value="0.00" readonly /></td>
+        </tr>
+    </tbody>
+  </table>
+  <div style="text-align:center; margin-top:15px;">
+    <button id="finalFinishBtn" style="background-color: #28a745; color: white; padding: 10px 20px;">All Staff Tipped!</button>
+  </div>
+</div>
+
+<script>
+// --- MUST BE AT THE VERY TOP ---
+window.runBypass = function() {
+    const t1 = document.getElementById('tableContainer');
+    const skip = document.getElementById('bypassBtn');
+    const footer = document.querySelector('.footer');
+    const t2 = document.getElementById('coworkerContainer');
+    const dashboard = document.querySelector('.top-row-container');
+
+    if (t1) t1.style.display = 'none';
+    if (skip) skip.style.display = 'none';
+    if (footer) footer.style.display = 'none';
+
+    if (t2 && dashboard) {
+        t2.classList.remove('hidden');
+        t2.classList.add('active', 'top-row-item');
+        dashboard.appendChild(t2);
+        t2.style.display = 'block';
+        setTimeout(() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 100);
+    }
+};
+
+// --- 1. INITIALIZATION & VARIABLES ---
+const kaching = new Audio('dragon-studio-cash-register-kaching-376867.mp3');
+const thud = new Audio('virtual_vibes-cinematic-thud-fx-379991.mp3');
+const thunder = new Audio('thunder.mp3');
+const tribal = new Audio('tribal.mp3');
+
+let isCalculated = false;
+
+// Safe references to DOM elements
+let btn, jar, tableContainer, tableBody, finishBtn, clearBtn, printBtn, resultDiv, headerResult, tipInput, shelf, smoke;
+
+// Run setup only after DOM is fully constructed to avoid null errors
+document.addEventListener("DOMContentLoaded", () => {
+    btn = document.getElementById("btn");
+    jar = document.getElementById("jar");
+    tableContainer = document.getElementById("tableContainer");
+    tableBody = document.getElementById("tableBody");
+    finishBtn = document.getElementById("finishBtn");
+    clearBtn = document.getElementById("clearBtn");
+    printBtn = document.getElementById("printBtn");
+    resultDiv = document.getElementById("result");
+    headerResult = document.getElementById("headerResult");
+    tipInput = document.getElementById("tipInput");
+    shelf = document.getElementById("shelf");
+    smoke = document.getElementById('smoke');
+
+    initializeEvents();
+    
+        // Permanent Static Diamond Triggers
+    const choiceRow = document.getElementById('choiceContainer');
+    const endTrigger = document.getElementById('endTrigger');
+    const coworkerTrigger = document.getElementById('coworkerTrigger');
+
+    if (endTrigger) {
+        endTrigger.addEventListener('click', () => {
+            if (choiceRow) choiceRow.style.display = 'none';
+            showFinale();
+        });
+    }
+
+    if (coworkerTrigger) {
+        coworkerTrigger.addEventListener('click', () => {
+            if (choiceRow) choiceRow.style.display = 'none';
+            revealSecondTable();
+        });
+    }
+});
+
+// --- 2. THE GOD MESSAGE TRIGGER ---
+function showFinale() {
+    const finalMsg = document.getElementById('finalMessage');
+    const finaleLayer = document.getElementById('finale-layer');
+    if (!finaleLayer || !finalMsg) return;
+
+    thunder.currentTime = 0;
+    thunder.play().catch(() => {});
+    
+    tribal.currentTime = 0;
+    tribal.loop = true; 
+    tribal.play().catch(() => {});
+
+    finaleLayer.style.setProperty('display', 'flex', 'important');
+
+    setTimeout(() => {
+        finalMsg.style.opacity = '1';
+    }, 50);
+}
+
+function initializeEvents() {
+    // Fixed formatting logic
+    if (tipInput) {
+        tipInput.addEventListener('blur', function() {
+            let val = this.value.replace(/[^0-9.]/g, ''); 
+            if (val) {
+                this.value = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(parseFloat(val));
+            }
+        });
+    }
+
+    // --- 3. JAR SUBMIT ---
+    if (btn) {
+        btn.addEventListener("click", () => {
+            const cleanValue = tipInput.value.replace(/[^0-9.]/g, '');
+            const numericTip = parseFloat(cleanValue);
+
+            if (!numericTip || numericTip <= 0) {
+                alert("Please enter a valid tip amount first!");
+                return;
+            }
+            
+            if (jar) jar.classList.add("animated");
+            btn.style.display = 'none'; 
+
+            kaching.currentTime = 0;
+            kaching.play().catch(() => {});
+
+            setTimeout(() => {
+                thud.currentTime = 0;
+                thud.play().catch(() => {}); 
+                if (jar) jar.classList.add('faded');
+
+                if (smoke) {
+                    smoke.classList.remove('active');
+                    void smoke.offsetWidth; 
+                    smoke.classList.add('active');
+                }
+
+                if (shelf) shelf.style.opacity = "1";
+                if (tableContainer) {
+                    tableContainer.classList.add("animated");
+                    tableContainer.style.display = "block";
+                    tableContainer.style.opacity = "1";
+                }
+
+                setTimeout(() => {
+                    const skipBtn = document.getElementById('bypassBtn');
+                    if (skipBtn) skipBtn.style.display = 'inline-block';
+                }, 1500);
+            }, 1200);
+        });
+    }
+
+    // --- 4. FIRST TABLE LOGIC ---
+    if (tableBody) {
+        tableBody.addEventListener('change', (e) => {
+            const rows = tableBody.querySelectorAll('tr');
+            const completedCount = Array.from(rows).filter(row => {
+                const inputs = row.querySelectorAll('input');
+                return inputs[0] && inputs[1] && inputs[0].value.trim() !== "" && inputs[1].value.trim() !== "";
+            }).length;
+
+            if (completedCount >= 2) {
+                if (finishBtn) finishBtn.style.display = 'inline-block';
+                if (clearBtn) clearBtn.style.display = 'inline-block';
+            }
+            
+            if (isCalculated) runCalculations();
+            
+            const currentRow = e.target.closest('tr');
+            if (currentRow && !currentRow.nextElementSibling && rows.length < 40) {
+                addNewRow(); 
+            }
+        });
+    }
+
+    // --- 5. FINISH & DIAMOND LOGIC ---
+    if (finishBtn) {
+        finishBtn.addEventListener('click', () => {
+            isCalculated = true;
+            runCalculations();
+            
+            kaching.currentTime = 0;
+            kaching.play().catch(() => {});
+            
+            if (headerResult) headerResult.classList.remove('hidden-column');
+            document.querySelectorAll('td.hidden-column').forEach(td => td.classList.remove('hidden-column'));
+            
+            finishBtn.style.display = 'none';
+            if (clearBtn) clearBtn.style.display = 'none';
+            if (printBtn) printBtn.style.display = 'inline-block';
+            
+            if (document.getElementById('bypassBtn')) document.getElementById('bypassBtn').style.display = 'none';
+
+            // Show Diamonds
+            const choiceRow = document.getElementById('choiceContainer');
+            if (choiceRow) choiceRow.style.setProperty('display', 'flex', 'important');
+
+            // Dashboard Glide
+            setTimeout(() => {
+                const dashboard = document.querySelector('.top-row-container');
+                if (tableContainer && dashboard) {
+                    tableContainer.classList.add('top-row-item');
+                    if (jar) dashboard.appendChild(jar);
+                    dashboard.appendChild(tableContainer);
+                }
+            }, 4000);
+        });
+    }
+
+    if (printBtn) {
+        printBtn.addEventListener('click', () => {
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach(input => input.setAttribute('value', input.value));
+            window.print();
+        });
+    }
+
+    if (clearBtn) clearBtn.addEventListener('click', () => location.reload());
+
+    const finalFinishBtn = document.getElementById('finalFinishBtn');
+    if (finalFinishBtn) {
+        finalFinishBtn.onclick = function(e) {
+            e.preventDefault();
+            this.style.display = 'none';
+            showFinale();
+            thud.currentTime = 0;
+            thud.play().catch(() => {});
+            
+            const coworkerTable = document.getElementById('coworkerContainer');
+            const dashboard = document.querySelector('.top-row-container');
+            if (coworkerTable && dashboard) {
+                coworkerTable.classList.add('top-row-item');
+                dashboard.appendChild(coworkerTable);
+            }
+        };
+    }
+
+}
+
+function addNewRow() {
+    const newRow = document.createElement('tr');
+    const hiddenClass = isCalculated ? "" : "hidden-column";
+    newRow.innerHTML = `
+        <td><input type="text" class="row-input"></td>
+        <td><input type="number" class="row-input" min="0" step="any"></td>
+        <td class="${hiddenClass}"><input type="text" class="row-input" readonly></td>
+    `;
+    if (tableBody) tableBody.appendChild(newRow);
+}
+
+function runCalculations() {
+    if (!tableBody || !tipInput) return;
+    const rows = Array.from(tableBody.querySelectorAll('tr'));
+    const totalTip = parseFloat(tipInput.value.replace(/[^0-9.]/g, '')) || 0;
+    let totalHours = 0;
+    
+    rows.forEach(row => {
+        const inputs = row.querySelectorAll('input');
+        if (inputs[1]) {
+            const h = parseFloat(inputs[1].value) || 0;
+            totalHours += h;
+        }
+    });
+    
+    if (totalHours === 0) return;
+    
+    rows.forEach(row => {
+        const inputs = row.querySelectorAll('input');
+        if (inputs[1] && inputs[2]) {
+            const rowH = parseFloat(inputs[1].value) || 0;
+            const amount = (rowH / totalHours) * totalTip;
+            inputs[2].value = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
+        }
+    });
+    if (resultDiv) resultDiv.innerHTML = `Total Hours: ${totalHours.toFixed(2)}`;
+}
+
+function revealSecondTable() {
+    const firstTable = document.getElementById('tableContainer');
+    if (firstTable) firstTable.classList.add('shrink-to-corner');
+
+    const coworkerTable = document.getElementById('coworkerContainer');
+    if (coworkerTable) {
+        coworkerTable.style.display = 'block';
+        coworkerTable.classList.remove('hidden');
+        coworkerTable.classList.add('active');
+        // Automatically reload the locked-in percentages for each coworker role
+['kitchen', 'bartender', 'hostess', 'runner'].forEach(role => {
+    const savedPercent = localStorage.getItem('lock_tip_' + role);
+    const tipEl = document.getElementById('tip_' + role);
+    if (savedPercent && tipEl) {
+        tipEl.value = savedPercent;
+        // Run the math automatically so the dollar amounts update instantly
+        window.calculateTipOut(role);
+    }
+});
+
+        if (document.activeElement) document.activeElement.blur(); setTimeout(() => coworkerTable.scrollIntoView({ behavior: 'smooth', block: 'start' }), 300);
+    }
+}
+
+// Function called by HTML oninput
+window.calculateTipOut = function(role) {
+    const salesEl = document.getElementById('sales_' + role);
+    const tipEl = document.getElementById('tip_' + role);
+    const tipoutEl = document.getElementById('tipout_' + role);
+    
+    if (!salesEl || !tipEl || !tipoutEl) return;
+    
+    const sales = parseFloat(salesEl.value) || 0;
+    const percent = parseFloat(tipEl.value) || 0;
+    // Lock the percentage into the phone/browser memory
+localStorage.setItem('lock_tip_' + role, tipEl.value);
+
+    const result = (sales * (percent / 100)).toFixed(2);
+    tipoutEl.value = "$" + result;
+};
+
+window.openManagerDoor = function(event) {
+    event.preventDefault(); 
+    
+    const sound = document.getElementById('creakSound');
+    const overlay = document.getElementById('transition-overlay');
+    const destination = event.currentTarget.href;
+
+    if (sound) sound.play().catch(() => {});
+    if (overlay) overlay.classList.add('active');
+
+    setTimeout(() => {
+        window.location.href = destination;
+    }, 1500); 
+};
+
+// --- MOON/SUN CALCULATOR MASTER BLOCK ---
+(function() { 
+    document.addEventListener("DOMContentLoaded", () => {
+        const p = document.getElementById('c-pc');
+        const t = document.getElementById('c-tot');
+        const r = document.getElementById('c-res');
+        const moonContainer = document.getElementById('full-moon');
+        const sBtn = document.getElementById('c-submit');
+        const cBtn = document.getElementById('clearMoonBtn');
+
+        window.runMoonMath = function(e) {
+            if (e) { e.preventDefault(); e.stopPropagation(); }
+            
+            const pIn = document.getElementById('c-pc');
+            const tIn = document.getElementById('c-tot');
+            const rIn = document.getElementById('c-res');
+            
+            if (!pIn || !tIn || !rIn) return;
+
+            const pNum = parseFloat(pIn.value);
+            const tNum = parseFloat(tIn.value);
+            const rNum = parseFloat(rIn.value);
+
+            if (pIn.value !== '' && tIn.value !== '') {
+                rIn.value = ((pNum / 100) * tNum).toFixed(2);
+            } else if (tIn.value !== '' && rIn.value !== '' && pIn.value === '') {
+                if (tNum !== 0) pIn.value = ((rNum / tNum) * 100).toFixed(1);
+            } else if (pIn.value !== '' && rIn.value !== '' && tIn.value === '') {
+                if (pNum !== 0) tIn.value = (rNum / (pNum / 100)).toFixed(2);
+            }
+            
+            if (document.activeElement) document.activeElement.blur();
+            
+            const moon = document.getElementById('full-moon');
+            if (moon) moon.classList.remove('is-engaged');
+        };
+
+        if (moonContainer) {
+        moonContainer.addEventListener('touchstart', (e) => { e.stopPropagation(); moonContainer.classList.toggle('is-engaged'); }, {passive: true});
+            moonContainer.addEventListener('click', (e) => {
+                e.stopPropagation();
+                moonContainer.classList.toggle('is-engaged');
+            });
+
+            const lunarInputs = moonContainer.querySelectorAll('.lunar-input');
+            lunarInputs.forEach(input => {
+                input.addEventListener('touchstart', (e) => e.stopPropagation(), {passive: true});
+                input.addEventListener('click', (e) => e.stopPropagation());
+            });
+
+            window.addEventListener('click', () => {
+                moonContainer.classList.remove('is-engaged');
+            });
+        }
+
+        if (sBtn) sBtn.addEventListener('click', window.runMoonMath);
+        if (cBtn) {
+            cBtn.addEventListener('click', (e) => {
+                if (e) e.stopPropagation();
+                if (p) p.value = '';
+                if (t) t.value = '';
+                if (r) r.value = '';
+            });
+        }
+    });
+
+    setTimeout(() => {
+        document.querySelectorAll('.star-letter').forEach(star => {
+            const duration = (Math.random() * 3 + 2).toFixed(2) + 's';
+            const delay = (Math.random() * 5).toFixed(2) + 's';
+            star.style.setProperty('--duration', duration);
+            star.style.animationDelay = delay;
+        });
+    }, 100);
+})();
+
+// --- THE STALWART RIVER ENGINE ---
+(function() {
+    const riverAssets = ["waiter1.png", "waiter2.png"];
+
+    function launchExplorer(imageSrc, immediate = false, startHalfway = false, initialPreDelay = '0s') {
+        const river = document.getElementById('river-container');
+        if (!river) return;
+
+        const boat = document.createElement('div');
+        boat.className = 'traveler';
+        
+        const chooseLane = Math.random() < 0.5 ? "left" : "right";
+        const drift = (chooseLane === "left" ? (Math.random() * -23 - 12) : (Math.random() * 23 + 12)) + 'vw';
+        
+        const duration = '30s'; 
+        
+        // Uses the negative pre-delay for the startup queue, otherwise defaults to 0s for looping
+        const delay = initialPreDelay; 
+
+        boat.style.setProperty('--drift', drift);
+        boat.style.setProperty('--dur', duration);
+        boat.style.setProperty('--delay', delay);
+
+        if (startHalfway) {
+            boat.style.animationDelay = '0s';
+            boat.style.setProperty('--delay', '0s');
+            boat.style.styleFloat = "none"; 
+            boat.setAttribute('style', `position:absolute; left:50%; --drift:${drift}; --dur:${duration}; --delay:0s; animation: floatAway ${duration} linear infinite; animation-start-value: 35vh;`);
+            
+            const inlineKeyframes = document.createElement('style');
+            inlineKeyframes.innerHTML = `@keyframes floatHalfwayStart { 0% { transform: translate(${drift}, 35vh) scale(1.5); opacity: 1; } 100% { transform: translate(-50%, 0) scale(0); opacity: 0; } }`;
+            boat.appendChild(inlineKeyframes);
+            boat.style.animationName = 'floatHalfwayStart';
+        }
+
+        let internalHTML = `
+            <div style="position: relative; display: flex; flex-direction: column; align-items: center;">
+                <img src="${imageSrc}" style="width: 120px; height: auto;" alt="river item">
+            </div>
+        `;
+        
+        boat.innerHTML = internalHTML;
+        river.appendChild(boat);
+
+        boat.addEventListener('animationiteration', () => {
+            const newAsset = riverAssets[Math.floor(Math.random() * riverAssets.length)];
+            const imgEl = boat.querySelector('img');
+                
+            if (imgEl) imgEl.src = newAsset;
+
+            boat.style.animationName = 'floatAway';
+
+            const cycleLane = Math.random() < 0.5 ? "left" : "right";
+            const newDrift = (cycleLane === "left" ? (Math.random() * -23 - 12) : (Math.random() * 23 + 12)) + 'vw';
+            boat.style.setProperty('--drift', newDrift);
+            // Reset delay to 0s on subsequent loops so it doesn't stay stuck back in time
+            boat.style.setProperty('--delay', '0s');
+        });
+    }
+document.addEventListener('DOMContentLoaded', () => {
+        // Launches the boats in a clean, sequential queue with zero browser glitching
+        setTimeout(() => { launchExplorer("waiter2.png", true, false); }, 0);
+        setTimeout(() => { launchExplorer("waiter1.png", false, false); }, 5000);
+        setTimeout(() => { launchExplorer("waiter2.png", false, false); }, 10000);
+        setTimeout(() => { launchExplorer("waiter1.png", false, false); }, 15000);
+        setTimeout(() => { launchExplorer("waiter2.png", false, false); }, 20000);
+        setTimeout(() => { launchExplorer("waiter1.png", false, false); }, 25000);
+    });
+
+})();
+</script><audio id="bg-music" src="circus.mp3" loop preload="auto"></audio>
+<audio id="creakSound" src="creak.mp3" preload="auto"></audio>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // ==========================================
+    // TOUR BUBBLE 1: THE TIP JAR (Launches Instantly)
+    // ==========================================
+    const jarElement = document.getElementById('jar');
+    const submitBtn = document.getElementById('btn');
+    let jarTooltip = null;
+
+    if (jarElement) {
+        jarTooltip = document.createElement('div');
+        jarTooltip.className = 'tour-popover arrow-right';
+        jarTooltip.innerHTML = 'Submit<br>total tips<br>here';
+        
+        jarTooltip.style.top = '50%'; 
+        jarTooltip.style.right = '105%'; 
+        jarTooltip.style.transform = 'translateY(-50%) translateX(-2vw)';
+        
+        jarElement.appendChild(jarTooltip);
+
+        setTimeout(() => {
+            if (jarTooltip) {
+                jarTooltip.style.opacity = '1';
+                jarTooltip.style.transform = 'translateY(-50%) translateX(0)';
+            }
+        }, 3000);
+
+        setTimeout(() => {
+            if (jarTooltip) {
+                triggerSmokePuff(jarTooltip);
+                jarTooltip.remove();
+                jarTooltip = null;
+            }
+        }, 5000);
+    }
+
+    // ==========================================
+    // LISTEN FOR THE SUBMIT CLICK TO TRIGGER TIMELINE
+    // ==========================================
+    if (submitBtn) {
+        submitBtn.addEventListener('click', () => {
+            if (jarTooltip) {
+                jarTooltip.remove();
+                jarTooltip = null;
+            }
+
+// 2. Deploys Bubble 2 exactly one frame after the table animations land
+setTimeout(() => {
+    const bypassTooltip = document.createElement('div');
+    bypassTooltip.className = 'tour-popover arrow-left';
+    
+    bypassTooltip.innerHTML = '↖ Tip Share?<br>OR<br>↙ Skip to Coworker Tip out';
+    
+    bypassTooltip.style.position = 'fixed';
+    bypassTooltip.style.top = '65%'; 
+    bypassTooltip.style.left = '52%'; 
+    bypassTooltip.style.transform = 'translateY(-50%) translateX(2vw)';
+    
+    document.body.appendChild(bypassTooltip);
+
+    setTimeout(() => {
+        bypassTooltip.style.opacity = '1';
+        bypassTooltip.style.transform = 'translateY(-50%) translateX(0)';
+    }, 50);
+
+    setTimeout(() => {
+        triggerSmokePuff(bypassTooltip);
+        bypassTooltip.style.opacity = '0';
+        bypassTooltip.style.transform = 'translateY(-50%) scale(0.8)';
+        setTimeout(() => { bypassTooltip.remove(); }, 400);
+    }, 4000);
+}, 3000);
+
+            // 4. Schedule Bubble 4 (Sun) 22 seconds AFTER submission
+            setTimeout(() => {
+                const moonAnchor = document.getElementById('moon-anchor');
+                if (moonAnchor) {
+                    const sunTooltip = document.createElement('div');
+                    sunTooltip.className = 'tour-popover arrow-right';
+                    sunTooltip.innerHTML = "Give the sun any two numbers<br>it'll generate the third number<br>gratis!";
+                    
+                    sunTooltip.style.position = 'absolute';
+                    sunTooltip.style.top = '15%'; 
+                    sunTooltip.style.right = '35%'; 
+                    sunTooltip.style.transform = 'translateX(2vw)';
+                    
+                    moonAnchor.appendChild(sunTooltip);
+
+                    setTimeout(() => {
+                        sunTooltip.style.opacity = '1';
+                        sunTooltip.style.transform = 'translateX(0)';
+                    }, 50);
+
+                    setTimeout(() => {
+                        sunTooltip.style.opacity = '0';
+                        sunTooltip.style.transform = 'scale(0.8)';
+                        setTimeout(() => { 
+                            triggerSmokePuff(sunTooltip);
+                            sunTooltip.remove(); 
+                        }, 200);
+                    }, 2500);
+                }
+            }, 22000);
+        });
+    }
+
+    // ==========================================
+    // TOUR BUBBLE 3: COWORKER TABLE WATCHDOG
+    // ==========================================
+    const coworkerContainer = document.getElementById('coworkerContainer');
+    if (coworkerContainer) {
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.attributeName === 'class') {
+                    const isHidden = coworkerContainer.classList.contains('hidden');
+                    const isDisplayNone = coworkerContainer.style.display === 'none';
+                    
+                    if (!isHidden && !isDisplayNone && !coworkerContainer.dataset.tourFired) {
+                        coworkerContainer.dataset.tourFired = 'true';
+                        
+                        const coworkerTooltip = document.createElement('div');
+                        coworkerTooltip.className = 'tour-popover arrow-left'; 
+                        coworkerTooltip.innerHTML = 'On what amount are you tipping the bartender?<br>Total sales? OR just drink sales?<br><br>The kitchen?<br>Total sales? OR only food sales?';
+                        
+                        coworkerTooltip.style.position = 'fixed';
+                        coworkerTooltip.style.top = '72%'; 
+                        coworkerTooltip.style.left = '52%'; 
+                        coworkerTooltip.style.transform = 'translateY(-50%) translateX(2vw)';
+                        
+                        document.body.appendChild(coworkerTooltip);
+
+                        setTimeout(() => {
+                            coworkerTooltip.style.opacity = '1';
+                            coworkerTooltip.style.transform = 'translateY(-50%) translateX(0)';
+                        }, 100);
+
+                        setTimeout(() => {
+                            triggerSmokePuff(coworkerTooltip);
+                            coworkerTooltip.style.opacity = '0';
+                            coworkerTooltip.style.transform = 'translateY(-50%) scale(0.8)';
+                            setTimeout(() => { coworkerTooltip.remove(); }, 400);
+                        }, 5500);
+                    }
+                }
+            });
+        });
+
+        observer.observe(coworkerContainer, { attributes: true });
+    }
+
+    // ==========================================
+    // THE MASTER SMOKE GENERATOR FUNCTION
+    // ==========================================
+    function triggerSmokePuff(element) {
+        const rect = element.getBoundingClientRect();
+        const centerX = rect.left + (rect.width / 2);
+        const centerY = rect.top + (rect.height / 2);
+
+        for (let i = 0; i < 8; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'smoke-particle';
+
+            const size = Math.random() * 4 + 6; 
+            particle.style.width = `${size}vw`;
+            particle.style.height = `${size}vw`;
+            particle.style.left = `${centerX - (rect.width * 0.1)}px`;
+            particle.style.top = `${centerY - (rect.height * 0.1)}px`;
+
+            const angle = Math.random() * Math.PI * 2;
+            const distance = Math.random() * 40 + 20;
+            const xMove = Math.cos(angle) * distance;
+            const yMove = Math.sin(angle) * distance;
+
+            particle.style.setProperty('--x', `${xMove}px`);
+            particle.style.setProperty('--y', `${yMove}px`);
+
+            document.body.appendChild(particle);
+
+            particle.addEventListener('animationend', () => {
+                particle.remove();
+            });
+        }
+    }
+});
+</script>
+
+<script>
+  // This function starts the music safely
+  function startCircusMusic() {
+    const music = document.getElementById('bg-music');
+    // Lower the volume slightly so it's not blastingly loud (0.0 to 1.0)
+    music.volume = 0.4; 
+    
+    music.play().catch(err => {
+      console.log("Waiting for user interaction to play audio.");
+    });
+  }
+
+  // Listen for the user's first click or mobile tap anywhere on the screen
+  window.addEventListener('click', startCircusMusic);
+  window.addEventListener('touchstart', startCircusMusic);
+
+</script>
+
+<div id="transition-overlay"></div>
+</body>
+</html>

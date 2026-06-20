@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager Inventory</title>
+    <style>
+        @media print {
+            .no-print, button, .add-row-btn {
+                display: none !important;
+            }
+            body {
+                background: white !important;
+            }
+            #inventory-page {
+                padding: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body>
+<button onclick="window.location.href='manager_office.html'" style="position: fixed; top: 20px; right: 20px; z-index: 10000; padding: 10px 20px; background: #c0392b; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.3);" class="no-print">
+    ✖ EXIT TO OFFICE
+</button>
+<div id="controls" style="margin-bottom: 20px; display: flex; gap: 10px;" class="no-print">
+    <button onclick="window.print()" style="padding: 10px 20px; background: #2ecc71; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">
+        📄 Save to PDF / Print
+    </button>
+    <button onclick="forwardToFootman()" style="padding: 10px 20px; background: #e67e22; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">
+        ➡️ Forward to Footman
+    </button>
+    <button onclick="clearCounts()" style="padding: 10px 20px; background: #95a5a6; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">
+    🧹 Clear Weekly Counts
+    </button>
+    
+</div>
+
+<div id="inventory-page" style="background: #f4f4f4; padding: 20px; font-family: sans-serif;">
+    <h1>📊 Bar & Dry Storage Inventory</h1>
+
+    <div class="category-block">
+        <h2 style="background:#2c3e50; color:white; padding:10px;">🍺 Beer</h2>
+        <div id="beer-section"></div>
+    </div>
+
+    <div class="category-block">
+        <h2 style="background:#722f37; color:white; padding:10px;">🍷 Wine</h2>
+        <div id="wine-sections" style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:15px;"></div>
+    </div>
+
+    <div class="category-block">
+        <h2 style="background:#6d4c41; color:white; padding:10px;">🥃 Hard Liquor</h2>
+        <div id="liquor-sub-sections" style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;"></div>
+    </div>
+
+    <div class="category-block">
+        <h2 style="background:#8e44ad; color:white; padding:10px;">🍸 Liqueurs</h2>
+        <div id="liqueur-section"></div>
+    </div>
+
+    <div class="category-block">
+        <h2 style="background:#27ae60; color:white; padding:10px;">🥤 Hard Sodas & Coolers</h2>
+        <div id="soda-section"></div>
+    </div>
+
+    <div class="category-block" style="margin-top:40px;">
+        <h2 style="background:#d35400; color:white; padding:10px;">📦 Dry Storage</h2>
+        <div id="dry-section"></div>
+    </div>
+</div>
+
+<script>
+const wineTypes = ["Red Wine", "White Wine", "Rosé"];
+const liquorTypes = ["Canadian Whisky", "Scotch Whisky", "Irish Whiskey", "Bourbon", "Vodka", "Gin", "Rum", "Tequila"];
+
+function createTableHtml(name) {
+    const safeId = "table-" + name.toLowerCase().replace(/ /g, "-");
+    return `
+        <div style="background:white; padding:15px; border-radius:8px; border:1px solid #ddd; margin-bottom:10px;">
+            <h4 style="margin:0;">${name}</h4>
+            <table id="${safeId}" style="width:100%; border-collapse:collapse; margin-bottom:10px;">
+                <thead>
+                    <tr style="text-align:left; font-size:0.8rem; background:#f8f9fa;">
+                        <th style="width:55%;">Item</th><th style="width:10%;">Par</th><th style="width:10%;">Count</th><th style="width:15%;">Order</th><th></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <button onclick="addRow('${safeId}')" style="width:100%; padding:5px; background:#3498db; color:white; border:none; border-radius:4px; cursor:pointer;">
+                + Add to ${name}
+            </button>
+        </div>
+    `;
+}
+
+function addRow(tableId) {
+    var table = document.getElementById(tableId);
+    var tbody = table.getElementsByTagName('tbody')[0];
+    var newRow = tbody.insertRow(-1);
+
+    var cell1 = newRow.insertCell(0);
+    var cell2 = newRow.insertCell(1);
+    var cell3 = newRow.insertCell(2);
+    var cell4 = newRow.insertCell(3);
+    var cell5 = newRow.insertCell(4);
+
+    cell1.innerHTML = '<input type="text" placeholder="Item Name" class="item-name" style="width:95%; padding:4px;">';
+    cell2.innerHTML = '<input type="number" placeholder="0" class="item-par" style="width:50px; padding:4px;">';
+    cell3.innerHTML = '<input type="number" placeholder="0" class="item-count" style="width:50px; padding:4px;">';
+    cell4.innerHTML = '<span class="item-order" style="font-weight:bold; color:#27ae60;">0</span>';
+    cell5.innerHTML = '<button onclick="this.parentElement.parentElement.remove(); saveInventory();" style="color:red; font-weight:bold; cursor:pointer; background:none; border:none;">X</button>';
+
+    newRow.addEventListener('input', function() {
+        calculateOrder(newRow);
+        saveInventory();
+    });
+}
+
+function calculateOrder(row) {
+    const par = parseFloat(row.querySelector('.item-par').value) || 0;
+    const count = parseFloat(row.querySelector('.item-count').value) || 0;
+    const orderSpan = row.querySelector('.item-order');
+    const diff = par - count;
+    orderSpan.innerText = diff > 0 ? diff : 0;
+}
+
+function setupInventory() {
+    const wineContainer = document.getElementById('wine-sections');
+    if(wineContainer) {
+        wineContainer.innerHTML = "";
+        wineTypes.forEach(type => { wineContainer.innerHTML += createTableHtml(type); });
+    }
+
+    const liquorContainer = document.getElementById('liquor-sub-sections');
+    if(liquorContainer) {
+        liquorContainer.innerHTML = "";
+        liquorTypes.forEach(type => { liquorContainer.innerHTML += createTableHtml(type); });
+    }
+
+    document.getElementById('beer-section').innerHTML = createTableHtml('Beer');
+    document.getElementById('liqueur-section').innerHTML = createTableHtml('Liqueurs');
+    document.getElementById('soda-section').innerHTML = createTableHtml('Hard Sodas');
+    document.getElementById('dry-section').innerHTML = createTableHtml('Dry Storage');
+
+    document.querySelectorAll('table').forEach(table => { addRow(table.id); });
+}
+
+function forwardToFootman() {
+    let message = "📋 *INVENTORY ORDER LIST*\n--------------------------\n";
+    const rows = document.querySelectorAll('tbody tr');
+    let itemsToOrder = 0;
+
+    rows.forEach(row => {
+        const name = row.querySelector('.item-name')?.value;
+        const par = parseFloat(row.querySelector('.item-par')?.value) || 0;
+        const count = parseFloat(row.querySelector('.item-count')?.value) || 0;
+        const orderAmt = par - count;
+
+        if (name && name.trim() !== "" && orderAmt > 0) {
+            message += `• ${name}: ${orderAmt}\n`;
+            itemsToOrder++;
+        }
+    });
+
+    if (itemsToOrder > 0) {
+        navigator.clipboard.writeText(message).then(() => {
+            alert("✅ Order List Copied!\n\n" + itemsToOrder + " items are ready to paste.");
+        }).catch(err => {
+            alert("Copy failed. Check browser permissions.");
+        });
+    } else {
+        alert("Nothing to order!");
+    }
+}
+
+function saveInventory() {
+    let inventoryData = [];
+    document.querySelectorAll('tbody tr').forEach(row => {
+        const name = row.querySelector('.item-name')?.value;
+        const par = row.querySelector('.item-par')?.value;
+        const count = row.querySelector('.item-count')?.value;
+        const tableId = row.closest('table').id;
+        if (name || par || count) {
+            inventoryData.push({ name, par, count, tableId });
+        }
+    });
+    localStorage.setItem('managerInventory', JSON.stringify(inventoryData));
+}
+
+window.onload = function() {
+    setupInventory(); 
+    try {
+        const savedData = localStorage.getItem('managerInventory');
+        if (savedData) {
+            const data = JSON.parse(savedData);
+            if (data.length > 0) {
+                document.querySelectorAll('tbody').forEach(body => body.innerHTML = "");
+                data.forEach(item => {
+                    const table = document.getElementById(item.tableId);
+                    if (table) {
+                        addRow(item.tableId);
+                        const lastRow = table.querySelector('tbody tr:last-child');
+                        lastRow.querySelector('.item-name').value = item.name || '';
+                        lastRow.querySelector('.item-par').value = item.par || '';
+                        lastRow.querySelector('.item-count').value = item.count || '';
+                        calculateOrder(lastRow);
+                    }
+                });
+            }
+        }
+    } catch (e) {
+        console.error("Save error", e);
+    }
+};
+
+function clearCounts() {
+    if (confirm("Reset all 'Count' boxes for the new week? (Names and Pars will stay!)")) {
+        // 1. Find and clear every count input
+        document.querySelectorAll('.item-count').forEach(input => {
+            input.value = ""; 
+        });
+
+        // 2. Update the math for every row so 'Order' reflects the new empty counts
+        document.querySelectorAll('tbody tr').forEach(row => {
+            calculateOrder(row);
+        });
+        
+        // 3. Save the cleared state
+        saveInventory();
+    }
+}
+</script>
+</body>
+</html>

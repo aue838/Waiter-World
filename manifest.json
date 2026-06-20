@@ -1,0 +1,16 @@
+{
+  "short_name": "TipJar",
+  "name": "Restaurant Tip Calculator",
+  "icons": [
+    {
+      "src": "icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "./index.html",
+  "background_color": "#228b22",
+  "theme_color": "#00b4ff",
+  "display": "standalone",
+  "orientation": "portrait"
+}

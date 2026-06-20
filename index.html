@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waiter World</title>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        :root {
+            --bg-color: #0b0f19;
+            --text-color: #ffffff;
+            --accent-color: #f3b33a;
+            --card-bg: rgba(255, 255, 255, 0.03);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* --- ADJUSTED SWOOPING TRAJECTORY TO PREVENT OVERLAP --- */
+        .header-container {
+            margin-top: 50px;
+            margin-bottom: 70px;
+            position: relative;
+            height: 220px;
+            width: 100%;
+            max-width: 750px;
+        }
+
+        .arched-title {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            font-family: 'Arial Black', Impact, sans-serif;
+        }
+
+        .arched-title span {
+            position: absolute;
+            bottom: 0;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: var(--accent-color);
+            transform: translate(-50%, 0);
+        }
+
+        .char1 { left: 4%;  font-size: 4.8rem; top: 33%; transform: translate(-50%, 0) rotate(-12deg); text-shadow: 0 1px 0 #cc9900, 0 2px 0 #b38600, 0 3px 0 #997300, 0 4px 0 #806000, 0 5px 0 #664d00, 0 8px 10px rgba(0,0,0,0.4); }
+        .char2 { left: 16%; font-size: 4.5rem; top: 32%; transform: translate(-50%, 0) rotate(-8deg);  text-shadow: 0 1px 0 #cc9900, 0 2px 0 #b38600, 0 3px 0 #997300, 0 4px 0 #806000, 0 5px 0 #664d00, 0 7px 9px rgba(0,0,0,0.4); }
+        .char3 { left: 24%; font-size: 4.2rem; top: 31%; transform: translate(-50%, 0) rotate(-4deg);  text-shadow: 0 1px 0 #cc9900, 0 2px 0 #b38600, 0 3px 0 #997300, 0 4px 0 #806000, 0 6px 8px rgba(0,0,0,0.35); }
+        .char4 { left: 32%; font-size: 3.9rem; top: 30%; transform: translate(-50%, 0) rotate(0deg);   text-shadow: 0 1px 0 #cc9900, 0 2px 0 #b38600, 0 3px 0 #997300, 0 4px 0 #806000, 0 6px 8px rgba(0,0,0,0.35); }
+        .char5 { left: 40%; font-size: 3.6rem; top: 30%; transform: translate(-50%, -52px) rotate(10deg);  text-shadow: 0 1px 0 #cc9900, 0 2px 0 #b38600, 0 3px 0 #997300, 0 5px 7px rgba(0,0,0,0.3); }
+        .char6 { left: 48%; font-size: 3.3rem; top: 30%; transform: translate(-50%, -72px) rotate(18deg);  text-shadow: 0 1px 0 #cc9900, 0 2px 0 #b38600, 0 3px 0 #997300, 0 5px 7px rgba(0,0,0,0.3); }
+        .char7 { left: 57%; font-size: 3.1rem; top: 30%; transform:translate(-50%, -96px) rotate(25deg);  text-shadow: 0 1px 0 #cc9900, 0 2px 0 #b38600, 0 4px 6px rgba(0,0,0,0.25); }
+        .char8 { left: 66%; font-size: 2.9rem; top: 30%; transform: translate(-50%, -122px) rotate(32deg); text-shadow: 0 1px 0 #cc9900, 0 2px 0 #b38600, 0 4px 6px rgba(0,0,0,0.25); }
+        .char9 { left: 75%; font-size: 2.7rem; top: 30%; transform: translate(-50%, -150px) rotate(38deg); text-shadow: 0 1px 0 #cc9900, 0 3px 5px rgba(0,0,0,0.2); }
+        .char10{ left: 84%; font-size: 2.5rem; top: 30%; transform: translate(-50%, -180px) rotate(42deg); text-shadow: 0 1px 0 #cc9900, 0 3px 5px rgba(0,0,0,0.2); }
+        .char11{ left: 93%; font-size: 2.3rem; top: 30%; transform: translate(-50%, -210px) rotate(45deg); text-shadow: 0 1px 0 #cc9900, 0 2px 4px rgba(0,0,0,0.15); }
+
+        /* --- MAIN APP DISPLAY INTERFACE --- */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            z-index: 10;
+            width: 100%;
+            max-width: 500px;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .app-icon-container {
+            width: 160px;
+            height: 160px;
+            margin-bottom: 35px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .app-icon-container:hover {
+            transform: scale(1.06);
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #f5be49 0%, #d89614 100%);
+            color: #0b0f19;
+            border: none;
+            padding: 15px 44px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 22px rgba(216, 150, 20, 0.25);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-decoration: none;
+            margin-bottom: 50px;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 26px rgba(216, 150, 20, 0.4);
+        }
+
+        /* --- ELEGANT GLASS INSTALLATION CARD --- */
+        .instructions-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 16px;
+            padding: 28px 24px;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: left;
+            margin-bottom: 40px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        .instructions-card h2 {
+            margin-top: 0;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+        }
+
+        .step-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .step-list li {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 14px;
+            color: #e2e8f0;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .step-list li::before {
+            content: "✓";
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            font-size: 0.8rem;
+            color: #4a5568;
+        }
+
+        /* Mobile Layout */
+        @media (max-width: 600px) {
+            .header-container { height: 130px; margin-top: 30px; margin-bottom: 45px; }
+            .char1  { font-size: 2.4rem; transform: translate(-50%, 0px) rotate(-15deg); }
+            .char2  { font-size: 2.25rem; transform: translate(-50%, -5px) rotate(-10deg); }
+            .char3  { font-size: 2.1rem; transform: translate(-50%, -11px) rotate(-5deg); }
+            .char4  { font-size: 1.95rem; transform: translate(-50%, -18px) rotate(2deg); }
+            .char5  { font-size: 1.8rem; transform: translate(-50%, -26px) rotate(10deg); }
+            .char6  { font-size: 1.65rem; transform: translate(-50%, -36px) rotate(18deg); }
+            .char7  { font-size: 1.55rem; transform: translate(-50%, -48px) rotate(25deg); }
+            .char8  { font-size: 1.45rem; transform: translate(-50%, -61px) rotate(32deg); }
+            .char9  { font-size: 1.35rem; transform: translate(-50%, -75px) rotate(38deg); }
+            .char10 { font-size: 1.25rem; transform: translate(-50%, -90px) rotate(42deg); }
+            .char11 { font-size: 1.15rem; transform: translate(-50%, -105px) rotate(45deg); }
+            .app-icon-container { width: 130px; height: 130px; }
+            .download-btn { padding: 14px 32px; font-size: 0.85rem; margin-bottom: 40px; }
+            .instructions-card { padding: 22px 18px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-container">
+        <h1 class="arched-title">
+            <span class="char1">W</span>
+            <span class="char2">A</span>
+            <span class="char3">I</span>
+            <span class="char4">T</span>
+            <span class="char5">E</span>
+            <span class="char6">R</span>
+            <span class="char7">W</span>
+            <span class="char8">O</span>
+            <span class="char9">R</span>
+            <span class="char10">L</span>
+            <span class="char11">D</span>
+        </h1>
+    </div>
+
+    <div class="main-content">
+        <div class="app-icon-container">
+            <img src="icon-512.png" alt="App Icon" style="width: 120px; height: 120px; display: block; margin: 0 auto;">
+        </div>
+
+        <a href="#" class="download-btn" onclick="trackDownload()">Download App</a>
+        
+        <div class="counter-container" style="display: flex; justify-content: center; gap: 30px; margin: 20px auto; font-family: sans-serif; color: #333; text-align: center;">
+            <div class="counter-box">
+                <span id="view-count" style="display: block; font-size: 2rem; font-weight: bold; color: #007bff;">0</span>
+                <span style="font-size: 0.9rem; uppercase; letter-spacing: 0.5px; color: #666;">Total Views</span>
+            </div>
+            <div class="counter-box">
+                <span id="download-count" style="display: block; font-size: 2rem; font-weight: bold; color: #28a745;">0</span>
+                <span style="font-size: 0.9rem; uppercase; letter-spacing: 0.5px; color: #666;">Downloads</span>
+            </div>
+        </div>
+
+ <div class="instructions-card">
+            <h2 id="device-title">Install App</h2>
+            <ul id="device-steps" class="step-list">
+                <li>Click the app icon above to add it to your home screen.</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        © 2026 Waiter World. All rights reserved.
+    </footer>
+
+    <script>
+        // Smoothly update instructions based on whether user is on iOS or Android
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        const titleEl = document.getElementById('device-title');
+        const stepsEl = document.getElementById('device-steps');
+
+        if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+            titleEl.textContent = "Install on iPhone";
+            stepsEl.innerHTML = `
+                <li>Tap the <span class="badge">Share</span> button (the square with an up-arrow) at the bottom of Safari.</li>
+                <li>Scroll down the menu and select <span class="badge">Add to Home Screen</span>.</li>
+            `;
+        } else if (/Android/.test(userAgent)) {
+            titleEl.textContent = "Install on Android";
+            stepsEl.innerHTML = `
+                <li>Tap the <span class="badge">Menu</span> icon (3 dots) in the top right corner of Chrome.</li>
+                <li>Select <span class="badge">Add to Home Screen</span> (or Install App).</li>
+            `;
+        }
+    </script>
+
+    <script type="module">
+        // 1. Import Firebase libraries directly for the browser
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, runTransaction, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        // 2. Your project configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyD7lrVFuiXpDTuBMXaNaap2BRFpbOwP3g8",
+            authDomain: "waiter-world-counters.firebaseapp.com",
+            databaseURL: "https://waiter-world-counters-default-rtdb.firebaseio.com",
+            projectId: "waiter-world-counters",
+            storageBucket: "waiter-world-counters.firebasestorage.app",
+            messagingSenderId: "1065657200854",
+            appId: "1:1065657200854:web:06e61e433a0b5e555cd977"
+        };
+
+        // 3. Initialize Firebase & Database
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        // References to our database entry points
+        const viewsRef = ref(db, 'stats/views');
+        const downloadsRef = ref(db, 'stats/downloads');
+
+        // 4. Automatically increment view counter when someone opens the page
+        runTransaction(viewsRef, (currentValue) => {
+            return (currentValue || 0) + 1;
+        });
+
+        // 5. Function to call when they click the download button
+        window.trackDownload = function() {
+            runTransaction(downloadsRef, (currentValue) => {
+                return (currentValue || 0) + 1;
+            });
+        };
+
+        // 6. Listen for changes in real-time and update the text elements on screen
+        onValue(viewsRef, (snapshot) => {
+            const viewCount = snapshot.val() || 0;
+            const viewElement = document.getElementById('view-count');
+            if (viewElement) viewElement.innerText = viewCount.toLocaleString();
+        });
+
+        onValue(downloadsRef, (snapshot) => {
+            const downloadCount = snapshot.val() || 0;
+            const downloadElement = document.getElementById('download-count');
+            if (downloadElement) downloadElement.innerText = downloadCount.toLocaleString();
+        });
+    </script>  
+</body>
+</html>

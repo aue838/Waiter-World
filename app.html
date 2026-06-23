@@ -31,7 +31,6 @@
 
 
 /* THE REST OF YOUR CSS... */
-
 body {
     background: 
         /* The Sun: Sharper, brighter, and higher up */
@@ -47,10 +46,11 @@ body {
     background-size: 50vw 50vw, cover; 
     background-position: 120% -20%, center; 
     background-repeat: no-repeat, no-repeat;
-    background-attachment: fixed;
+    background-attachment: scroll; /* Changing this to 'scroll' fixes the mobile iPad engine! */
     min-height: 100vh;
     margin: 0;
 }
+
 
 /* 1. GLOBAL & BASE STYLES */
 .secondary-table {

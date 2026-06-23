@@ -982,10 +982,13 @@ window.addEventListener('resize', () => {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 });
 
-window.addEventListener('click', (event) => {
+// Force immediate size rendering update
+renderer.setSize(window.innerWidth, window.innerHeight);
+
+function handleSelection(clientX, clientY) {
     const rect = renderer.domElement.getBoundingClientRect();
-    mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-    mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+    mouse.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+    mouse.y = -((clientY - rect.top) / rect.height) * 2 + 1;
 
     raycaster.setFromCamera(mouse, camera);
     const intersects = raycaster.intersectObjects(scene.children, true);
@@ -1024,7 +1027,20 @@ window.addEventListener('click', (event) => {
             triggerGhost();
         }
     }
+} // <--- This closing bracket closes the selection function correctly!
+    
+// Fire selection logic for mouse clicks
+window.addEventListener('click', (event) => {
+    handleSelection(event.clientX, event.clientY);
 });
+
+// Fire selection logic for iPad finger touches
+window.addEventListener('touchstart', (event) => {
+    if(event.touches.length > 0) {
+        handleSelection(event.touches[0].clientX, event.touches[0].clientY);
+    }
+});
+
 
 function closeAllModals() {
     // This list must match the IDs in your HTML exactly

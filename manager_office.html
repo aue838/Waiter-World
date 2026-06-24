@@ -1058,6 +1058,7 @@ function animate() {
 animate();
 
 </script>
+<button id="mute-btn" style="position: fixed; top: 20px; left: 20px; z-index: 1000; padding: 10px; font-size: 1.2rem; cursor: pointer; background: rgba(0,0,0,0.6); color: white; border: 1px solid white; border-radius: 5px;">🔊 Mute</button>
 
 <audio id="office-music" src="picnic.mp3" loop></audio>
 
@@ -1066,6 +1067,32 @@ animate();
     const officeMusic = document.getElementById('office-music');
     if (officeMusic) {
       officeMusic.volume = 0.4;
+     const muteBtn = document.getElementById('mute-btn');
+if (muteBtn) {
+    muteBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Stops the 3D raycaster from clicking the room behind it
+        if (officeMusic.muted) {
+            officeMusic.muted = false;
+            muteBtn.innerText = "🔊 Mute";
+        } else {
+            officeMusic.muted = true;
+            muteBtn.innerText = "🔇 Unmute";
+        }
+    });
+    // Also attach to touchstart for instant iPad taps
+    muteBtn.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (officeMusic.muted) {
+            officeMusic.muted = false;
+            muteBtn.innerText = "🔊 Mute";
+        } else {
+            officeMusic.muted = true;
+            muteBtn.innerText = "🔇 Unmute";
+        }
+    });
+}
+ 
       
       // Because the user just interacted with the screen to click the door,
       // the browser will allow us to play the music immediately when this page loads!

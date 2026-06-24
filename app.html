@@ -2367,6 +2367,28 @@ setTimeout(() => {
     const music = document.getElementById('bg-music');
     // Lower the volume slightly so it's not blastingly loud (0.0 to 1.0)
     music.volume = 0.4; 
+        const muteBtn = document.getElementById('app-mute-btn');
+    if (muteBtn && !muteBtn.dataset.listenerAdded) {
+      muteBtn.dataset.listenerAdded = "true";
+      
+      const toggleMute = (e) => {
+        e.stopPropagation();
+        if (music.muted) {
+          music.muted = false;
+          muteBtn.innerText = "🔊 Mute";
+        } else {
+          music.muted = true;
+          muteBtn.innerText = "🔇 Unmute";
+        }
+      };
+
+      muteBtn.addEventListener('click', toggleMute);
+      muteBtn.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        toggleMute(e);
+      });
+    }
+
     
     music.play().catch(err => {
       console.log("Waiting for user interaction to play audio.");
@@ -2378,6 +2400,7 @@ setTimeout(() => {
   window.addEventListener('touchstart', startCircusMusic);
 
 </script>
+<button id="app-mute-btn" style="position: fixed; top: 20px; left: 20px; z-index: 1000; padding: 10px; font-size: 1.2rem; cursor: pointer; background: rgba(0,0,0,0.6); color: white; border: 1px solid white; border-radius: 5px;">🔊 Mute</button>
 
 <div id="transition-overlay"></div>
 </body>

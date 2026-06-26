@@ -1399,11 +1399,11 @@ body::before {
 
 #river-container {
     position: fixed;
-    bottom: 0;
+    top: 25vh;        /* Locks the top of the river precisely to your 25vh sky horizon! */
+    bottom: 0;        /* Runs the river all the way to the bottom of the screen */
     left: 50%;
     transform: translateX(-50%);
     width: 100vw;
-    height: 75vh; 
     z-index: -2; 
     overflow: hidden;
     clip-path: polygon(45% 0%, 55% 0%, 100% 100%, 0% 100%);
@@ -1411,18 +1411,6 @@ body::before {
     border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-@media screen and (max-width: 480px) {
-  #river-container { 
-    position: fixed; 
-    top: 23vh; 
-    bottom: auto; 
-    left: 50%; 
-    transform: translateX(-50%); 
-    width: 100vw; 
-    height: 77vh; 
-    z-index: -2; 
-  }
-}
 
 .traveler {
     position: absolute;

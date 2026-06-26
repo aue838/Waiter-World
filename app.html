@@ -2394,6 +2394,18 @@ setTimeout(() => {
       console.log("Waiting for user interaction to play audio.");
     });
   }
+  // Automatically mute all music if user exits or minimizes the app layout
+document.addEventListener('visibilitychange', () => {
+  const music = document.getElementById('bg-music');
+  if (music) {
+    if (document.hidden) {
+      music.pause(); // Instantly stops the music from playing in the background
+    } else if (!music.muted) {
+      music.play().catch(err => console.log("Audio play blocked"));
+    }
+  }
+});
+
 
   // Listen for the user's first click or mobile tap anywhere on the screen
   window.addEventListener('click', startCircusMusic);

@@ -1110,6 +1110,17 @@ if (muteBtn) {
       });
     }
   });
+  // Instantly silence the 3D office room if the app screen is minimized
+document.addEventListener('visibilitychange', () => {
+  if (typeof officeMusic !== 'undefined') {
+    if (document.hidden) {
+      officeMusic.pause();
+    } else if (!officeMusic.muted) {
+      officeMusic.play().catch(err => console.log("Audio play blocked"));
+    }
+  }
+});
+
 </script>
 </body>
 </html>

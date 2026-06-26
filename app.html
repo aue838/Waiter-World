@@ -35,18 +35,20 @@ body {
     background: 
         /* The Sun: Sharper, brighter, and higher up */
         radial-gradient(circle at top right, #fff9e6 0%, #fff176 10%, rgba(255, 255, 255, 0) 50%),
-        /* The High Noon Sky to Grass transition */
+        /* The High Noon Sky to Grass transition with a locked horizon river */
         linear-gradient(to bottom, 
-            #00b4ff 0%,    /* Sky Top */
-            #70d1ff 25vh,   /* Horizon Blue */
-            #44cc44 25vh,   /* Bright Summer Grass */
-            #228b22 100%   /* Deep Grass Shadow */
+            #00b4ff 0%,       /* Sky Top */
+            #70d1ff 240px,    /* Horizon River Top (Locked) */
+            #005fbc 240px,    /* Blue River Line Starts */
+            #005fbc 260px,    /* Blue River Line Ends (20px thick) */
+            #44cc44 260px,    /* Bright Summer Grass Starts */
+            #228b22 100%      /* Deep Grass Shadow */
         );
     
-    background-size: 50vw 50vw, cover; 
+    background-size: 50vw 50vw, 100% 100%; /* Forces the canvas gradient to stretch identically as one solid sheet */
     background-position: 120% -20%, center; 
     background-repeat: no-repeat, no-repeat;
-    background-attachment: scroll; /* Changing this to 'scroll' fixes the mobile iPad engine! */
+    background-attachment: scroll;
     min-height: 100vh;
     margin: 0;
 }

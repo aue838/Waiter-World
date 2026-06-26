@@ -29,11 +29,22 @@
     transition: transform 0.5s ease-in-out;
 }
 
-
-/* THE REST OF YOUR CSS... */
 body {
+    min-height: 100vh;
+    margin: 0;
+    position: relative;
+}
+
+/* This layer holds your sky and grass perfectly stationary so the horizon line never moves */
+.scenery-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -3; /* Sits completely behind your river container and tables */
     background: 
-        /* The Sun: Sharper, brighter, and higher up */
+        /* The Sun */
         radial-gradient(circle at top right, #fff9e6 0%, #fff176 10%, rgba(255, 255, 255, 0) 50%),
         /* The High Noon Sky to Grass transition */
         linear-gradient(to bottom, 
@@ -42,15 +53,10 @@ body {
             #44cc44 25vh,   /* Bright Summer Grass */
             #228b22 100%   /* Deep Grass Shadow */
         );
-    
-    background-size: 50vw 50vw, cover; 
+    background-size: 50vw 50vw, 100% 100%;
     background-position: 120% -20%, center; 
     background-repeat: no-repeat, no-repeat;
-    background-attachment: scroll;
-    min-height: 100vh;
-    margin: 0;
 }
-
 
 
 /* 1. GLOBAL & BASE STYLES */
@@ -1489,6 +1495,7 @@ body::before {
 </head>
 
 <body>
+<div class="scenery-bg"></div>
 <div id="world-wrapper" style="position: relative; width: 100%; overflow: hidden;">
 <div id="river-container">
     <!-- Reflection Glow -->

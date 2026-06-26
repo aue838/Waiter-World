@@ -2208,7 +2208,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 jarTooltip.remove();
                 jarTooltip = null;
             }
-        }, 5000);
+        }, 9000);
     }
 
     // ==========================================
@@ -2226,7 +2226,7 @@ setTimeout(() => {
     const bypassTooltip = document.createElement('div');
     bypassTooltip.className = 'tour-popover arrow-left';
     
-    bypassTooltip.innerHTML = '↖ Tip Share?<br>OR<br>↙ Skip to Coworker Tip out';
+    bypassTooltip.innerHTML = '↖ Tip Share?<br>OR<br>↙ Tip out?';
     
     bypassTooltip.style.position = 'fixed';
     bypassTooltip.style.top = '65%'; 
@@ -2245,7 +2245,7 @@ setTimeout(() => {
         bypassTooltip.style.opacity = '0';
         bypassTooltip.style.transform = 'translateY(-50%) scale(0.8)';
         setTimeout(() => { bypassTooltip.remove(); }, 400);
-    }, 4000);
+    }, 8000);
 }, 3000);
 
             // 4. Schedule Bubble 4 (Sun) 22 seconds AFTER submission
@@ -2275,7 +2275,7 @@ setTimeout(() => {
                             triggerSmokePuff(sunTooltip);
                             sunTooltip.remove(); 
                         }, 200);
-                    }, 2500);
+                    }, 9000);
                 }
             }, 22000);
         });

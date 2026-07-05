@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>percentageSun</title>
+
+<style>
+body {
+    background-color: #ff914d; /* A happy, vibrant cartoonish sun-orange */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* Clear, bold header style */
+h1 {
+    color: white;
+    font-size: 2.2rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    margin-top: 40px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* The friendly math container panel */
+.math-card {
+    background: white;
+    padding: 30px 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    box-sizing: border-box;
+}
+
+/* Beautiful row layout for your math sentence input cells */
+.math-sentence {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+/* Large, friendly input slots */
+.lunar-input {
+    width: 80px;
+    padding: 12px;
+    font-size: 1.2rem;
+    text-align: center;
+    border: 3px solid #ff914d;
+    border-radius: 12px;
+    outline: none;
+    font-weight: bold;
+    color: #333;
+}
+
+.lunar-input:focus {
+    border-color: #e07026;
+    background-color: #fff9f5;
+}
+
+/* Sizing adjustment for the total and answer slots */
+#c-tot, #c-res {
+    width: 100px;
+}
+
+/* Text connector styles like 'of' and '=' */
+.math-label {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #555;
+    padding: 0 2px;
+}
+
+/* Unified styling for your Submit and Clear action buttons */
+.btn-group {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+    justify-content: center;
+}
+
+.action-btn {
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.action-btn:active {
+    transform: scale(0.97);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#c-submit {
+    background-color: #ff914d;
+    color: white;
+}
+
+#clearMoonBtn {
+    background-color: #e0e0e0;
+    color: #444;
+}
+
+/* The floating top-left Traipse Exit Button */
+.exit-btn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 10px 18px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.25);
+    border: 2px solid white;
+    border-radius: 30px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.exit-btn:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+</style>
+</head>
+<body>
+    <!-- The Traipse Exit Button to fly straight back to the tip jar app -->
+    <a href="app.html" class="exit-btn">← Exit</a>
+
+    <!-- Page Header Title -->
+    <h1>Percentage Calculator</h1>
+
+    <!-- The Cartoon Math Panel -->
+    <div class="math-card">
+        <div class="math-sentence">
+            <input type="number" id="c-pc" placeholder="%" class="lunar-input" min="0"> 
+            <span class="math-label">of</span>
+            <input type="number" id="c-tot" placeholder="total" class="lunar-input" min="0"> 
+            <span class="math-label">=</span>
+            <input type="number" id="c-res" placeholder="answer" class="lunar-input" min="0">
+        </div>
+
+        <div class="btn-group">
+            <button id="c-submit" class="action-btn" onclick="runMoonMath(event)">Submit</button>
+            <button id="clearMoonBtn" class="action-btn" onclick="clearMoonFields(event)">Clear</button>
+        </div>
+    </div>
+<script>
+function runMoonMath(event) {
+    if (event) event.preventDefault();
+
+    // Grab the active inputs from your cells
+    const percentInput = document.getElementById('c-pc');
+    const totalInput = document.getElementById('c-tot');
+    const answerInput = document.getElementById('c-res');
+
+    // Convert their text entry strings into clear decimal numbers
+    let p = percentInput.value !== "" ? parseFloat(percentInput.value) : null;
+    let t = totalInput.value !== "" ? parseFloat(totalInput.value) : null;
+    let a = answerInput.value !== "" ? parseFloat(answerInput.value) : null;
+
+    // Rule A: If Percentage and Total are filled -> Calculate the Answer
+    if (p !== null && t !== null && a === null) {
+        answerInput.value = ((p / 100) * t).toFixed(2);
+    }
+    // Rule B: If Total and Answer are filled -> Calculate the Percentage
+    else if (t !== null && a !== null && p === null) {
+        if (t === 0) {
+            alert("Total cannot be zero when dividing!");
+            return;
+        }
+        percentInput.value = ((a / t) * 100).toFixed(1);
+    }
+    // Rule C: If Percentage and Answer are filled -> Calculate the Total
+    else if (p !== null && a !== null && t === null) {
+        if (p === 0) {
+            alert("Percentage cannot be zero when calculating total!");
+            return;
+        }
+        totalInput.value = ((a / p) * 100).toFixed(2);
+    }
+    // Safety check if they clicked submit without enough numbers
+    else {
+        alert("Please enter exactly TWO numbers. The sun will compute the third one for you!");
+    }
+}
+
+function clearMoonFields(event) {
+    if (event) event.preventDefault();
+    document.getElementById('c-pc').value = "";
+    document.getElementById('c-tot').value = "";
+    document.getElementById('c-res').value = "";
+}
+</script>
+
+
+</body>
+</html>

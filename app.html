@@ -2173,6 +2173,41 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================
     // TOUR BUBBLE 1: THE TIP JAR (Launches Instantly)
     // ==========================================
+    
+        // CHECK SCREEN MEMORY VAULT: If they already clicked "Got It" in the past, stop right here!
+    if (localStorage.getItem("tourComplete") === "true") {
+        return; 
+    }
+
+    // Create a floating "Got It!" bypass button at the bottom of the screen
+    const skipBtn = document.createElement('button');
+    skipBtn.innerText = "✕ Got It! Hide Tour";
+    skipBtn.style.position = 'fixed';
+    skipBtn.style.bottom = '20px';
+    skipBtn.style.right = '20px';
+    skipBtn.style.zIndex = '9999';
+    skipBtn.style.padding = '10px 15px';
+    skipBtn.style.fontSize = '1rem';
+    skipBtn.style.fontWeight = 'bold';
+    skipBtn.style.backgroundColor = 'rgba(0,0,0,0.75)';
+    skipBtn.style.color = 'white';
+    skipBtn.style.border = '2px solid white';
+    skipBtn.style.borderRadius = '30px';
+    skipBtn.style.cursor = 'pointer';
+    document.body.appendChild(skipBtn);
+
+    // When clicked, save the hidden marker and clear everything instantly
+    const handleSkipTour = (e) => {
+        e.stopPropagation();
+        localStorage.setItem("tourComplete", "true"); // Lock it in the memory vault
+        skipBtn.remove(); // Remove this skip button
+        
+        // Safety wipe: instantly delete any active tour bubbles currently on screen
+        document.querySelectorAll('.tour-popover').forEach(bubble => bubble.remove());
+    };
+    skipBtn.addEventListener('click', handleSkipTour);
+    skipBtn.addEventListener('touchstart', (e) => { e.preventDefault(); handleSkipTour(e); });
+
     const jarElement = document.getElementById('jar');
     const submitBtn = document.getElementById('btn');
     let jarTooltip = null;

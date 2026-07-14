@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { 
+            margin: 0; 
+            padding: 2vw; 
+            font-family: sans-serif; 
+            background-color: #FFDBBB; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+        }
+        .container { width: 100%; max-width: 50rem; text-align: center; }
+        
+        .mascot-box { 
+            background: white; 
+            border: 0.15rem solid #000099; 
+            padding: 2vw; 
+            border-radius: 1rem; 
+            margin-bottom: 2vh; 
+            font-weight: bold; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            gap: 1vw;
+        }
+        .mascot-emoji { font-size: 2.5rem; transform: rotate(-15deg); display: inline-block; }
+        
+        table { border-collapse: collapse; width: 100%; margin-bottom: 2vh; }
+        th, td { border: 0.05rem solid black; padding: 1vw; text-align: center; }
+        input { width: 90%; padding: 0.5vw; box-sizing: border-box; font-size: 1rem; }
+        
+        .trademark-e {
+            display: inline-block;
+            transform: rotate(20deg);
+            margin: 0 0.2em; 
+            will-change: transform;
+        }
+
+        h1 { color: #000099; font-size: 3rem; margin: 1vh 0; }
+
+        footer { 
+            margin-top: 3vh; 
+            padding: 1vh; 
+            font-size: 1rem; 
+            color: #555; 
+            text-align: center;
+        }
+
+        .back-link {
+            display: block;
+            margin-bottom: 1vh;
+            color: #000099;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>fairNsquare</h1>
+    
+    <div id="instructionBox" class="mascot-box">
+        <span class="mascot-emoji">🤡👉</span> 
+        <span>Enter Total Tips First! Then proceed to fill out the table</span>
+    </div>
+
+    <table>
+        <tr>
+            <th><input type="number" id="firstNumber" placeholder="Total Tips" oninput="ClassicApp.calculateHourlyWage()" /><br><small>[Total Tips]</small></th>
+            <th><input type="number" id="secondNumber" placeholder="Total Hrs" oninput="ClassicApp.calculateHourlyWage()" /><br><small>[Total Hrs=All Workers]</small></th>
+            <th><input type="text" id="hourlyWage" placeholder="Wage" readonly /><br><small>[Hourly Wage]</small></th>
+        </tr>
+    </table>
+
+    <table id="employeeTable">
+        <tr><th>Name</th><th>Hours</th><th>Take</th></tr>
+        <script>
+            for(let i = 1; i <= 8; i++) {
+                document.write(`<tr>
+                    <td><input type="text" id="employee${i}" /></td>
+                    <td><input type="number" id="hours${i}" oninput="ClassicApp.updateTake(${i})" /></td>
+                    <td><input type="text" id="take${i}" readonly /></td>
+                </tr>`);
+            }
+        </script>
+    </table>
+
+    <table id="tipOutTable">
+        <tr><th>Role</th><th>Sales</th><th>%</th><th>TipOut</th></tr>
+        <script>
+            const roles = ['Kitchen', 'Bartender', 'Hostess', 'Runner'];
+            roles.forEach(role => {
+                let r = role.toLowerCase();
+                document.write(`<tr>
+                    <td>${role}</td>
+                    <td><input type="number" id="sales_${r}" oninput="ClassicApp.calculateTipOut('${r}')" /></td>
+                    <td><input type="number" id="tip_${r}" oninput="ClassicApp.calculateTipOut('${r}')" /></td>
+                    <td><input type="text" id="tipout_${r}" readonly /></td>
+                </tr>`);
+            });
+        </script>
+    </table>
+
+    <footer>
+        <a href="index.html" class="back-link">← Back to Waiter World</a>
+        <p>Lrn<span class="trademark-e">E</span>© 2026. All rights reserved.</p>
+    </footer>
+</div>
+
+<script>
+    var ClassicApp = {
+        timers: {},
+        init: function() {
+            ['kitchen', 'bartender', 'hostess', 'runner'].forEach(r => {
+                let saved = localStorage.getItem('tip_' + r);
+                if (saved) document.getElementById('tip_' + r).value = saved;
+            });
+        },
+        debounce: function(key, callback) {
+            clearTimeout(this.timers[key]);
+            this.timers[key] = setTimeout(callback, 500);
+        },
+        calculateTipOut: function(role) {
+            this.debounce('tipOut_' + role, () => {
+                let sales = parseFloat(document.getElementById('sales_' + role).value) || 0;
+                let tip = parseFloat(document.getElementById('tip_' + role).value) || 0;
+                localStorage.setItem('tip_' + role, tip);
+                document.getElementById('tipout_' + role).value = (sales * (tip / 100)).toFixed(2);
+                document.getElementById('instructionBox').style.display = 'none';
+            });
+        },
+        updateTake: function(row) {
+            this.debounce('take_' + row, () => {
+                let wage = parseFloat(document.getElementById("hourlyWage").value) || 0;
+                let hours = parseFloat(document.getElementById("hours" + row).value) || 0;
+                document.getElementById("take" + row).value = (wage * hours).toFixed(2);
+                document.getElementById('instructionBox').style.display = 'none';
+            });
+        },
+        calculateHourlyWage: function() {
+            this.debounce('wage', () => {
+                let totalCash = parseFloat(document.getElementById("firstNumber").value);
+                let totalHours = parseFloat(document.getElementById("secondNumber").value);
+                if (!isNaN(totalCash) && !isNaN(totalHours) && totalHours > 0) {
+                    document.getElementById("hourlyWage").value = (totalCash / totalHours).toFixed(2);
+                    document.getElementById('instructionBox').style.display = 'none';
+                }
+            });
+        }
+    };
+    ClassicApp.init();
+</script>
+
+</body>
+</html>
+
+

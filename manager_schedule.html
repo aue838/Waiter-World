@@ -13,32 +13,32 @@
             --neon-accent: #00ffcc;
         }
 
-        body {
+body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             /* Dark office wall texture using a radial gradient */
             background-color: #1a1a1a;
-            background-image: radial-gradient(#333 1px, transparent 1px);
-            background-size: 20px 20px; 
+            background-image: radial-gradient(#333 0.0625rem, transparent 0.0625rem);
+            background-size: 1.25rem 1.25rem; 
             margin: 0;
-            padding: 20px;
+            padding: 1.25rem;
             display: flex;
             flex-direction: column;
             align-items: center;
         }        
 
         .controls {
-            margin-bottom: 20px;
+            margin-bottom: 1.25rem;
             display: flex;
-            gap: 10px;
+            gap: 0.625rem;
         }
 
         button {
-            padding: 10px 20px;
+            padding: 0.625rem 1.25rem;
             cursor: pointer;
             background: var(--header-bg);
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 0.25rem;
             font-weight: bold;
         }
 
@@ -47,16 +47,16 @@
         #calendar-container {
             background: var(--calendar-bg);
             /* Subtle paper texture effect */
-            background-image: linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px),
-                      linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px);
-            background-size: 20px 20px;
+            background-image: linear-gradient(rgba(0,0,0,0.02) 0.0625rem, transparent 0.0625rem),
+                     linear-gradient(90deg, rgba(0,0,0,0.02) 0.0625rem, transparent 0.0625rem);
+            background-size: 1.25rem 1.25rem;
     
-            border: 8px solid #3d2b1f; /* Thick "wooden frame" border */
+            border: 0.5rem solid #3d2b1f; /* Thick "wooden frame" border */
             width: 95vw;
-            max-width: 1000px;
+            max-width: 62.5rem;
             margin: 0 auto;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8), inset 0 0 100px rgba(0,0,0,0.05);
-            border-radius: 4px;
+            box-shadow: 0 1.25rem 3.125rem rgba(0,0,0,0.8), inset 0 0 6.25rem rgba(0,0,0,0.05);
+            border-radius: 0.25rem;
         }
 
         .calendar-header {
@@ -68,7 +68,7 @@
             font-weight: bold;
         }
 
-        .day-label { padding: 10px 0; border: 1px solid #333; }
+        .day-label { padding: 0.625rem 0; border: 0.0625rem solid #333; }
 
         .calendar-grid {
             display: grid;
@@ -77,20 +77,20 @@
         }
 
         .calendar-day {
-            min-height: 120px;
-            border: 1px solid var(--border-color);
-            padding: 5px;
+            min-height: 7.5rem;
+            border: 0.0625rem solid var(--border-color);
+            padding: 0.3125rem;
             position: relative;
         }
 
-        .day-number { font-weight: bold; margin-bottom: 5px; display: block; }
+        .day-number { font-weight: bold; margin-bottom: 0.3125rem; display: block; }
 
         /* Highlight the current week */
         .current-week { background-color: var(--highlight-week); }
 
         textarea {
             width: 90%;
-            height: 80px;
+            height: 5rem;
             border: none;
             background: transparent;
             font-size: 0.8rem;
@@ -98,19 +98,19 @@
             outline: none;
         }
         
-       /* Highlight for the current specific day */
+        /* Highlight for the current specific day */
 .today-highlight { 
-    border: 3px solid #d32f2f !important; 
+    border: 0.1875rem solid #d32f2f !important; 
     background-color: #fff0f0 !important; 
 } 
         
         /* Style the container for each staff row */
 #shift-list > div {
     background: rgba(255, 255, 255, 0.05); /* Very faint background */
-    padding: 10px;
-    border-radius: 6px;
-    border-left: 4px solid var(--neon-accent, #00ffcc); /* Accent bar on the side */
-    margin-bottom: 12px !important; /* Space between people */
+    padding: 0.625rem;
+    border-radius: 0.375rem;
+    border-left: 0.25rem solid var(--neon-accent, #00ffcc); /* Accent bar on the side */
+    margin-bottom: 0.75rem !important; /* Space between people */
 }
 
 /* Zebra striping: every second row gets a slightly lighter background */
@@ -120,14 +120,14 @@
 
 /* Make the inputs look a bit more professional inside the rows */
 #shift-list input {
-    border: 1px solid #555;
+    border: 0.0625rem solid #555;
     background: #222;
     color: white;
     font-size: 1rem;
 }
 
 .nav-container {
-    padding: 20px;
+    padding: 1.25rem;
     background: #2c3e50;
     display: flex;
     justify-content: flex-start;
@@ -137,8 +137,8 @@
     text-decoration: none;
     color: white;
     background: #009933;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 0.625rem 1.25rem;
+    border-radius: 0.3125rem;
     font-family: sans-serif;
     font-weight: bold;
     transition: background 0.3s;
@@ -147,27 +147,26 @@
 .btn-return:hover {
     background: #a93226;
 }
-
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 37.5rem) {
     .controls {
         display: grid;
         grid-template-columns: repeat(2, 1fr); 
         width: 100%;
-        gap: 5px;
+        gap: 0.3125rem;
     }
 
     /* Target the class to match your desktop selector */
     .calendar-grid {
         display: block !important; /* Stack days vertically */
-        padding: 10px;
+        padding: 0.625rem;
     }
 
     .calendar-day {
         width: 100% !important;
         box-sizing: border-box; /* Prevents horizontal scroll */
         min-height: auto;
-        margin-bottom: 10px;
-        border: 2px solid var(--border-color);
+        margin-bottom: 0.625rem;
+        border: 0.125rem solid var(--border-color);
     }
 
     .day-headers {
@@ -176,7 +175,7 @@
 
     #day-modal > div {
         width: 95%;
-        margin: 10px auto;
+        margin: 0.625rem auto;
     }
 }
 
@@ -195,7 +194,7 @@
     #calendar-container {
         width: 100% !important;
         max-width: none !important;
-        border: 1px solid #000 !important;
+        border: 0.0625rem solid #000 !important;
         box-shadow: none !important;
         background: white !important;
     }
@@ -203,12 +202,12 @@
     .calendar-header, .day-headers {
         background: #eee !important;
         color: black !important;
-        border-bottom: 2px solid #000 !important;
+        border-bottom: 0.125rem solid #000 !important;
     }
 
     .calendar-day {
-        min-height: 100px !important;
-        border: 1px solid #ddd !important;
+        min-height: 6.25rem !important;
+        border: 0.0625rem solid #ddd !important;
     }
 }
     </style>
@@ -233,7 +232,7 @@
     </div>
 
 <div id="calendar-container">
-    <div id="month-name" style="background: var(--header-bg); color: white; text-align: center; padding: 15px; font-size: 1.5rem;">
+    <div id="month-name" style="background: var(--header-bg); color: white; text-align: center; padding: 0.9375rem; font-size: 1.5rem;">
         </div>
 
     <div class="day-headers" style="display: grid; grid-template-columns: repeat(7, 1fr); background: var(--header-bg); color: white;">
@@ -261,59 +260,62 @@ function initCalendar() {
     const month = now.getMonth();
     const today = now.getDate();
 
-    const monthNames = ["January", "February", "March", "April", "May", "June",
+ const monthNames = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"];
     monthLabel.innerText = `${monthNames[month]} ${year}`;
 
-    const firstDay = new Date(year, month, 1).getDay();
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-    // Current Week Range
-    const currentDayOfWeek = now.getDay();
-    const startOfWeek = today - currentDayOfWeek;
-    const endOfWeek = startOfWeek + 6;
-
+    const firstDayIndex = new Date(year, month, 1).getDay();
+    const lastDayOfMonth = new Date(year, month + 1, 0).getDate();
+    const prevMonthLastDay = new Date(year, month, 0).getDate();
+    
     grid.innerHTML = '';
 
-    for (let i = 0; i < firstDay; i++) {
-        const emptyDiv = document.createElement('div');
-        emptyDiv.classList.add('calendar-day');
-        emptyDiv.style.background = "#eee";
-        grid.appendChild(emptyDiv);
-    }
-
-        // Create the actual days
-        for (let day = 1; day <= daysInMonth; day++) {
-        const dayDiv = document.createElement('div');
+    for (let i = 0; i < 42; i++) {
+        let day, displayMonth, displayYear;
+        
+        if (i < firstDayIndex) {
+            day = prevMonthLastDay - firstDayIndex + i + 1;
+            displayMonth = month === 0 ? 11 : month - 1;
+            displayYear = month === 0 ? year - 1 : year;
+        } else if (i >= firstDayIndex + lastDayOfMonth) {
+            day = i - (firstDayIndex + lastDayOfMonth) + 1;
+            displayMonth = month === 11 ? 0 : month + 1;
+            displayYear = month === 11 ? year + 1 : year;
+        } else {
+            day = i - firstDayIndex + 1;
+            displayMonth = month;
+            displayYear = year;
+        }
+const dayDiv = document.createElement('div');
         dayDiv.classList.add('calendar-day');
         dayDiv.style.cursor = "pointer";
-        dayDiv.setAttribute('onclick', `openModal(${day})`);
+        // Pass the full date info to the modal
+        dayDiv.setAttribute('onclick', `openModal(${day}, ${displayMonth}, ${displayYear})`);
 
-// Highlight the current week
-        if (day >= startOfWeek && day <= endOfWeek) {
-            dayDiv.classList.add('current-week');
+        // Style non-current month days
+        if (displayMonth !== month) {
+            dayDiv.style.background = "#f0f0f0";
         }
 
         // Highlight TODAY specifically
-        if (day === today) {
+        if (day === now.getDate() && displayMonth === now.getMonth() && displayYear === now.getFullYear()) {
             dayDiv.classList.add('today-highlight');
         }
 
-        // 1. Get Today's Data
-        const savedData = JSON.parse(localStorage.getItem(`shifts-${year}-${month}-${day}`) || "[]");
+const savedData = JSON.parse(localStorage.getItem(`shifts-${displayYear}-${displayMonth}-${day}`) || "[]");
         
-        // 2. NEW: Get Yesterday's Data to check for "Clopens"
-        const yesterdayData = day > 1 ? JSON.parse(localStorage.getItem(`shifts-${year}-${month}-${day - 1}`) || "[]") : [];
+        // Use displayMonth/displayYear for lookup
+        const prevDate = new Date(displayYear, displayMonth, day - 1);
+        const yesterdayData = JSON.parse(localStorage.getItem(`shifts-${prevDate.getFullYear()}-${prevDate.getMonth()}-${prevDate.getDate()}`) || "[]");
         
-        // 3. Create a list of people who worked LATE yesterday (5p or Cl)
         const workedLateYesterday = yesterdayData
             .filter(s => s.time.toLowerCase().includes("5p") || s.time.toLowerCase().includes("cl"))
             .map(s => s.name.trim().toLowerCase());
 
         const staffCount = savedData.length;
-        const badgeHTML = staffCount > 0 ? `<span style="float:right; background:#4b2c15; color:white; font-size:0.6rem; padding:2px 5px; border-radius:10px;">${staffCount} Staff</span>` : '';
+        const badgeHTML = staffCount > 0 ? `<span style="float:right; background:#4b2c15; color:white; font-size:0.6rem; padding:0.125rem 0.3125rem; border-radius:0.625rem;">${staffCount} Staff</span>` : '';
 
-        let shiftListHTML = '<div style="margin-top:5px; font-size:0.7rem; line-height:1.2; clear:both;">';
+        let shiftListHTML = '<div style="margin-top:0.3125rem; font-size:0.7rem; line-height:1.2; clear:both;">';
         
         const nameCounts = {};
         savedData.forEach(s => {
@@ -321,24 +323,20 @@ function initCalendar() {
             nameCounts[n] = (nameCounts[n] || 0) + 1;
         });
         
-        // --- NEW: Calculate Total Hours Scheduled ---
         let totalHours = 0;
         savedData.forEach(shift => {
             const time = shift.time.toLowerCase();
             if (time.includes("7a-3p")) totalHours += 8;
             else if (time.includes("11a-5p")) totalHours += 6;
-            else if (time.includes("5p-cl")) totalHours += 5; // Assuming Close is 10pm
-            else if (time !== "") totalHours += 4; // Default for custom labels
+            else if (time.includes("5p-cl")) totalHours += 5;
+            else if (time !== "") totalHours += 4;
         });
 
-        // Create the Budget Badge HTML
-        const budgetHTML = totalHours > 0 ? `<div style="font-size:0.6rem; color:#666; font-style:italic; margin-top:2px; border-top:1px solid #ddd; padding-top:2px;">Total: ${totalHours} hrs</div>` : '';
+        const budgetHTML = totalHours > 0 ? `<div style="font-size:0.6rem; color:#666; font-style:italic; margin-top:0.125rem; border-top:0.0625rem solid #ddd; padding-top:0.125rem;">Total: ${totalHours} hrs</div>` : '';
         savedData.forEach(shift => {
             const currentName = shift.name.trim().toLowerCase();
             const currentTime = shift.time.toLowerCase();
             
-            // --- NEW: CLOPEN LOGIC ---
-            // Trigger warning if they work an early shift (7a or 11a) AND worked late yesterday
             const isEarlyToday = currentTime.includes("7a") || currentTime.includes("11a");
             const isClopen = workedLateYesterday.includes(currentName) && isEarlyToday;
 
@@ -349,27 +347,26 @@ function initCalendar() {
 
             const isDuplicate = nameCounts[currentName] > 1;
             
-            // Priority: Clopen (Purple) takes precedence over Duplicate (Orange)
             let borderColor = "none";
             let shadowStyle = "none";
             let finalBg = bgColor;
 
             if (isDuplicate) {
                 finalBg = "#fff3e0";
-                borderColor = "2px solid #ff6600";
+                borderColor = "0.125rem solid #ff6600";
             }
             
             if (isClopen) {
-                finalBg = "#f3e5f5"; // Light purple
-                borderColor = "2px solid #9c27b0"; // Deep purple
-                shadowStyle = "0 0 5px rgba(156,39,176,0.5)";
+                finalBg = "#f3e5f5";
+                borderColor = "0.125rem solid #9c27b0";
+                shadowStyle = "0 0 0.3125rem rgba(156,39,176,0.5)";
             }
 
             shiftListHTML += `
                 <div style="background:${finalBg}; 
-                            border:${borderColor}; 
-                            box-shadow:${shadowStyle};
-                            padding:2px 4px; margin-bottom:1px; border-radius:2px; color:#333;">
+                          border:${borderColor}; 
+                          box-shadow:${shadowStyle};
+                          padding:0.125rem 0.25rem; margin-bottom:0.0625rem; border-radius:0.125rem; color:#333;">
                     ${isClopen ? '<strong>⚠️ </strong>' : ''}<strong>${shift.time}</strong> ${shift.name}
                 </div>`;
         });
@@ -379,7 +376,7 @@ function initCalendar() {
         let eventHTML = '';
         if (savedEvent) {
         dayDiv.style.background = "#fff9c4"; // Soft yellow for event days
-        eventHTML = `<div style="background:#fbc02d; color:#333; font-size:0.6rem; font-weight:bold; padding:2px; text-align:center; margin-top:2px; text-transform:uppercase;">${savedEvent}</div>`;
+        eventHTML = `<div style="background:#fbc02d; color:#333; font-size:0.6rem; font-weight:bold; padding:0.125rem; text-align:center; margin-top:0.125rem; text-transform:uppercase;">${savedEvent}</div>`;
         }
         
         dayDiv.innerHTML = `<span class="day-number">${day}</span>${badgeHTML}${eventHTML}${shiftListHTML}${budgetHTML}`;
@@ -388,15 +385,16 @@ function initCalendar() {
 }
 
 // MODAL LOGIC
-function openModal(day) {
-    currentEditingDay = day;
-    const now = new Date();
-    document.getElementById('modal-date-title').innerText = `${now.toLocaleString('default', { month: 'long' })} ${day}, ${now.getFullYear()}`;
+function openModal(day, month, year) {
+    currentEditingDay = { day, month, year };
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"];
+    document.getElementById('modal-date-title').innerText = `${monthNames[month]} ${day}, ${year}`;
     
     const list = document.getElementById('shift-list');
     list.innerHTML = '';
     
-    const savedData = JSON.parse(localStorage.getItem(`shifts-${now.getFullYear()}-${now.getMonth()}-${day}`) || "[]");
+    const savedData = JSON.parse(localStorage.getItem(`shifts-${year}-${month}-${day}`) || "[]");
     
     if (savedData.length === 0) {
         addShiftRow(); 
@@ -404,7 +402,7 @@ function openModal(day) {
         savedData.forEach(shift => addShiftRow(shift.name, shift.time));
     }
     document.getElementById('day-modal').style.display = 'block';
-    const savedEvent = localStorage.getItem(`event-${now.getFullYear()}-${now.getMonth()}-${day}`) || "";
+    const savedEvent = localStorage.getItem(`event-${year}-${month}-${day}`) || "";
     document.getElementById('event-name').value = savedEvent;
 }
 
@@ -417,22 +415,22 @@ function addShiftRow(name = '', time = '') {
     const c3 = localStorage.getItem('custom-label-3') || 'Custom 3';
 
     row.innerHTML = `
-        <div style="display: flex; gap: 5px; margin-bottom: 8px;">
-            <input type="text" placeholder="Name" value="${name}" style="flex:2; padding:8px;">
+        <div style="display: flex; gap: 0.3125rem; margin-bottom: 0.5rem;">
+            <input type="text" placeholder="Name" value="${name}" style="flex:2; padding:0.5rem;">
             <input type="text" class="time-input" placeholder="Time" value="${time}" 
                    onfocus="this.parentElement.nextElementSibling.style.display='grid'" 
-                   style="flex:1; padding:8px;">
-            <button onclick="this.parentElement.parentElement.remove()" style="background:#a00; padding:5px 10px; border:none; color:white; border-radius:4px;">X</button>
+                   style="flex:1; padding:0.5rem;">
+            <button onclick="this.parentElement.parentElement.remove()" style="background:#a00; padding:0.3125rem 0.625rem; border:none; color:white; border-radius:0.25rem;">X</button>
         </div>
         
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px;">
-            <button type="button" onclick="selectTime(this, '7a-3p')" style="font-size:0.65rem; background:#444; padding:6px 2px;">7a-3p</button>
-            <button type="button" onclick="selectTime(this, '11a-5p')" style="font-size:0.65rem; background:#444; padding:6px 2px;">11a-5p</button>
-            <button type="button" onclick="selectTime(this, '5p-Cl')" style="font-size:0.65rem; background:#444; padding:6px 2px;">5p-Cl</button>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.3125rem;">
+            <button type="button" onclick="selectTime(this, '7a-3p')" style="font-size:0.65rem; background:#444; padding:0.375rem 0.125rem;">7a-3p</button>
+            <button type="button" onclick="selectTime(this, '11a-5p')" style="font-size:0.65rem; background:#444; padding:0.375rem 0.125rem;">11a-5p</button>
+            <button type="button" onclick="selectTime(this, '5p-Cl')" style="font-size:0.65rem; background:#444; padding:0.375rem 0.125rem;">5p-Cl</button>
             
-            <button type="button" onclick="selectTime(this, '${c1}')" style="font-size:0.65rem; background:#222; border:1px solid #555; padding:6px 2px;">${c1}</button>
-            <button type="button" onclick="selectTime(this, '${c2}')" style="font-size:0.65rem; background:#222; border:1px solid #555; padding:6px 2px;">${c2}</button>
-            <button type="button" onclick="selectTime(this, '${c3}')" style="font-size:0.65rem; background:#222; border:1px solid #555; padding:6px 2px;">${c3}</button>
+            <button type="button" onclick="selectTime(this, '${c1}')" style="font-size:0.65rem; background:#222; border:0.0625rem solid #555; padding:0.375rem 0.125rem;">${c1}</button>
+            <button type="button" onclick="selectTime(this, '${c2}')" style="font-size:0.65rem; background:#222; border:0.0625rem solid #555; padding:0.375rem 0.125rem;">${c2}</button>
+            <button type="button" onclick="selectTime(this, '${c3}')" style="font-size:0.65rem; background:#222; border:0.0625rem solid #555; padding:0.375rem 0.125rem;">${c3}</button>
         </div>
     `;
     list.appendChild(row);
@@ -453,13 +451,12 @@ function saveDailyShifts() {
         }
     });
 
-    const now = new Date();
-    // Save shifts
-    localStorage.setItem(`shifts-${now.getFullYear()}-${now.getMonth()}-${currentEditingDay}`, JSON.stringify(shiftData));
+    // Use the stored day, month, and year object
+    const { day, month, year } = currentEditingDay;
     
-    // Save event (Using currentEditingDay instead of 'day')
+    localStorage.setItem(`shifts-${year}-${month}-${day}`, JSON.stringify(shiftData));
     const eventVal = document.getElementById('event-name').value;
-    localStorage.setItem(`event-${now.getFullYear()}-${now.getMonth()}-${currentEditingDay}`, eventVal); 
+    localStorage.setItem(`event-${year}-${month}-${day}`, eventVal); 
 
     closeModal();
     initCalendar(); 
@@ -524,7 +521,6 @@ function exportToPDF() {
     document.title = originalTitle;
 }
 
-
 // TOP CONTROLS
 function clearEntireSchedule() {
     if (confirm("Are you sure? This will wipe the ENTIRE month.")) {
@@ -566,45 +562,9 @@ function toggleViewMode() {
         // 3. Add a small "View Only" indicator
         const indicator = document.createElement('div');
         indicator.innerHTML = "<strong>VIEW-ONLY MODE</strong>";
-        indicator.style.cssText = "color: white; background: #c00; padding: 5px 20px; border-radius: 20px; margin-bottom: 10px;";
+        indicator.style.cssText = "color: white; background: #c00; padding: 0.3125rem 1.25rem; border-radius: 1.25rem; margin-bottom: 0.625rem;";
         document.body.prepend(indicator);
     }
-}function copyPreviousWeek() {
-    if (!confirm("This will copy shifts from 7 days ago into the current days. Continue?")) return;
-
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = now.getMonth();
-    const today = now.getDate();
-    
-    // Find the start of the current week (Sunday)
-    const currentDayOfWeek = now.getDay();
-    const startOfThisWeek = today - currentDayOfWeek;
-
-    // Loop through the 7 days of the week
-    for (let i = 0; i < 7; i++) {
-        const targetDay = startOfThisWeek + i;
-        const sourceDay = targetDay - 7;
-
-        // Only copy if the source day exists in this month
-        if (sourceDay > 0) {
-            const sourceKey = `shifts-${year}-${month}-${sourceDay}`;
-            const targetKey = `shifts-${year}-${month}-${targetDay}`;
-            
-            const sourceData = localStorage.getItem(sourceKey);
-            const sourceEvent = localStorage.getItem(`event-${year}-${month}-${sourceDay}`);
-
-            if (sourceData) {
-                localStorage.setItem(targetKey, sourceData);
-            }
-            if (sourceEvent) {
-                localStorage.setItem(`event-${year}-${month}-${targetDay}`, sourceEvent);
-            }
-        }
-    }
-
-    alert("Shifts and Events copied from last week!");
-    initCalendar(); // Refresh the view
 }
 
 function copyPreviousWeek() {
@@ -645,35 +605,33 @@ function copyPreviousWeek() {
     initCalendar(); // Refresh the view
 }
 
-
-
 // Start
 initCalendar();
 
 </script>
  
     <div id="day-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:20000; color:white; overflow-y:auto;">
-    <div style="max-width:500px; margin:40px auto; padding:20px; background:#333; border-radius:8px; position:relative;">
-        <span onclick="closeModal()" style="position:absolute; top:10px; right:20px; font-size:2rem; cursor:pointer;">&times;</span>
+      <div style="width: 90%; max-width: 40rem; margin: 2.5rem auto; padding: 1.25rem; background: #333; border-radius: 0.5rem; position: relative;">
+        <span onclick="closeModal()" style="position:absolute; top:0.625rem; right:1.25rem; font-size:2rem; cursor:pointer;">&times;</span>
         
         <h2 id="modal-date-title" style="color:var(--neon-accent);">April 16, 2026</h2>
         <hr>
-       <input type="text" id="event-name" placeholder="Special Event (e.g. Inventory, Holiday)" style="width:100%; padding:10px; margin-bottom:15px; background:#444; color:white; border:1px solid #666; border-radius:4px;"> 
+       <input type="text" id="event-name" placeholder="Special Event (e.g. Inventory, Holiday)" style="width:100%; padding:0.625rem; margin-bottom:0.9375rem; background:#444; color:white; border:0.0625rem solid #666; border-radius:0.25rem;"> 
  <div id="shift-list">
             </div>
 
-        <div id="custom-settings" style="margin-top:20px; padding:10px; border:1px dashed #666; border-radius:8px; display:none;">
-            <p style="font-size:0.8rem; margin-bottom:10px; color:#ccc;">Set your 3 custom shortcuts:</p>
-            <input type="text" id="custom-1" placeholder="Custom 1" style="width:30%; font-size:0.7rem; padding:5px;">
-            <input type="text" id="custom-2" placeholder="Custom 2" style="width:30%; font-size:0.7rem; padding:5px;">
-            <input type="text" id="custom-3" placeholder="Custom 3" style="width:30%; font-size:0.7rem; padding:5px;">
-            <button onclick="saveCustomLabels()" style="width:100%; margin-top:10px; background:#444; font-size:0.8rem;">Save Custom Labels</button>
+        <div id="custom-settings" style="margin-top:1.25rem; padding:0.625rem; border:0.0625rem dashed #666; border-radius:0.5rem; display:none;">
+            <p style="font-size:0.8rem; margin-bottom:0.625rem; color:#ccc;">Set your 3 custom shortcuts:</p>
+            <input type="text" id="custom-1" placeholder="Custom 1" style="width:30%; font-size:0.7rem; padding:0.3125rem;">
+            <input type="text" id="custom-2" placeholder="Custom 2" style="width:30%; font-size:0.7rem; padding:0.3125rem;">
+            <input type="text" id="custom-3" placeholder="Custom 3" style="width:30%; font-size:0.7rem; padding:0.3125rem;">
+            <button onclick="saveCustomLabels()" style="width:100%; margin-top:0.625rem; background:#444; font-size:0.8rem;">Save Custom Labels</button>
         </div>
 
-        <button onclick="document.getElementById('custom-settings').style.display='block'" style="background:none; color:var(--neon-accent); border:1px solid var(--neon-accent); width:100%; margin-top:20px; font-size:0.8rem;">⚙️ EDIT CUSTOM BUTTONS</button>
+        <button onclick="document.getElementById('custom-settings').style.display='block'" style="background:none; color:var(--neon-accent); border:0.0625rem solid var(--neon-accent); width:100%; margin-top:1.25rem; font-size:0.8rem;">⚙️ EDIT CUSTOM BUTTONS</button>
         
-        <button onclick="addShiftRow()" style="background:#28a745; width:100%; margin-top:10px;">+ ADD STAFF MEMBER</button>
-        <button onclick="saveDailyShifts()" style="background:var(--neon-accent); color:#88aadd; width:100%; margin-top:10px;">SAVE DAY</button>       
+        <button onclick="addShiftRow()" style="background:#28a745; width:100%; margin-top:0.625rem;">+ ADD STAFF MEMBER</button>
+        <button onclick="saveDailyShifts()" style="background:var(--neon-accent); color:#88aadd; width:100%; margin-top:0.625rem;">SAVE DAY</button>        
 
     </div>
 </div>

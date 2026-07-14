@@ -20,9 +20,9 @@
 .animation-wrapper {
     position: relative; 
     margin: 0 auto;
-    top: 20px;
-    width: 300px;
-    height: 260px;
+    top: 1.25rem;
+    width: 18.75rem;
+    height: 16.25rem;
     z-index: 1;
     pointer-events: none;
     transform: scale(var(--jar-scale-desktop));
@@ -35,29 +35,28 @@ body {
     position: relative;
 }
 
-/* This layer holds your sky and grass perfectly stationary so the horizon line never moves */
+/* This layer holds your sky and grass perfectly stationary */
 .scenery-bg {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -3; /* Sits completely behind your river container and tables */
+    width: 100%;
+    height: 100%;
+    z-index: -3;
     background: 
         /* The Sun */
         radial-gradient(circle at top right, #fff9e6 0%, #fff176 10%, rgba(255, 255, 255, 0) 50%),
         /* The High Noon Sky to Grass transition */
         linear-gradient(to bottom, 
-            #00b4ff 0%,    /* Sky Top */
-            #70d1ff 25vh,   /* Horizon Blue */
-            #44cc44 25vh,   /* Bright Summer Grass */
+            #00b4ff 0%,   /* Sky Top */
+            #70d1ff 15rem,   /* Horizon Blue */
+            #44cc44 15rem,   /* Bright Summer Grass */
             #228b22 100%   /* Deep Grass Shadow */
         );
-    background-size: 50vw 50vw, 100% 100%;
-    background-position: 120% -20%, center; 
+    background-size: 50rem 50rem, 100% 100%;
+    background-position: 120% -1.25rem, center; 
     background-repeat: no-repeat, no-repeat;
 }
-
 
 /* 1. GLOBAL & BASE STYLES */
 .secondary-table {
@@ -65,17 +64,17 @@ body {
     flex-direction: column;
     align-items: center;
     width: 95%;
-    max-width: 600px;
-    margin: 10px auto !important; 
+    max-width: 37.5rem;
+    margin: 0.625rem auto !important; 
     position: relative;
     text-align: center;
     transition: transform 0.3s ease-in-out;
     background: rgba(40, 50, 45, 0.85); 
-    border-radius: 12px; 
-    border: 1px solid rgba(255, 255, 255, 0.1); 
-    box-shadow: 0 0 25px rgba(255, 255, 255, 0.15), 
-                inset 0 0 15px rgba(255, 255, 255, 0.05);
-    padding: 15px; 
+    border-radius: 0.75rem; 
+    border: 0.0625rem solid rgba(255, 255, 255, 0.1); 
+    box-shadow: 0 0 1.5625rem rgba(255, 255, 255, 0.15), 
+                inset 0 0 0.9375rem rgba(255, 255, 255, 0.05);
+    padding: 0.9375rem; 
 }
 
 .secondary-table:focus-within { 
@@ -86,17 +85,17 @@ body {
 th, td { 
     text-align: center;
     overflow: hidden; 
-    padding: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Very thin light border */
+    padding: 0.625rem;
+    border: 0.0625rem solid rgba(255, 255, 255, 0.1);
 }
 
 th {
-    color: #e0e0e0 !important; /* Off-white for contrast against #2a0052 */
+    color: #e0e0e0 !important;
     font-size: 0.9rem;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2); 
-    background: rgba(255, 255, 255, 0.05); /* Slight lift for headers */
+    letter-spacing: 0.0625rem;
+    border-bottom: 0.0625rem solid rgba(255, 255, 255, 0.2); 
+    background: rgba(255, 255, 255, 0.05);
 }
 
 td {
@@ -112,121 +111,119 @@ td {
     overflow-x: auto;
     display: block;
     margin: 0 auto;
-    -webkit-overflow-scrolling: touch; /* Smooth swiping on iPhone */
-    padding-bottom: 10px; /* Space for the scrollbar so it doesn't cover data */
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.625rem;
 }
 
-h1  {
-  text-align:  center;
-  }
+h1 {
+    text-align: center;
+}
 
 table { 
-  margin-left: auto; 
-  margin-right: auto; 
-  width: 90%; max-width: 100vw;
-  border-collapse: collapse; 
-  margin-bottom: 5px; 
-  box-sizing: border-box; 
+    margin-left: auto; 
+    margin-right: auto; 
+    width: 90%; 
+    max-width: 100%;
+    border-collapse: collapse; 
+    margin-bottom: 0.3125rem; 
+    box-sizing: border-box; 
 }
 
 input { 
-  width: 80%; 
-  padding: 5px; 
-  border: 1px solid #ccc;
-  border-radius:  4px; 
+    width: 80%; 
+    padding: 0.3125rem; 
+    border: 0.0625rem solid #ccc;
+    border-radius: 0.25rem; 
 }
 
+
 input[readonly] { 
-  background-color:  #e9ecef; 
-  border: 1px solid #ced4da; 
+  background-color: #e9ecef; 
+  border: 0.0625rem solid #ced4da; 
 }  
+
 /* Buttons */
 button { 
-  padding: 10px 20px; 
+  padding: 0.625rem 1.25rem; 
   cursor: pointer; 
   border: none; 
-  border-radius: 4px; 
+  border-radius: 0.25rem; 
   font-weight: bold; 
-  margin: 5px; 
-  }
+  margin: 0.3125rem; 
+}
 
 .main {
-  text-align:  center;
-  position:  absolute;
+  text-align: center;
+  position: absolute;
   left: 50%;
-  transform:  translateX(-50%);
-  top: 60px; 
+  transform: translateX(-50%);
+  top: 3.75rem; 
   width: 100%;
   z-index: 101; 
 }
 
-
 #tipInput {
-    text-align: center; /* Centers the text you type */
+    text-align: center;
 }
 
 #tipInput::placeholder {
-    text-align: center; /* Centers the grey placeholder hint */
+    text-align: center;
     opacity: 0.6;
 }
+
 /* 2. THE JAR & SHELF */
 .jar {
   opacity: 1 !important;
-  transform-style: preserve-3d; /* Keeps lid, jar, and legs together in 3D space */
-  transform-origin: bottom center; /* Keeps the "feet" on the ground during scale */
-  width: 200px !important;
-  max-width:  200px !important;
-  flex: 0 0 200px !important;
+  transform-style: preserve-3d;
+  transform-origin: bottom center;
+  width: 12.5rem !important;
+  max-width: 12.5rem !important;
+  flex: 0 0 12.5rem !important;
   display: flex;
-  flex-direction:  column;
+  flex-direction: column;
   align-items: center;
-  height: 250px;
+  height: 15.625rem;
   position: relative;
-  margin: 50px auto;
+  margin: 3.125rem auto;
   background-color: slategray;
-  box-shadow:  inset -10px -10px 30px rgba(0,0,0,0.5);
-  border-radius:  47px 47px 40px 40px; 
-  z-index: 10; /* rounded  bottom corners */
+  box-shadow: inset -0.625rem -0.625rem 1.875rem rgba(0,0,0,0.5);
+  border-radius: 2.9375rem 2.9375rem 2.5rem 2.5rem; 
+  z-index: 10;
   pointer-events: none;  
 }
 
-.jar.faded  {
-  opacity:  0.5 !important;
+.jar.faded {
+  opacity: 0.5 !important;
   transition: opacity 2s ease-in-out;
 }
 
-
-
-.jar-top  {
-   width: 210px;
-   height: 50px;
+.jar-top {
+   width: 13.125rem;
+   height: 3.125rem;
    background-color: slategray;
-   position: absolute; /* Changed from relative */
-   top: -25px;
+   position: absolute;
+   top: -1.5625rem;
    left: 50%;
-   transform: translateX(-50%); /* Locks it to the exact middle of the jar */
-   box-shadow: inset -10px -10px 30px rgba(0,0,0,0.5);
+   transform: translateX(-50%);
+   box-shadow: inset -0.625rem -0.625rem 1.875rem rgba(0,0,0,0.5);
    border-radius: 50% / 100%;
-   border-bottom: 2px solid black;
+   border-bottom: 0.125rem solid black;
    z-index: 100;
    pointer-events: auto !important;  
 }
 
 .jar input, .jar button {
-    pointer-events: auto; /* Re-enables clicking for the internal Jar input/button */
+    pointer-events: auto;
 }
 
-
 .tip-jar-title, #tipInput, #btn {
-    opacity: 0; /* Keep hidden initially */
+    opacity: 0;
     animation: fadeIn 0.8s ease-out forwards;
-    animation-delay: 2.0s; /* Waits for the money to finish falling */
+    animation-delay: 2.0s;
 }
 
 #btn {
     opacity: 0;
-    /* First fade in, then pulse forever. 
-       Note: 2.8s delay (2.0s wait + 0.8s fade duration) */
     animation: fadeIn 0.8s ease-out forwards 2.0s, 
                steadyPulseGlow 2.5s ease-in-out infinite 2.8s;
 }
@@ -240,11 +237,11 @@ button {
     position: absolute;
     bottom: 0;
     left: 50%;
-    transform: translateX(-50%); /* Centers the shelf under the jar */
-    width: 150px;
-    height: 10px;
-    background: #8b4513; /* Wood brown */
-    border-radius: 5px;
+    transform: translateX(-50%);
+    width: 9.375rem;
+    height: 0.625rem;
+    background: #8b4513;
+    border-radius: 0.3125rem;
     opacity: 0;
     transition: opacity 0.5s;
     z-index: 5;
@@ -254,48 +251,47 @@ button {
 /* Stickman Legs */
 .legs-container {
     position: absolute;
-    bottom: -20px;
+    bottom: -1.25rem;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 30px;
-    opacity: 0; /* Hidden until jump */
+    gap: 1.875rem;
+    opacity: 0;
 }
 
 .leg {
-    width: 4px;
-    height: 30px;
+    width: 0.25rem;
+    height: 1.875rem;
     background: black;
     position: relative;
 }
 
 .boot {
-    width: 15px;
-    height: 10px;
+    width: 0.9375rem;
+    height: 0.625rem;
     background: #4a2c2a;
-    border-radius: 5px 5px 2px 2px;
+    border-radius: 0.3125rem 0.3125rem 0.125rem 0.125rem;
     position: absolute;
-    bottom: -5px;
-    left: -5px;
+    bottom: -0.3125rem;
+    left: -0.3125rem;
 }
 
 .container {
-    position: relative; /* Ensure container is the reference point */
-    overflow: visible;  /* Allow the ground to be seen */
+    position: relative;
+    overflow: visible; 
 }
 
 .container::after {
     content: "";
     position: absolute;
-    /* Position exactly where the dollar signs reach 100% (218px) */
-    top: 218px; 
+    top: 13.625rem; 
     left: 10%;
     width: 80%;
-    height: 2px;
-    background: rgba(0, 0, 0, 0.1); /* Subtle horizontal line */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Soft ground shadow */
+    height: 0.125rem;
+    background: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.2);
     border-radius: 50%;
-    z-index: -1; /* Place behind the falling money */
+    z-index: -1;
 }
 
 .shrink-to-corner {
@@ -305,20 +301,19 @@ button {
     transition: all 1s ease-in-out;
 }
 
-
 #bypassBtn {
-    display: none; /* JS will show it */
-    margin: 20px auto;
+    display: none;
+    margin: 1.25rem auto;
     position: relative;
-    z-index: 5000; /* Ensure it stays above everything */
+    z-index: 5000;
     transform: translateX(-50%);
 }
 
 .top-row-container {
     display: flex;
-    flex-direction: column; /* Forces the Jar -> Table 1 -> Table 2 stack */
+    flex-direction: column;
     align-items: center;
-    gap: 0;                 /* Tightens the space between items */
+    gap: 0;
     width: 100%;
     margin: 0 auto;
     position: relative;
@@ -332,11 +327,10 @@ button {
     justify-content: center !important;
     transform: scale(0.65) !important;
     transform-origin: top center;
-    margin: 0 auto !important; /* This forces the "Spine" stacking */
-    width: 95% !important;    /* Occupies the full width to prevent drifting left/right */
+    margin: 0 auto !important;
+    width: 95% !important;
     opacity: 1 !important;
 }
-
 
 /* Centering wrapper for buttons below tables */
 .action-footer {
@@ -344,59 +338,57 @@ button {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    gap: 10px;
-    position: relative; /* Allows z-index to work */
-    z-index: 10000;      /* Higher than the Jar (200) and Tables (10) */
+    margin-top: 0.3125rem;
+    margin-bottom: 0.3125rem;
+    gap: 0.625rem;
+    position: relative;
+    z-index: 10000;
     pointer-events: auto;
 }
 
-
 /* Ensure ALL action buttons are centered and sized for fingers/touch */
 #bypassBtn, #finalFinishBtn {
-    display: none; /* Controlled by JS */
-    margin: 10px auto;
-    min-width: 200px; /* Makes it easier to tap on iPad */
-    padding: 15px 30px;
-    font-size: 16px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    display: none;
+    margin: 0.625rem auto;
+    min-width: 12.5rem;
+    padding: 0.9375rem 1.875rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.25rem 0.375rem rgba(0,0,0,0.1);
     position: relative !important;
-    z-index: 10000 !important;   /* Higher than the Jar and Table layers */
-    pointer-events: auto !important; 
-
+    z-index: 10000 !important;
+    pointer-events: auto !important;
 }
 
 /* Base styles for all tour popovers */
 .tour-popover {
     position: absolute;
     background: #ffffff;
-    border: 2px solid #333333;
-    border-radius: 12px;
-    padding: 14px 22px;
+    border: 0.125rem solid #333333;
+    border-radius: 0.75rem;
+    padding: 0.875rem 1.375rem;
     font-family: 'Segoe UI', sans-serif;
-    font-size: 18px;
+    font-size: 1.125rem;
     font-weight: bold;
     color: #333333;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-    z-index: 20000; /* Stays above your layout layers */
-    opacity: 0;     /* Starts invisible; JS will fade it in */
+    box-shadow: 0 0.25rem 0.625rem rgba(0,0,0,0.15);
+    z-index: 20000;
+    opacity: 0;
     transition: opacity 0.4s ease, transform 0.4s ease;
-    pointer-events: none; /* Won't block clicks underneath it */
+    pointer-events: none;
     width: max-content;
-    max-width: 280px;
+    max-width: 17.5rem;
     text-align: center;
 }
 
-/* Arrow Tail: Pointing DOWN (For Tip Jar and Bypass Button) */
+/* Arrow Tail: Pointing DOWN */
 .tour-popover.arrow-down::after {
     content: '';
     position: absolute;
-    bottom: -10px;
+    bottom: -0.625rem;
     left: 50%;
     transform: translateX(-50%);
-    border-width: 10px 10px 0;
+    border-width: 0.625rem 0.625rem 0;
     border-style: solid;
     border-color: #ffffff transparent;
     display: block;
@@ -405,10 +397,10 @@ button {
 .tour-popover.arrow-down::before {
     content: '';
     position: absolute;
-    bottom: -13px;
+    bottom: -0.8125rem;
     left: 50%;
     transform: translateX(-50%);
-    border-width: 11px 11px 0;
+    border-width: 0.6875rem 0.6875rem 0;
     border-style: solid;
     border-color: #333333 transparent;
     display: block;
@@ -416,14 +408,14 @@ button {
     z-index: -1;
 }
 
-/* Arrow Tail: Pointing RIGHT (For the Sun) */
+/* Arrow Tail: Pointing RIGHT */
 .tour-popover.arrow-right::after {
     content: '';
     position: absolute;
-    right: -10px;
+    right: -0.625rem;
     top: 50%;
     transform: translateY(-50%);
-    border-width: 10px 0 10px 10px;
+    border-width: 0.625rem 0 0.625rem 0.625rem;
     border-style: solid;
     border-color: transparent #ffffff;
     display: block;
@@ -432,10 +424,10 @@ button {
 .tour-popover.arrow-right::before {
     content: '';
     position: absolute;
-    right: -13px;
+    right: -0.8125rem;
     top: 50%;
     transform: translateY(-50%);
-    border-width: 11px 0 11px 11px;
+    border-width: 0.6875rem 0 0.6875rem 0.6875rem;
     border-style: solid;
     border-color: transparent #333333;
     display: block;
@@ -443,103 +435,98 @@ button {
     z-index: -1;
 }
 
+
 /* 3. ALL ANIMATIONS (@keyframes) */
 
-@keyframes  myAnimation  {
-  0%   {left:0%; top: -210px; opacity: 0;}
+@keyframes myAnimation {
+  0%   {left:0%; top: -13.125rem; opacity: 0;}
   10%  { opacity: 1; }
   90%  { opacity: 1; }
-  100% {left:0%; top:218px; opacity: 0; }
+  100% {left:0%; top:13.625rem; opacity: 0; }
 }
 
 @keyframes flutterSmall {
   0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-8px) rotate(-3deg); }
-  75% { transform: translateX(8px) rotate(3deg); }
+  25% { transform: translateX(-0.5rem) rotate(-3deg); }
+  75% { transform: translateX(0.5rem) rotate(3deg); }
 }
 
 @keyframes flutterMed {
   0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-20px) rotate(-6deg); }
-  75% { transform: translateX(20px) rotate(6deg); }
+  25% { transform: translateX(-1.25rem) rotate(-6deg); }
+  75% { transform: translateX(1.25rem) rotate(6deg); }
 }
 
 @keyframes flutterLarge {
   0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-35px) rotate(-10deg); }
-  75% { transform: translateX(35px) rotate(10deg); }
+  25% { transform: translateX(-2.1875rem) rotate(-10deg); }
+  75% { transform: translateX(2.1875rem) rotate(10deg); }
 }
 
-
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
+    from { opacity: 0; transform: translateY(0.625rem); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-  
 @keyframes steadyPulseGlow {
     0% { 
         transform: scale(1); 
-        box-shadow: 0 0 5px rgba(40, 167, 69, 0.4);
+        box-shadow: 0 0 0.3125rem rgba(40, 167, 69, 0.4);
     }
     50% { 
         transform: scale(1.03); 
-        box-shadow: 0 0 15px rgba(40, 167, 69, 0.7); 
+        box-shadow: 0 0 0.9375rem rgba(40, 167, 69, 0.7); 
     }
     100% { 
         transform: scale(1); 
-        box-shadow: 0 0 0px rgba(40, 167, 69, 0.4);
+        box-shadow: 0 0 0rem rgba(40, 167, 69, 0.4);
     }
 }
 
 /* JUMP ANIMATION */
 @keyframes jumpToShelf {
     0% { top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1); }
-    20% { transform: translate(-50%, -40%) scaleY(0.8);} /* Bending down */
-    50% { transform: translate(-80px, -230px) scaleY(1.1); } /* Jumping up */
-    100% { top: -30px; left: 100px; transform: translate(0, 0) scale(0.5); opacity: 0.5;} /* Landing on shelf */
+    20% { transform: translate(-50%, -40%) scaleY(0.8);}
+    50% { transform: translate(-5rem, -14.375rem) scaleY(1.1); }
+    100% { top: -1.875rem; left: 6.25rem; transform: translate(0, 0) scale(0.5); opacity: 0.5;}
 }
-
 
 @keyframes dustCloud {
     0% {
         opacity: 0;
         transform: scale(0.5);
-        /* Creates a cluster of 3 dust particles */
         box-shadow: 
-            0 0 8px 4px rgba(180, 160, 140, 0.8),
-            12px 2px 6px 2px rgba(180, 160, 140, 0.6),
-            -12px 2px 6px 2px rgba(180, 160, 140, 0.6);
+            0 0 0.5rem 0.25rem rgba(180, 160, 140, 0.8),
+            0.75rem 0.125rem 0.375rem 0.125rem rgba(180, 160, 140, 0.6),
+            -0.75rem 0.125rem 0.375rem 0.125rem rgba(180, 160, 140, 0.6);
     }
-    20% { opacity: 1; } /* Quick impact pop */
+    20% { opacity: 1; }
     100% {
         opacity: 0;
-        transform: scale(2.5) translateY(-25px); /* Dust drifts UP */
+        transform: scale(2.5) translateY(-1.5625rem);
         box-shadow: 
-            0 -10px 20px 10px rgba(180, 160, 140, 0),
-            25px -15px 15px 5px rgba(180, 160, 140, 0),
-            -25px -15px 15px 5px rgba(180, 160, 140, 0);
+            0 -0.625rem 1.25rem 0.625rem rgba(180, 160, 140, 0),
+            1.5625rem -0.9375rem 0.9375rem 0.3125rem rgba(180, 160, 140, 0),
+            -1.5625rem -0.9375rem 0.9375rem 0.3125rem rgba(180, 160, 140, 0);
     }
 }
-
 
 @keyframes legSwing {
     0%, 100% { transform: rotate(-15deg); }
     50% { transform: rotate(15deg); }
 }
 
-
-/* Mist Animation: left-to-right floating */
+/* Mist Animation */
 @keyframes mistPass {
-  0% { transform: translateX(-150px); opacity: 0.4; }
-  50% { transform: translateX(50px); opacity: 0.6; }
-  100% { transform: translateX(150px); opacity: 0.4; }
+  0% { transform: translateX(-9.375rem); opacity: 0.4; }
+  50% { transform: translateX(3.125rem); opacity: 0.6; }
+  100% { transform: translateX(9.375rem); opacity: 0.4; }
 }
 
 /* Gods float gently up and down */
 @keyframes ritualFloat {
     0%, 100% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(-10px) scale(1.05); }
+    50% { transform: translateY(-0.625rem) scale(1.05); }
 }
 
 /* 4. INTERACTIVE CLASSES & SMOKE */
@@ -554,35 +541,34 @@ button {
 .content1::after, .content2::after, .content3::after, .content4::after, .content5::after, .content6::after {   
    position:  absolute;
    content: "\0024";
-   padding: 2px 5px;
-   border-radius: 3px;
+   padding: 0.125rem 0.3125rem;
+   border-radius: 0.1875rem;
    display: inline-block;
 }
 
-.content1::before  {left:  60px; transform:  rotate(-15deg); background-color:  #ebb1a7; } /* light pink */
-.content2::before  { left:  33px; transform:  rotate(-15deg); background-color:  pink; }
-.content3::before  { left:  49px; transform:  scale(1.8) rotate(-27deg); background-color:  #e1d5f5;  } /* light purple */
-.content4::before  { left:  22px; transform:  rotate(27deg); background-color:  #caa6e3; } /* light purple */
-.content5::before  { left:  80px; transform:  rotate(44deg); background-color:  lightblue; }
-.content6::before  { left: 90px; transform:  rotate(-31deg); background-color: #9cbf7d; } /* light green */
-.content1::after { right: 59px; transform: scale(1.5) rotate(15deg); background-color: #905424; }
-.content2::after { right: 17px; transform: rotate(15deg); background-color: #905424; }
-.content3::after { right: 33px; transform: rotate(15deg); background-color: #E1d5f5; }
-.content4::after { right: 49px; transform: rotate(27deg); background-color: #caa6e3; }
-.content5::after { right: 66px; transform: rotate(-27deg); background-color: lightblue; }
-.content6::after { left: 100px; transform: scale(1.5) rotate(72deg); background-color: #9cbf7d; }
+.content1::before  {left:  3.75rem; transform:  rotate(-15deg); background-color:  #ebb1a7; }
+.content2::before  { left:  2.0625rem; transform:  rotate(-15deg); background-color:  pink; }
+.content3::before  { left:  3.0625rem; transform:  scale(1.8) rotate(-27deg); background-color:  #e1d5f5;  }
+.content4::before  { left:  1.375rem; transform:  rotate(27deg); background-color:  #caa6e3; }
+.content5::before  { left:  5rem; transform:  rotate(44deg); background-color:  lightblue; }
+.content6::before  { left: 5.625rem; transform:  rotate(-31deg); background-color: #9cbf7d; }
+.content1::after { right: 3.6875rem; transform: scale(1.5) rotate(15deg); background-color: #905424; }
+.content2::after { right: 1.0625rem; transform: rotate(15deg); background-color: #905424; }
+.content3::after { right: 2.0625rem; transform: rotate(15deg); background-color: #E1d5f5; }
+.content4::after { right: 3.0625rem; transform: rotate(27deg); background-color: #caa6e3; }
+.content5::after { right: 4.125rem; transform: rotate(-27deg); background-color: lightblue; }
+.content6::after { left: 6.25rem; transform: scale(1.5) rotate(72deg); background-color: #9cbf7d; }
 
 .smoke-puff {
     position: absolute;
-    /* Position exactly where the jar lands (top: -30px, left: 100px in your jump) */
-    top: 90px;  /* Slightly above shelf height of 100px */
-    left: 145px; 
-    width: 2px;
-    height: 2px;
+    top: 5.625rem;
+    left: 9.0625rem; 
+    width: 0.125rem;
+    height: 0.125rem;
     background: transparent;
     border-radius: 50%;
     opacity: 0;
-    z-index: 8; /* Higher than jar (7) and shelf (5) */
+    z-index: 8;
     pointer-events: none;
 }
 
@@ -598,11 +584,11 @@ button {
 
 .jar.animated .legs-container {
     opacity: 0.6;
-    transition: opacity 0.2s 0.8s; /* Appear just as it lands */
+    transition: opacity 0.2s 0.8s;
 }
 
 .jar.animated .leg {
-    animation: legSwing 1s ease-in-out infinite 1.2s; /* Swing after landing */
+    animation: legSwing 1s ease-in-out infinite 1.2s;
     transform-origin: top;
 }
 
@@ -613,11 +599,10 @@ button {
 }
 
 .tableContainer.animated {
-    max-height: 2000px;
+    max-height: 125rem;
     opacity: 1;
     transition-delay: 1.5s;
 }
-
 
 /* 5. TABLE 1 (MAIN TABLE) */
 .tableContainer {
@@ -627,78 +612,71 @@ button {
     align-items: center;
     justify-content: center;
     width: 95%;
-    max-width: 800px; /* Changed from 100vw to keep it from looking too wide */
-    margin: 20px auto; 
+    max-width: 50rem; 
+    margin: 1.25rem auto; 
     
-    /* THE GLOW & BACKGROUND WE DISCUSSED */
     background: rgba(40, 50, 45, 0.85); 
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 25px rgba(255, 255, 255, 0.15), 
-                inset 0 0 15px rgba(255, 255, 255, 0.05);
-    padding: 15px; 
+    border-radius: 0.75rem;
+    border: 0.0625rem solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 1.5625rem rgba(255, 255, 255, 0.15), 
+                inset 0 0 0.9375rem rgba(255, 255, 255, 0.05);
+    padding: 0.9375rem; 
 
-    /* YOUR EXISTING TRANSITION LOGIC */
     overflow: hidden;
     transition: all 1s ease-in-out;
     z-index: 10;
-    /* Note: If your table isn't showing up, ensure your JS removes the 0 opacity/height below */
     max-height: 0; 
     opacity: 0;
 }
 
-
-/* Ensure the "Who worked?" headline is also visible */
 .tableContainer h2 {
     color: #f0f0f0 !important;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    text-shadow: 0 0 0.625rem rgba(255, 255, 255, 0.2);
     font-size: 1.1rem;
-    margin-bottom: 15px;
+    margin-bottom: 0.9375rem;
 }
 
 #finalFinishBtn {
     background-color: #28a745; 
     color: white; 
-    display: inline-block; /* Ensure it is visible when the table appears */
-    margin: 10px auto;
-    padding: 10px 20px;
+    display: inline-block; 
+    margin: 0.625rem auto;
+    padding: 0.625rem 1.25rem;
 }
 
 #finishBtn  { background-color: #007bff; color: white; display: none; }
 #clearBtn  { background-color: #dc3545; color: white; display: none;}
-#printBtn  { background-color: #28a745; color:  white; display: none; }
+#printBtn  { background-color: #28a745; color: white; display: none; }
 
 /* 6. SECONDARY TABLE & WARNING */
 .diamond-warning {
-    width: 120px;
-    height: 120px;
+    width: 7.5rem;
+    height: 7.5rem;
     background: #ffcc00;
     margin: 0; 
-    display: flex; /* Controlled by JS */
+    display: flex;
     position: relative;
     align-items: center;
     justify-content: center;
     transform: rotate(45deg);
-    border: 4px solid #000;
+    border: 0.25rem solid #000;
     z-index: 100; 
     flex-shrink: 0;
 }
 
-
 .diamond-warning:hover {
-    transform: rotate(45deg) scale(1.1); /* Slight grow on hover */
+    transform: rotate(45deg) scale(1.1);
     background: #ffdb4d;
 }
 
-/* Un-rotate the text inside so it's readable */
 .diamond-warning span {
     transform: rotate(-45deg); 
     font-weight: bold;
     font-family: sans-serif;
-    font-size: 11px;
+    font-size: 0.6875rem;
     line-height: 1.2;
     color: #000;
-    padding: 5px;
+    padding: 0.3125rem;
 }
 
 .secondary-table.active {
@@ -707,36 +685,33 @@ button {
     opacity: 1 !important;
     max-height: none !important;
     height: auto !important;
-    min-height: 200px !important;
+    min-height: 12.5rem !important;
 }
-
 
 #bypassBtn, .footer {
     display: block;
-    margin: 15px auto; /* Centers the button and gives it some breathing room */
+    margin: 0.9375rem auto;
     width: fit-content;
 }
 
-
 /* 7. THE FINAL DASHBOARD & GODS */
 .diamond-end {
-    width: 120px;
-    height: 120px;
-    background: #00703c; /* Roadside Green */
-    display: flex;        /* Hidden until Finish is clicked */
+    width: 7.5rem;
+    height: 7.5rem;
+    background: #00703c;
+    display: flex; 
     align-items: center;
     justify-content: center;
     transform: rotate(45deg);
-    border: 4px solid #ffffff; /* White border */
+    border: 0.25rem solid #ffffff;
     cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    display: flex; 
+    box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.3);
     flex-shrink: 0;
 }
 
 .diamond-end span {
     display: block;
-    transform: rotate(-45deg); /* Un-rotates the text */
+    transform: rotate(-45deg);
     color: white;
     font-family: Arial, sans-serif;
     font-weight: bold;
@@ -745,14 +720,14 @@ button {
 
 .top-dashboard {
     position: fixed;
-    top: 10px;
+    top: 0.625rem;
     left: 0;
     width: 100%;
     display: flex;
-    justify-content: space-evenly; /* Perfectly spaces Jar, Table 1, Table 2 */
+    justify-content: space-evenly;
     align-items: center;
     z-index: 4000;
-    pointer-events: none; /* Let clicks pass to the gods in the center */
+    pointer-events: none;
 }
 
 .dashboard-item {
@@ -774,18 +749,17 @@ button {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
-    width: 100vw !important;
+    width: 100%;
     height: 100vh !important;
-    /* This handles the vertical sizing for mobile browser bars */
-    height: 100dvh !important; 
+    height: 100dvh !important;
     
-    z-index: 2147483647 !important; 
+    z-index: 2147483647 !important;
     
     /* THE CENTERING ENGINE */
-    display: none;           /* This will be 'flex' via JS */
-    flex-direction: column;  /* Stacks p tags vertically */
-    align-items: center;     /* Centers horizontally */
-    justify-content: center; /* PULLS IT TO THE VERTICAL CENTER */
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     
     pointer-events: none;
     background: transparent;
@@ -795,13 +769,12 @@ button {
 #finalMessage p {
     margin: 0 !important;
     padding: 0 !important;
-    position: static !important; /* Force them to stay inside their parent */
+    position: static !important;
     transform: none !important;
 }
 
 /* 2. The Message - Forced to Center */
 #finalMessage {
-    /* Reset everything to ensure no parent scaling affects it */
     display: flex !important;
     flex-direction: column;
     align-items: center;
@@ -811,108 +784,98 @@ button {
     max-width: 90% !important;
     text-align: center;
     
-    /* Remove any positioning/transforms - let the parent Flexbox do the work */
     position: relative !important;
-    transform: none !important; 
+    transform: none !important;
     margin: 0 !important;
     opacity: 1 !important;
 }
 
 /* Optional styling for the messages */
 .thank-you-note {
-  font-family: Arial, sans-serif !important;
-  font-size: 0.7rem !important;
-  letter-spacing: 1.5px;
-  color: #666 !important;
-  margin: 0 !important;
+    font-family: Arial, sans-serif !important;
+    font-size: 0.7rem !important;
+    letter-spacing: 0.09375rem;
+    color: #666 !important;
+    margin: 0 !important;
 }
 
-.outline-text  {
-  font-size: 0.6rem;
-  color: transparent;
-  -webkit-text-stroke: 0.1rem #666;
+.outline-text {
+    font-size: 0.6rem;
+    color: transparent;
+    -webkit-text-stroke: 0.1rem #666;
 }
-
-
 
 /* Lightning Bolt Base Style */
 .bolt {
     font-size: 0.8rem;
-    opacity: 0; /* Hidden until they flash */
+    opacity: 0;
     display: inline-block;
-    color: #fff176; /* Subtle lightning yellow */
-    text-shadow: 0 0 5px #fff;
+    color: #fff176;
+    text-shadow: 0 0 0.3125rem #fff;
 }
 
 /* Individual Flash Timings */
-.b1, .b2 { animation: stormFlash 4s infinite 0.5s; } /* Two together */
-.b3      { animation: stormFlash 4s infinite 1.5s; } /* One solo */
-.b4, .b5 { animation: stormFlash 4s infinite 1.8s; } /* Rapid succession */
+.b1, .b2 { animation: stormFlash 4s infinite 0.5s; }
+.b3      { animation: stormFlash 4s infinite 1.5s; }
+.b4, .b5 { animation: stormFlash 4s infinite 1.8s; }
 
 @keyframes stormFlash {
     0%, 10%, 12%, 20%, 100% { opacity: 0; }
-    11%, 21% { opacity: 1; } /* The "Strobe" effect */
+    11%, 21% { opacity: 1; }
 }
 
 .gods-appeased {
     font-family: 'Cinzel', serif !important;
-    font-size: 0.5vw !important;
-    letter-spacing: 3px;
+    font-size: 0.5rem !important;
+    letter-spacing: 0.1875rem;
     color: #666666 !important;
     text-align: center;
     position: relative;
-    /* The Glow + The Blur (Mist Refraction) */
-    text-shadow: 0 0 8px rgba(255, 69, 0, 0.6); 
-    /* Combined: The flicker AND the "mist dance" */
+    text-shadow: 0 0 0.5rem rgba(255, 69, 0, 0.6);
     animation: divineFlicker 3s infinite alternate ease-in-out, 
                mistDance 5s infinite ease-in-out !important;
 }
 
 @keyframes divineFlicker {
-    0% { text-shadow: 0 3px 4px rgba(255, 69, 0, 0.4); opacity: 0.9; }
-    100% { text-shadow: 0 4px 15px rgba(255, 0, 0, 0.8), 0 0 10px rgba(255, 140, 0, 0.6); opacity: 1; }
+    0% { text-shadow: 0 0.1875rem 0.25rem rgba(255, 69, 0, 0.4); opacity: 0.9; }
+    100% { text-shadow: 0 0.25rem 0.9375rem rgba(255, 0, 0, 0.8), 0 0 0.625rem rgba(255, 140, 0, 0.6); opacity: 1; }
 }
 
 @keyframes mistDance {
     0%, 100% { transform: translateY(0) rotate(-0.5deg); }
-    25% { transform: translateY(-2px) rotate(0.5deg) translateX(1px); }
-    50% { transform: translateY(1px) rotate(-0.8deg) translateX(-1px); }
-    75% { transform: translateY(-1px) rotate(0.3deg); }
+    25% { transform: translateY(-0.125rem) rotate(0.5deg) translateX(0.0625rem); }
+    50% { transform: translateY(0.0625rem) rotate(-0.8deg) translateX(-0.0625rem); }
+    75% { transform: translateY(-0.0625rem) rotate(0.3deg); }
 }
 
 .hell-mist, .hell-mist::before, .hell-mist::after {
     position: absolute;
-    width: 500px;
-    height: 180px;
+    width: 31.25rem;
+    height: 11.25rem;
     background: radial-gradient(ellipse at center, 
                 rgba(20, 20, 20, 0.8) 0%, 
                 rgba(10, 10, 10, 0.4) 50%, 
                 transparent 80%);
-    filter: blur(40px);
+    filter: blur(2.5rem);
     pointer-events: none;
     z-index: 20;
 }
 
-/* The Main Cloud - Drifts Left to Right */
-.hell-mist {
-    animation: mistPass 15s infinite linear;
-}
+.hell-mist { animation: mistPass 15s infinite linear; }
 
-/* Second Cloud Layer - Drifts Right to Left (Faster) */
 .hell-mist::before {
     content: "";
-    width: 400px;
-    height: 140px;
-    top: -20px;
+    width: 25rem;
+    height: 8.75rem;
+    top: -1.25rem;
     opacity: 0.6;
     animation: mistPassReverse 10s infinite linear;
 }
 
-/* Third Cloud Layer - Drifts Left to Right (Slowest/Lowest) */
 .hell-mist::after {
     content: "";
-    width: 600px;
-    top: 40px;
+    width: 37.5rem;
+    top: 2.5rem;
     opacity: 0.4;
     animation: mistPass 22s infinite linear;
 }
@@ -921,35 +884,31 @@ button {
     0% { transform: translateX(-150%) translateY(0); opacity: 0; }
     20% { opacity: 0.7; }
     80% { opacity: 0.7; }
-    100% { transform: translateX(150%) translateY(-20px); opacity: 0; }
+    100% { transform: translateX(150%) translateY(-1.25rem); opacity: 0; }
 }
 
 @keyframes mistPassReverse {
     0% { transform: translateX(150%) translateY(0); opacity: 0; }
     20% { opacity: 0.5; }
     80% { opacity: 0.5; }
-    100% { transform: translateX(-150%) translateY(20px); opacity: 0; }
+    100% { transform: translateX(-150%) translateY(1.25rem); opacity: 0; }
 }
 
-/* 1. The Wrapper: Prevents the table from pushing off-screen */
 .table-scroll-wrapper {
     width: 100%;
-    overflow-x: auto; /* Adds horizontal scroll ONLY if needed */
+    overflow-x: auto;
     display: block;
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */
+    -webkit-overflow-scrolling: touch;
     margin: 0 auto;
 }
 
-/* 2. The Table: Ensure it doesn't have a fixed large width */
 #myTable {
     width: 100%;
-    min-width: 300px; /* Minimum width to keep it readable */
-    max-width:  90vw;
+    min-width: 18.75rem;
+    max-width: 90%;
     margin: 0 auto;
 }
 
-
-/* Ensure the shelf stays pinned inside the jar when shrunken */
 #jar.top-row-item .shelf {
     opacity: 1 !important;
 }
@@ -958,187 +917,141 @@ button {
     font-family: 'Dancing Script', cursive;
     font-size: 0.75rem;
     text-align: center;
-    padding: 5px;
+    padding: 0.3125rem;
     border: none !important;
 }
 
 #jar.top-row-item {
-    margin: 10px auto !important; /* Forces horizontal centering */
-    left: 0 !important;           /* Kills any leftover animation offsets */
+    margin: 0.625rem auto !important;
+    left: 0 !important;
     right: 0 !important;
     position: relative !important;
-    display: block !important;    /* Block + margin:auto is the most stable center */
-    transform: scale(0.6) !important; /* Keeps it small in the row */
+    display: block !important;
+    transform: scale(0.6) !important;
 }
 
-/* 1. The Door & Built-in Knob (Clean & Single Block) */
+/* 1. The Door & Built-in Knob */
 #managerDoorway {
     display: inline-block;
     text-decoration: none !important;
     position: relative;
     z-index: 10000;
-    width: 80px;
-    height: 100px;
-    margin-top: 20px;
-    border-radius: 40px 40px 0 0;
+    width: 5rem;
+    height: 6.25rem;
+    margin-top: 1.25rem;
+    border-radius: 2.5rem 2.5rem 0 0;
     background: 
-        radial-gradient(circle at 70% 55%, #b8860b 0, #8b6508 2px, transparent 4px), /* The Knob */
-        repeating-linear-gradient(90deg, #4b2c15 0, #4b2c15 8px, #3d2310 9px, #3d2310 10px), /* Planks */
+        radial-gradient(circle at 70% 55%, #b8860b 0, #8b6508 0.125rem, transparent 0.25rem),
+        repeating-linear-gradient(90deg, #4b2c15 0, #4b2c15 0.5rem, #3d2310 0.5625rem, #3d2310 0.625rem),
         linear-gradient(to bottom, #2d1a0c, #4b2c15);
-    box-shadow: inset 0 0 15px rgba(0,0,0,0.8), 0 4px 8px rgba(0,0,0,0.6);
-    border-bottom: 4px solid #1a0f06;
+    box-shadow: inset 0 0 0.9375rem rgba(0,0,0,0.8), 0 0.25rem 0.5rem rgba(0,0,0,0.6);
+    border-bottom: 0.25rem solid #1a0f06;
     overflow: visible; 
 }
 
-/* 2. Grounded Brambles (Thick, Random, and Messy) */
+/* 2. Grounded Brambles */
 #managerDoorway::before {
     content: '';
     position: absolute;
-    bottom: -8px;
-    left: -15px;
-    right: -15px;
-    height: 65px;
-    /* Layering 4 different angles to break the 'grid' look */
+    bottom: -0.5rem;
+    left: -0.9375rem;
+    right: -0.9375rem;
+    height: 4.0625rem;
     background-image: 
-        repeating-linear-gradient(65deg, transparent 0, transparent 15px, #1a0f06 15px, #1a0f06 18px),
-        repeating-linear-gradient(-25deg, transparent 0, transparent 20px, #26150a 20px, #26150a 22px),
-        repeating-linear-gradient(110deg, transparent 0, transparent 12px, #1a0f06 12px, #1a0f06 14px),
-        repeating-linear-gradient(5deg, transparent 0, transparent 25px, #26150a 25px, #26150a 28px);
-    
-    /* A more 'jagged' fade-out mask */
+        repeating-linear-gradient(65deg, transparent 0, transparent 0.9375rem, #1a0f06 0.9375rem, #1a0f06 1.125rem),
+        repeating-linear-gradient(-25deg, transparent 0, transparent 1.25rem, #26150a 1.25rem, #26150a 1.375rem),
+        repeating-linear-gradient(110deg, transparent 0, transparent 0.75rem, #1a0f06 0.75rem, #1a0f06 0.875rem),
+        repeating-linear-gradient(5deg, transparent 0, transparent 1.5625rem, #26150a 1.5625rem, #26150a 1.75rem);
     -webkit-mask-image: radial-gradient(ellipse at bottom, black 30%, rgba(0,0,0,0.6) 60%, transparent 90%);
     mask-image: radial-gradient(ellipse at bottom, black 30%, rgba(0,0,0,0.6) 60%, transparent 90%);
-    
     z-index: 10001;
     pointer-events: none;
-    filter: blur(0.3px); /* Softens the digital lines to look like wood */
+    filter: blur(0.01875rem);
 }
 
-/* 3. Detritus (Dead leaves, moss, and smaller sticks) */
+/* 3. Detritus */
 #managerDoorway::after {
     content: '';
     position: absolute;
-    bottom: -6px;
-    left: -5px;
-    right: -5px;
-    height: 25px;
-    /* Creating 'clumps' of dark matter at the base */
+    bottom: -0.375rem;
+    left: -0.3125rem;
+    right: -0.3125rem;
+    height: 1.5625rem;
     background-image: 
-        radial-gradient(circle at 20% 80%, #1a0f06 4px, transparent 10px),
-        radial-gradient(circle at 50% 90%, #000 6px, transparent 12px),
-        radial-gradient(circle at 80% 85%, #1a0f06 5px, transparent 10px),
+        radial-gradient(circle at 20% 80%, #1a0f06 0.25rem, transparent 0.625rem),
+        radial-gradient(circle at 50% 90%, #000 0.375rem, transparent 0.75rem),
+        radial-gradient(circle at 80% 85%, #1a0f06 0.3125rem, transparent 0.625rem),
         linear-gradient(to top, #1a0f06, transparent);
     opacity: 0.9;
-    z-index: 10002; /* Sits inside/on top of the main brambles */
+    z-index: 10002;
     pointer-events: none;
 }
 
-/* 3. Askew, Weathered Sign on a Nail */
+/* 4. Askew, Weathered Sign */
 .door-sign {
     position: absolute;
-    top: 22px;
+    top: 1.375rem;
     left: 50%;
     transform: translateX(-50%) rotate(-8deg); 
-    width: 52px; 
+    width: 3.25rem; 
     background: #c3b091; 
-    color: rgba(61, 35, 16, 0.6); /* Worn, faded text */
+    color: rgba(61, 35, 16, 0.6);
     font-family: 'Courier New', Courier, monospace; 
-    font-size: 7px;
+    font-size: 0.4375rem;
     font-weight: bold;
     text-align: center;
-    padding: 2px;
-    border: 1px solid rgba(61, 35, 16, 0.5);
-    background-image: repeating-radial-gradient(circle, rgba(0,0,0,0.05), transparent 2px);
-    box-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+    padding: 0.125rem;
+    border: 0.0625rem solid rgba(61, 35, 16, 0.5);
+    background-image: repeating-radial-gradient(circle, rgba(0,0,0,0.05), transparent 0.125rem);
+    box-shadow: 0.0625rem 0.0625rem 0.1875rem rgba(0,0,0,0.4);
     z-index: 10010;
     pointer-events: none;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.0625rem;
 }
 
-/* The Rusty Nail */
 .door-sign::before {
     content: '';
     position: absolute;
-    top: -4px;
+    top: -0.25rem;
     left: 50%;
     transform: translateX(-50%);
-    width: 3px;
-    height: 3px;
-    background: #333; /* The nail head */
+    width: 0.1875rem;
+    height: 0.1875rem;
+    background: #333;
     border-radius: 50%;
 }
 
-
-/* Unified Tablet & Small Desktop Query (601px to 1367px) */
 @media (min-width: 601px) and (max-width: 1367px) {
-    .animation-wrapper {
-        position: relative;
-        margin: 0 auto;
-        height: 320px;
-    }
-    .jar {
-        transform: scale(0.7); 
-        opacity: 0.8;
-    }
-    .gods-appeased { 
-        font-size: 0.5rem !important; 
-    }
-    .thank-you-note { 
-        font-size: 0.9rem !important; 
-    }
-    .hell-mist { 
-        width: 220px; 
-        height: 110px; 
-        top: -28px; 
-    }
+    .animation-wrapper { position: relative; margin: 0 auto; height: 20rem; }
+    .jar { transform: scale(0.7); opacity: 0.8; }
+    .gods-appeased { font-size: 0.5rem !important; }
+    .thank-you-note { font-size: 0.9rem !important; }
+    .hell-mist { width: 13.75rem; height: 6.875rem; top: -1.75rem; }
 }
 
-/* Unified Phone Query (Up to 600px) */
 @media (max-width: 600px) {
-    .animation-wrapper {
-        position: relative;
-        margin: 0 auto;
-        height: 280px;
-    }
-    .jar {
-        opacity: 0.5;
-    }
-    table {
-        font-size: 14px;
-    }
-    .gods-appeased { 
-        font-size: 0.5rem !important; 
-    }
-    .thank-you-note { 
-        font-size: 0.9rem !important; 
-    }
-    .hell-mist { 
-        width: 180px; 
-        height: 90px; 
-        top: -25px; 
-    }
+    .animation-wrapper { position: relative; margin: 0 auto; height: 17.5rem; }
+    .jar { opacity: 0.5; }
+    table { font-size: 0.875rem; }
+    .gods-appeased { font-size: 0.5rem !important; }
+    .thank-you-note { font-size: 0.9rem !important; }
+    .hell-mist { width: 11.25rem; height: 5.625rem; top: -1.5625rem; }
 }
-
 
 #coworkerContainer.active {
-    display: block !important; /* Tables behave better as blocks */
+    display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
     max-height: none !important;
     height: auto !important;
-    min-height: 100px !important;
+    min-height: 6.25rem !important;
     width: 95% !important;
-    margin: 20px auto !important;
+    margin: 1.25rem auto !important;
 }
 
+.hidden { display: none !important; }
 
-/* Also ensure the 'hidden' class isn't accidentally stuck on 'none' */
-.hidden {
-    display: none !important;
-}
-
-/* The Transition Curtain */
 #transition-overlay {
     position: fixed;
     top: 0;
@@ -1146,25 +1059,16 @@ button {
     width: 100vw;
     height: 100vh;
     background: black;
-    z-index: 20000; /* Stays above everything */
+    z-index: 20000;
     opacity: 0;
-    pointer-events: none; /* Allows you to click things 'through' it until it activates */
-    transition: opacity 1.2s ease-in-out; /* Controls the speed of the fade */
+    pointer-events: none;
+    transition: opacity 1.2s ease-in-out;
 }
 
-/* When this class is added, the curtain closes */
-#transition-overlay.active {
-    opacity: 1;
-    pointer-events: all;
-}
+#transition-overlay.active { opacity: 1; pointer-events: all; }
 
-@media print  {
-    /* 1. Hide the Jar and Buttons */
-    button, .jar, .main, .diamond-warning, #finalMessage, .animation-wrapper, #skipToCoworker, .footer { 
-        display: none !important; 
-    }
-
-    /* 2. Force the Table to be a standard, visible element in Dark Blue */
+@media print {
+    button, .jar, .main, .diamond-warning, #finalMessage, .animation-wrapper, #skipToCoworker, .footer { display: none !important; }
     .tableContainer, #myTable, .table-scroll-wrapper, .secondary-table { 
         display: block !important;
         visibility: visible !important;
@@ -1173,120 +1077,103 @@ button {
         transform: none !important; 
         width: 100% !important;
         position: static !important;
-        color: #00008B !important; /* Dark Blue */
+        color: #00008B !important;
     }
-
-    /* 3. Make Inputs look like standard dark blue text */
     input {
         border: none !important;
         background: transparent !important;
-        color: #00008B !important; /* Dark Blue */
+        color: #00008B !important;
         font-size: 14pt !important;
         font-weight: bold !important;
         width: 100% !important;
         text-align: center !important;
-        display: block !important
+        display: block !important;
         -webkit-appearance: none;
     }
-
-    /* 4. Draw simple dark blue lines */
-    th, td {
-        border: 1px solid #00008B !important; /* Dark Blue */
-        padding: 8px !important;
-        visibility: visible !important;
-    }
-
-
+    th, td { border: 0.0625rem solid #00008B !important; padding: 0.5rem !important; visibility: visible !important; }
 }
 
-/* 1. Add the faint hint text */
 #full-moon::after {
     content: 'percentages';
     position: absolute;
     font-family: 'Dancing Script', cursive;
-    font-size: 14px;
-    color: rgba(0, 0, 0, 0.2); /* Very faint */
+    font-size: 0.875rem;
+    color: rgba(0, 0, 0, 0.2);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     transition: opacity 0.3s;
 }
 
-/* 1. THE MOON CONTAINER - Fixed size, acts as the anchor */
 #full-moon {
-    width: 120px;
-    height: 120px;
+    width: 7.5rem;
+    height: 7.5rem;
     background: radial-gradient(circle at 30% 30%, #fff, #e0e0e0);
     border-radius: 50%;
     display: flex;
     flex-direction: column; 
     justify-content: center;
     align-items: center;
-    gap: 2px;
+    gap: 0.125rem;
     position: fixed;
-    top: 20px;
-    right: 20px;
+    top: 1.25rem;
+    right: 1.25rem;
     z-index: 200;
     cursor: pointer;
     overflow: hidden;
     transform-origin: right center;
     transition: transform 0.6s ease-in-out;
-    box-shadow: 0 0 50px rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 3.125rem rgba(255, 255, 255, 0.5);
 }
 
-/* 2. THE CONTENT REVEAL - Everything inside stays hidden until hover */
-/* KEEP: This ensures the inner text starts invisible */
+/* 2. THE CONTENT REVEAL */
 #full-moon > * {
     opacity: 0;
     transition: opacity 0.3s ease;
 }
 
-/* NEW: This replaces the hover. When JS adds the 'is-engaged' class, the moon grows */
 #full-moon.is-engaged {
     transform: scale(2.2);
 }
 
-/* NEW: When 'is-engaged', the inner text becomes visible */
 #full-moon.is-engaged > * {
     opacity: 1;
 }
 
-/* NEW: When 'is-engaged', the background label disappears */
 #full-moon.is-engaged::after {
     opacity: 0;
 }
 
-/* 3. THE MATH SENTENCE - This is the horizontal lock */
+/* 3. THE MATH SENTENCE */
 .moon-math-sentence {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 4px;
+    gap: 0.25rem;
     width: auto;
-    transform: scale(0.6); /* Shrinks the whole row to fit the circle's width */
+    transform: scale(0.6);
     white-space: nowrap;
 }
 
 .moon-math-sentence span {
     font-family: 'Segoe UI', sans-serif;
-    font-size: 11px;
+    font-size: 0.6875rem;
     font-weight: bold;
     color: #444;
 }
 
-/* 4. THE LUNAR INPUTS - Sized for the row */
+/* 4. THE LUNAR INPUTS */
 .lunar-input {
-    width: 50px;
-    height: 18px;
-    font-size: 10px;
+    width: 3.125rem;
+    height: 1.125rem;
+    font-size: 0.625rem;
     text-align: center;
-    border: 1px solid #ccc;
-    border-radius: 3px;
+    border: 0.0625rem solid #ccc;
+    border-radius: 0.1875rem;
     background: #fff;
 }
 
-/* Removes arrows from number inputs for a cleaner look */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -1294,17 +1181,16 @@ input::-webkit-inner-spin-button {
 }
 
 input[type=number] {
-    -moz-appearance: textfield; /* For Firefox */
+    -moz-appearance: textfield;
 }
 
-
-/* 5. THE BUTTONS - Neatly stacked below the equator */
+/* 5. THE BUTTONS */
 #c-submit, #clearMoonBtn {
-    font-size: 8px;
-    padding: 2px 6px;
+    font-size: 0.5rem;
+    padding: 0.125rem 0.375rem;
     cursor: pointer;
-    border-radius: 4px;
-    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    border: 0.0625rem solid #ccc;
     background: #eee;
     position: relative;
     z-index: 10;
@@ -1318,40 +1204,40 @@ input[type=number] {
 }
 
 #moon-path {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: linear-gradient(315deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 50%, transparent 85%);
-  z-index: 100; /* High enough to sit on top of the background layers */
-  pointer-events: none;
-  animation: moonShimmer 8s ease-in-out infinite alternate;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(315deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 50%, transparent 85%);
+    z-index: 100;
+    pointer-events: none;
+    animation: moonShimmer 8s ease-in-out infinite alternate;
 }
 
 @keyframes moonShimmer {
-  0% { opacity: 0.3; }
-  100% { opacity: 0.7; }
+    0% { opacity: 0.3; }
+    100% { opacity: 0.7; }
 }
 
 body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: linear-gradient(315deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.1) 40%, transparent 75%);
-  z-index: 5;
-  pointer-events: none;
-  animation: moonShimmer 6s ease-in-out infinite alternate;
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(315deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.1) 40%, transparent 75%);
+    z-index: 5;
+    pointer-events: none;
+    animation: moonShimmer 6s ease-in-out infinite alternate;
 }
 
 #star-sky-phrase {
     display: block;
     text-align: center;
-    margin-top: 20px;
-    letter-spacing: 2px;
+    margin-top: 1.25rem;
+    letter-spacing: 0.125rem;
 }
 
 .star-letter {
@@ -1359,13 +1245,12 @@ body::before {
     color: white;
     font-family: 'Georgia', serif; 
     font-weight: 200;
-    font-size: 12px;
-    /* This creates the 'Emitting Light' effect */
+    font-size: 0.75rem;
     text-shadow: 
-        0 0 4px #fff, 
-        0 0 10px #fff, 
-        0 0 20px rgba(255, 255, 255, 0.4),
-        0 0 40px rgba(255, 255, 255, 0.2);
+        0 0 0.25rem #fff, 
+        0 0 0.625rem #fff, 
+        0 0 1.25rem rgba(255, 255, 255, 0.4),
+        0 0 2.5rem rgba(255, 255, 255, 0.2);
     transition: opacity 0.5s ease;
     animation: twinkle var(--duration) ease-in-out infinite alternate;
 }
@@ -1374,13 +1259,12 @@ body::before {
     0% { 
         opacity: 0.3; 
         transform: scale(0.9);
-        text-shadow: 0 0 2px #fff;
+        text-shadow: 0 0 0.125rem #fff;
     }
     100% { 
         opacity: 1; 
         transform: scale(1.1);
-        /* The star 'pulses' light onto the page */
-        text-shadow: 0 0 8px #fff, 0 0 20px #fff, 0 0 35px rgba(255, 255, 255, 0.6);
+        text-shadow: 0 0 0.5rem #fff, 0 0 1.25rem #fff, 0 0 2.1875rem rgba(255, 255, 255, 0.6);
     }
 }
 
@@ -1391,8 +1275,7 @@ body::before {
     border-radius: 50%;
     pointer-events: none;
     z-index: 6;
-    box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
-    /* This forces the phone/computer to use its graphics chip */
+    box-shadow: 0 0 0.25rem rgba(255, 255, 255, 0.8);
     will-change: opacity, transform;
     transform: translateZ(0); 
     animation: randomTwinkle var(--duration) ease-in-out infinite alternate;
@@ -1400,13 +1283,13 @@ body::before {
 
 @keyframes randomTwinkle {
     0% { opacity: 0.2; transform: scale(0.8); }
-    100% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 8px rgba(255, 255, 255, 1); }
+    100% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 0.5rem rgba(255, 255, 255, 1); }
 }
 
 #river-container {
     position: fixed;
-    top: 25vh;        /* Locks the top of the river precisely to your 25vh sky horizon! */
-    bottom: 0;        /* Runs the river all the way to the bottom of the screen */
+    top: 25vh;
+    bottom: 0;
     left: 50%;
     transform: translateX(-50%);
     width: 100vw;
@@ -1414,9 +1297,8 @@ body::before {
     overflow: hidden;
     clip-path: polygon(45% 0%, 55% 0%, 100% 100%, 0% 100%);
     background: linear-gradient(to bottom, #4da6ff 0%, #0066cc 100%);
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 0.0625rem solid rgba(255, 255, 255, 0.2);
 }
-
 
 .traveler {
     position: absolute;
@@ -1435,61 +1317,54 @@ body::before {
     10% { opacity: 1; }
     90% { opacity: 1; }
     100% {
-        /* FIX: Keeps the horizontal lane drift consistent through the entire journey */
         transform: translate(-50%, 0) scale(0);
         opacity: 0;
     }
 }
 
-/* Anchors the whole setup to the exact physical middle of your river container */
 .elephant-island-wrapper {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
-    flex-direction: column; /* Columns stack top-to-bottom naturally */
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     z-index: 10; 
     pointer-events: none; 
 }
 
-/* Tells the elephant to spin from back to front on its vertical axis */
 .spinning-elephant {
-    font-size: 28px; 
-    margin-bottom: -6px; /* Pulls the toe down onto the top of the island */
-    transform-origin: bottom center; /* Keeps the balancing toe locked in place */
+    font-size: 1.75rem; 
+    margin-bottom: -0.375rem;
+    transform-origin: bottom center;
     animation: backFootPirouette 3s linear infinite;
     z-index: 12;
 }
 
-/* Styles your rugged, rocky northern island base beneath the elephant */
 .island-base {
-    font-size: 36px; 
+    font-size: 2.25rem; 
     line-height: 1;
     z-index: 11;
-    filter: drop-shadow(0 4px 6px rgba(19, 38, 19, 0.6)); 
+    filter: drop-shadow(0 0.25rem 0.375rem rgba(19, 38, 19, 0.6)); 
 }
 
-/* The 3D Axis Rotation Loop anchoring the Rear/Back Foot */
 @keyframes backFootPirouette {
     0% {
-        /* A minor forward pitch (rotateX) positions the visual weight onto the rear foot asset lines */
-        transform: perspective(400px) rotateX(8deg) rotateY(0deg);
+        transform: perspective(25rem) rotateX(8deg) rotateY(0deg);
     }
     100% {
-        transform: perspective(400px) rotateX(8deg) rotateY(360deg);
+        transform: perspective(25rem) rotateX(8deg) rotateY(360deg);
     }
 }
 
-
 #printArea { 
-        display: none; 
-    }
+    display: none; 
+}
 
-</style>  
-<link rel="apple-touch-icon" sizes="180x180" href="icon-512.png">
+</style>   
+<link rel="apple-touch-icon" sizes="11.25rem" href="icon-512.png">
 <link rel="manifest" href="manifest.json">
 
 </head>
@@ -1500,7 +1375,7 @@ body::before {
 <div id="river-container">
     <!-- Reflection Glow -->
     <div style="position:absolute; top:0; left:45%; width:10%; height:100%; 
-              background: linear-gradient(to bottom, rgba(255,255,255,0.2), transparent); filter: blur(20px);">
+              background: linear-gradient(to bottom, rgba(255,255,255,0.2), transparent); filter: blur(1.25rem);">
     </div>
 <div class="elephant-island-wrapper">
     <div class="spinning-elephant">🐘</div>
@@ -1509,7 +1384,7 @@ body::before {
 <!-- Boat 1 Pre-Render Anchor (Launches instantly with the elephant) -->
 <div class="traveler" style="--drift: -18vw; --dur: 30s; --delay: 0s; opacity: 1; animation: floatAway 30s linear infinite;">
     <div style="position: relative; display: flex; flex-direction: column; align-items: center;">
-        <img src="waiter1.png" style="width: 60px; height: auto;" alt="river item">
+        <img src="waiter1.png" style="width: 3.75rem; height: auto;" alt="river item">
     </div>
 </div>
 
@@ -1571,7 +1446,7 @@ body::before {
   <div class="shelf" id="shelf"></div> <!-- Move shelf inside the jar div -->
       <div class ="main"> 
         <div class="tip-jar-title">TIP JAR</div>
-        <input type="text" id="tipInput" placeholder="$123.00" style="text-align: center; width: 120px;"><br>
+        <input type="text" id="tipInput" placeholder="$123.00" style="text-align: center; width: 7.5rem;"><br>
         <button id="btn">Submit</button>
       </div>
 
@@ -1625,11 +1500,11 @@ body::before {
 
 
 
-<div id="result" style="text-align:center; font-weight:bold; margin-top:10px"></div>
+<div id="result" style="text-align:center; font-weight:bold; margin-top:0.625rem"></div>
 
 
 <!-- Centered Warning Overlay -->
-<div id="choiceContainer" style="display: none; align-items: center; justify-content: center; gap: 30px; margin: 20px 0; width: 100%; position: relative; left: 0; padding: 0;">
+<div id="choiceContainer" style="display: none; align-items: center; justify-content: center; gap: 1.875rem; margin: 1.25rem 0; width: 100%; position: relative; left: 0; padding: 0;">
     
     <!-- Yellow Warning Diamond -->
     <div id="coworkerTrigger" class="diamond-warning">
@@ -1687,8 +1562,8 @@ body::before {
         </tr>
     </tbody>
   </table>
-  <div style="text-align:center; margin-top:15px;">
-    <button id="finalFinishBtn" style="background-color: #28a745; color: white; padding: 10px 20px;">All Staff Tipped!</button>
+  <div style="text-align:center; margin-top:0.9375rem;">
+    <button id="finalFinishBtn" style="background-color: #28a745; color: white; padding: 0.625rem 1.25rem;">All Staff Tipped!</button>
   </div>
 </div>
 
@@ -2132,7 +2007,7 @@ window.openManagerDoor = function(event) {
 
         let internalHTML = `
             <div style="position: relative; display: flex; flex-direction: column; align-items: center;">
-                <img src="${imageSrc}" style="width: 120px; height: auto;" alt="river item">
+                <img src="${imageSrc}" style="width: 3.75rem; height: auto;" alt="river item">
             </div>
         `;
         
@@ -2183,16 +2058,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const skipBtn = document.createElement('button');
     skipBtn.innerText = "✕ Got It! Hide Tour";
     skipBtn.style.position = 'fixed';
-    skipBtn.style.bottom = '20px';
-    skipBtn.style.right = '20px';
+    skipBtn.style.bottom = '1.25rem';
+    skipBtn.style.right = '1.25rem';
     skipBtn.style.zIndex = '9999';
-    skipBtn.style.padding = '10px 15px';
+    skipBtn.style.padding = '0.625rem 0.9375rem';
     skipBtn.style.fontSize = '1rem';
     skipBtn.style.fontWeight = 'bold';
     skipBtn.style.backgroundColor = 'rgba(0,0,0,0.75)';
     skipBtn.style.color = 'white';
-    skipBtn.style.border = '2px solid white';
-    skipBtn.style.borderRadius = '30px';
+    skipBtn.style.border = '0.125rem solid white';
+    skipBtn.style.borderRadius = '1.875rem';
     skipBtn.style.cursor = 'pointer';
     document.body.appendChild(skipBtn);
 
@@ -2259,7 +2134,7 @@ setTimeout(() => {
     bypassTooltip.style.position = 'fixed';
     bypassTooltip.style.top = '65%'; 
     bypassTooltip.style.left = '52%'; 
-    bypassTooltip.style.transform = 'translateY(-50%) translateX(2vw)';
+    bypassTooltip.style.transform = 'translateY(-50%) translateX(1.25rem)';
     
     document.body.appendChild(bypassTooltip);
 
@@ -2287,7 +2162,7 @@ setTimeout(() => {
                     sunTooltip.style.position = 'absolute';
                     sunTooltip.style.top = '15%'; 
                     sunTooltip.style.right = '35%'; 
-                    sunTooltip.style.transform = 'translateX(2vw)';
+                    sunTooltip.style.transform = 'translateX(1.25rem)';
                     
                     moonAnchor.appendChild(sunTooltip);
 
@@ -2330,7 +2205,7 @@ setTimeout(() => {
                         coworkerTooltip.style.position = 'fixed';
                         coworkerTooltip.style.top = '72%'; 
                         coworkerTooltip.style.left = '52%'; 
-                        coworkerTooltip.style.transform = 'translateY(-50%) translateX(2vw)';
+                        coworkerTooltip.style.transform = 'translateY(-50%) translateX(1.25rem)';
                         
                         document.body.appendChild(coworkerTooltip);
 
@@ -2352,12 +2227,16 @@ setTimeout(() => {
 
         observer.observe(coworkerContainer, { attributes: true });
     }
-
-    // ==========================================
+// ==========================================
     // THE MASTER SMOKE GENERATOR FUNCTION
     // ==========================================
     function triggerSmokePuff(element) {
+        if (!element) return;
         const rect = element.getBoundingClientRect();
+        
+        // Ensure element is visible before calculating
+        if (rect.width === 0 && rect.height === 0) return;
+
         const centerX = rect.left + (rect.width / 2);
         const centerY = rect.top + (rect.height / 2);
 
@@ -2365,28 +2244,26 @@ setTimeout(() => {
             const particle = document.createElement('div');
             particle.className = 'smoke-particle';
 
-            const size = Math.random() * 4 + 6; 
+            const size = (Math.random() * 4 + 6).toFixed(2);
             particle.style.width = `${size}vw`;
             particle.style.height = `${size}vw`;
+            
+            // Positioning remains in pixels as it is tied to viewport coordinates
             particle.style.left = `${centerX - (rect.width * 0.1)}px`;
             particle.style.top = `${centerY - (rect.height * 0.1)}px`;
 
             const angle = Math.random() * Math.PI * 2;
-            const distance = Math.random() * 40 + 20;
-            const xMove = Math.cos(angle) * distance;
-            const yMove = Math.sin(angle) * distance;
-
-            particle.style.setProperty('--x', `${xMove}px`);
-            particle.style.setProperty('--y', `${yMove}px`);
+            const distance = (Math.random() * 2.5 + 1.25).toFixed(2);
+            
+            particle.style.setProperty('--x', `${(Math.cos(angle) * distance).toFixed(2)}rem`);
+            particle.style.setProperty('--y', `${(Math.sin(angle) * distance).toFixed(2)}rem`);
 
             document.body.appendChild(particle);
-
-            particle.addEventListener('animationend', () => {
-                particle.remove();
-            });
+            particle.addEventListener('animationend', () => particle.remove(), { once: true });
         }
     }
 });
+
 </script>
 
 <script>
@@ -2395,7 +2272,7 @@ setTimeout(() => {
     const music = document.getElementById('bg-music');
     // Lower the volume slightly so it's not blastingly loud (0.0 to 1.0)
     music.volume = 0.4; 
-        const muteBtn = document.getElementById('app-mute-btn');
+    const muteBtn = document.getElementById('app-mute-btn');
     if (muteBtn && !muteBtn.dataset.listenerAdded) {
       muteBtn.dataset.listenerAdded = "true";
       
@@ -2414,34 +2291,45 @@ setTimeout(() => {
       muteBtn.addEventListener('touchstart', (e) => {
         e.preventDefault();
         toggleMute(e);
-      });
+      }, { passive: false });
     }
 
-    
     music.play().catch(err => {
       console.log("Waiting for user interaction to play audio.");
     });
+    
+    // Once started, remove listeners to prevent redundant calls
+    window.removeEventListener('click', startCircusMusic);
+    window.removeEventListener('touchstart', startCircusMusic);
   }
+  
   // Automatically mute all music if user exits or minimizes the app layout
-document.addEventListener('visibilitychange', () => {
-  const music = document.getElementById('bg-music');
-  if (music) {
-    if (document.hidden) {
-      music.pause(); // Instantly stops the music from playing in the background
-    } else if (!music.muted) {
-      music.play().catch(err => console.log("Audio play blocked"));
+  document.addEventListener('visibilitychange', () => {
+    const music = document.getElementById('bg-music');
+    if (music) {
+      if (document.hidden) {
+        music.pause();
+      } else if (!music.muted) {
+        music.play().catch(err => console.log("Audio play blocked"));
+      }
     }
-  }
-});
-
+  });
 
   // Listen for the user's first click or mobile tap anywhere on the screen
   window.addEventListener('click', startCircusMusic);
-  window.addEventListener('touchstart', startCircusMusic);
-
+  window.addEventListener('touchstart', startCircusMusic, { passive: true });
 </script>
-<button id="app-mute-btn" style="position: fixed; top: 20px; left: 20px; z-index: 1000; padding: 10px; font-size: 1.2rem; cursor: pointer; background: rgba(0,0,0,0.6); color: white; border: 1px solid white; border-radius: 5px;">🔊 Mute</button>
+
+<button id="app-mute-btn" style="position: fixed; top: 1.25rem; left: 1.25rem; z-index: 1000; padding: 0.625rem; font-size: 1.2rem; cursor: pointer; background: rgba(0,0,0,0.6); color: white; border: 0.0625rem solid white; border-radius: 0.3125rem;">🔊 Mute</button>
 
 <div id="transition-overlay"></div>
+
+<!-- Back to Hub Navigation -->
+<div style="clear: both; width: 100%; text-align: center; margin: 3.125rem 0; padding: 1.25rem 0; pointer-events: auto; z-index: 9999; position: relative;">
+    <a href="index.html" style="color: #000099; text-decoration: none; font-weight: bold; font-size: 1.2rem; display: inline-block; padding: 0.625rem;">
+        ← Back to Waiter World
+    </a>
+</div>
+
 </body>
 </html>

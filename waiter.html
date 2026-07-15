@@ -23,10 +23,12 @@
     table { border-collapse: collapse; width: 100%; margin-bottom: 2rem; }
     th, td { border: 0.05rem solid black; padding: 1rem; text-align: center; }
     input { width: 90%; padding: 0.5rem; box-sizing: border-box; font-size: 1rem; }
-    
-    .trademark-e {
-        display: inline-block; transform: rotate(20deg);
-        margin: 0 0.2rem; will-change: transform;
+
+  /* Only apply this to the first table */
+    .header-table { table-layout: fixed; }
+    .header-table th { height: 90px; vertical-align: top; }
+    .header-table input { display: block; margin: 0 auto 0.5rem; }  
+    .trademark-e {display: inline-block; transform: rotate(20deg); margin: 0 0.2rem; will-change: transform;
     }
 
     h1 { color: #000099; font-size: 3rem; margin: 1rem 0; }
@@ -77,7 +79,7 @@
         <span>Enter Total Tips First! Then proceed to fill out the table</span>
     </div>
 
-    <table>
+    <table class="header-table">
         <tr>
             <th><input type="number" id="firstNumber" placeholder="Total Tips" oninput="ClassicApp.calculateHourlyWage()" /><br><small>Total Tips</small></th>
             <th onmouseover="showHint()" onmouseout="hideHint()">

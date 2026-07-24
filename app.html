@@ -435,6 +435,11 @@ button {
     z-index: -1;
 }
 
+.tour-popover.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
 
 /* 3. ALL ANIMATIONS (@keyframes) */
 
@@ -1144,24 +1149,6 @@ button {
     opacity: 0;
 }
 
-/* 3. THE MATH SENTENCE */
-.moon-math-sentence {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 0.25rem;
-    width: auto;
-    transform: scale(0.6);
-    white-space: nowrap;
-}
-
-.moon-math-sentence span {
-    font-family: 'Segoe UI', sans-serif;
-    font-size: 0.6875rem;
-    font-weight: bold;
-    color: #444;
-}
 
 /* 4. THE LUNAR INPUTS */
 .lunar-input {
@@ -1184,24 +1171,6 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
-/* 5. THE BUTTONS */
-#c-submit, #clearMoonBtn {
-    font-size: 0.5rem;
-    padding: 0.125rem 0.375rem;
-    cursor: pointer;
-    border-radius: 0.25rem;
-    border: 0.0625rem solid #ccc;
-    background: #eee;
-    position: relative;
-    z-index: 10;
-    color: #444;
-}
-
-#c-submit {
-    background: #222;
-    color: white;
-    border: none;
-}
 
 #moon-path {
     position: fixed;
@@ -1288,15 +1257,15 @@ body::before {
 
 #river-container {
     position: fixed;
-    top: 25vh;
+    top: 15rem;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
     width: 100vw;
     z-index: -2; 
     overflow: hidden;
-    clip-path: polygon(45% 0%, 55% 0%, 100% 100%, 0% 100%);
-    background: linear-gradient(to bottom, #4da6ff 0%, #0066cc 100%);
+    clip-path: polygon(48% 0%, 52% 0%, 100% 100%, 0% 100%);
+    background: linear-gradient(to bottom, #70d1ff 0%, #0066cc 100%);
     border-top: 0.0625rem solid rgba(255, 255, 255, 0.2);
 }
 
@@ -1631,13 +1600,15 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    if (coworkerTrigger) {
+if (coworkerTrigger) {
         coworkerTrigger.addEventListener('click', () => {
             if (choiceRow) choiceRow.style.display = 'none';
             revealSecondTable();
         });
     }
+
 });
+
 
 // --- 2. THE GOD MESSAGE TRIGGER ---
 function showFinale() {
@@ -2090,7 +2061,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (jarElement) {
         jarTooltip = document.createElement('div');
         jarTooltip.className = 'tour-popover arrow-right';
-        jarTooltip.innerHTML = 'Submit<br>total tips<br>here';
+        jarTooltip.innerHTML = '🤡👉Submit<br>total tips<br>here';
         
         jarTooltip.style.top = '50%'; 
         jarTooltip.style.right = '105%'; 
@@ -2129,7 +2100,7 @@ setTimeout(() => {
     const bypassTooltip = document.createElement('div');
     bypassTooltip.className = 'tour-popover arrow-left';
     
-    bypassTooltip.innerHTML = '↖ Tip Share?<br>OR<br>↙ Tip out?';
+    bypassTooltip.innerHTML = '↖ Tip Share?<br>👈🤡OR<br>↙ Tip out?';
     
     bypassTooltip.style.position = 'fixed';
     bypassTooltip.style.top = '65%'; 
@@ -2157,7 +2128,7 @@ setTimeout(() => {
                 if (moonAnchor) {
                     const sunTooltip = document.createElement('div');
                     sunTooltip.className = 'tour-popover arrow-right';
-                    sunTooltip.innerHTML = "Give the sun any two numbers<br>it'll generate the third number<br>gratis!";
+                    sunTooltip.innerHTML = "🤡👉Give the sun any two numbers<br>it'll generate the third number<br>gratis!";
                     
                     sunTooltip.style.position = 'absolute';
                     sunTooltip.style.top = '15%'; 
@@ -2200,7 +2171,7 @@ setTimeout(() => {
                         
                         const coworkerTooltip = document.createElement('div');
                         coworkerTooltip.className = 'tour-popover arrow-left'; 
-                        coworkerTooltip.innerHTML = 'Tipping the bartender?<br>Total sales?<br>OR<br>just Drinks?<br><br>The kitchen?<br>Total sales?<br>OR<br>just Food?';
+                        coworkerTooltip.innerHTML = 'Tipping the bartender?<br>Total sales?<br>OR<br>just Drinks?<br>🤡<br>The kitchen?<br>Total sales?<br>OR<br>just Food?';
                         
                         coworkerTooltip.style.position = 'fixed';
                         coworkerTooltip.style.top = '72%'; 

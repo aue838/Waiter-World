@@ -53,9 +53,28 @@ body {
             #44cc44 15rem,   /* Bright Summer Grass */
             #228b22 100%   /* Deep Grass Shadow */
         );
-    background-size: 50rem 50rem, 100% 100%;
-    background-position: 120% -1.25rem, center; 
+    background-size: 100% 100%, 100% 100%;
+    background-position: center, center; 
     background-repeat: no-repeat, no-repeat;
+}
+
+.sunbeam-path {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: conic-gradient(
+        from 180deg at 85% 5%,
+        transparent 0deg,
+        rgba(255, 245, 180, 0.08) 15deg,
+        rgba(255, 255, 220, 0.2) 25deg,
+        rgba(255, 245, 180, 0.08) 35deg,
+        transparent 50deg
+    );
+    pointer-events: none;
+    mix-blend-mode: screen;
+    z-index: -2;
 }
 
 /* 1. GLOBAL & BASE STYLES */
@@ -1340,6 +1359,7 @@ body::before {
 
 <body>
 <div class="scenery-bg"></div>
+<div class="sunbeam-path"></div>
 <div id="world-wrapper" style="position: relative; width: 100%; overflow: hidden;">
 <div id="river-container">
     <!-- Reflection Glow -->

@@ -134,6 +134,13 @@
         <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0-2-.9-2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/>
       </svg>
     </a>
+    <!-- Language Switcher Pill in Top Right -->
+<div id="language-switcher" style="position: fixed; top: 1.5rem; right: 1.5rem; display: flex; align-items: center; gap: 0.25rem; background: #2c4a6f; padding: 0.3rem 0.6rem; border-radius: 9999rem; box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2); z-index: 1000; border: 1px solid #d4b886;">
+  <button onclick="setLanguage('en')" title="English" style="background: none; border: none; color: #f4eee1; cursor: pointer; font-size: 0.85rem; font-weight: bold; padding: 0.2rem 0.4rem; border-radius: 9999rem; transition: transform 0.2s ease;">EN</button>
+  <button onclick="setLanguage('fr')" title="Français (Québec)" style="background: none; border: none; cursor: pointer; font-size: 1.1rem; padding: 0.2rem 0.4rem; border-radius: 9999rem; transition: transform 0.2s ease; display: inline-flex; align-items: center; justify-content: center; width: 1.5rem; height: 1.5rem; background-color: #003366; color: #ffffff; border-radius: 50%;">⚜️</button>
+  <button onclick="setLanguage('es')" title="Español (México)" style="background: none; border: none; color: #f4eee1; cursor: pointer; font-size: 1.1rem; padding: 0.2rem 0.4rem; border-radius: 9999rem; transition: transform 0.2s ease;">🇲🇽</button>
+</div>
+    
     <div class="header-container">
         <h1 class="arched-title">
             <span class="char1">W</span><span class="char2">A</span><span class="char3">I</span><span class="char4">T</span><span class="char5">E</span><span class="char6">R</span>
@@ -169,6 +176,26 @@
     <footer>
         © 2026 Waiter World. All rights reserved.
     </footer>
-<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "f3bae60bc3da4e11b35bd3f850f97d3b"}'></script><!-- End Cloudflare Web Analytics -->    
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "f3bae60bc3da4e11b35bd3f850f97d3b"}'></script><!-- End Cloudflare Web Analytics -->  
+<script>
+  function setLanguage(lang) {
+    localStorage.setItem('preferredLang', lang);
+    applyLanguage(lang);
+  }
+
+  function applyLanguage(lang) {
+    document.querySelectorAll('[data-translate]').forEach(el => {
+      const key = el.getAttribute('data-translate');
+      if (typeof translations !== 'undefined' && translations[lang] && translations[lang][key]) {
+        el.innerText = translations[lang][key];
+      }
+    });
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('preferredLang') || 'en';
+    applyLanguage(savedLang);
+  });
+</script>    
 </body>
 </html>

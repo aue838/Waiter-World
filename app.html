@@ -1410,14 +1410,22 @@ body::before {
     <path id="mute-x" d="M3 3l18 18" stroke="#fff" stroke-width="2.5" stroke-linecap="round" display="none"/>
   </svg>
 </button>
+
+<!-- Language Switcher Pill in Top Right -->
+<div id="language-switcher" style="position: fixed; top: 1.5rem; right: 5rem; display: flex; align-items: center; gap: 0.25rem; background: #2c4a6f; padding: 0.3rem 0.6rem; border-radius: 9999rem; box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2); z-index: 1000; border: 1px solid #d4b886;">
+  <button onclick="setLanguage('en')" title="English" style="background: none; border: none; color: #f4eee1; cursor: pointer; font-size: 0.85rem; font-weight: bold; padding: 0.2rem 0.4rem; border-radius: 9999rem; transition: transform 0.2s ease;">EN</button>
+  <button onclick="setLanguage('fr')" title="Français (Québec)" style="background: none; border: none; cursor: pointer; font-size: 1.1rem; padding: 0.2rem 0.4rem; border-radius: 9999rem; transition: transform 0.2s ease; display: inline-flex; align-items: center; justify-content: center; width: 1.5rem; height: 1.5rem; background-color: #003366; color: #ffffff; border-radius: 50%;">⚜️</button>
+  <button onclick="setLanguage('es')" title="Español (México)" style="background: none; border: none; color: #f4eee1; cursor: pointer; font-size: 1.1rem; padding: 0.2rem 0.4rem; border-radius: 9999rem; transition: transform 0.2s ease;">🇲🇽</button>
+</div>
+
 <div class="scenery-bg"></div>
 <div class="sunbeam-path"></div>
-    <a href="index.html" class="back-home-button">←Back</a>
+    <a href="index.html" class="back-home-button" data-translate="backHome">←Back</a>
 <div id="world-wrapper" style="position: relative; width: 100%; overflow: hidden;">
 <div id="river-container">
     <!-- Reflection Glow -->
     <div style="position:absolute; top:0; left:45%; width:10%; height:100%; 
-              background: linear-gradient(to bottom, rgba(255,255,255,0.2), transparent); filter: blur(1.25rem);">
+                background: linear-gradient(to bottom, rgba(255,255,255,0.2), transparent); filter: blur(1.25rem);">
     </div>
 <div class="elephant-island-wrapper">
     <div class="spinning-elephant">🐘</div>
@@ -1429,9 +1437,6 @@ body::before {
         <img src="waiter1.png" style="width: 3.75rem; height: auto;" alt="river item">
     </div>
 </div>
-
-
-    
 </div>
 </div>
 <div id="moon-path"></div>
@@ -1445,7 +1450,6 @@ body::before {
         </div>
     </a>
 </div>
-
 
     <!-- THE STAR-CONSTELLATION PHRASE -->
     <div id="star-sky-phrase">
@@ -1461,21 +1465,19 @@ body::before {
         <span class="star-letter">s</span><span class="star-letter">t</span><span class="star-letter">i</span><span class="star-letter">l</span><span class="star-letter">l</span>
         <span class="star-letter">~</span>
     </div>
-</div>
-
 
     <div id="finale-layer">
         <div id="finalMessage">
             <div class="hell-mist"></div>
-            <p class="thank-you-note outline-text">Thank you for your hard work</p>
+            <p class="thank-you-note outline-text" data-translate="thankYouNote">Thank you for your hard work</p>
             <p class="gods-appeased">
              <span class="bolt b1">⚡</span>
-             the restaurant
+             <span data-translate="restaurantGods1">the restaurant</span>
              <span class="bolt b2">⚡</span>
-              gods  
+             <span data-translate="restaurantGods2">gods</span>  
              <span class="bolt b3">⚡</span>
              <span class="bolt b4">⚡</span>
-             are appeased
+             <span data-translate="restaurantGods3">are appeased</span>
              <span class="bolt b5">⚡</span>
             </p>
         </div>
@@ -1486,12 +1488,11 @@ body::before {
   <div class="smoke-puff" id="smoke"></div>
   <div class="jar" id="jar">
   <div class="shelf" id="shelf"></div> <!-- Move shelf inside the jar div -->
-      <div class ="main"> 
-        <div class="tip-jar-title">TIP JAR</div>
-        <input type="text" id="tipInput" placeholder="$123.00" style="text-align: center; width: 7.5rem;"><br>
-        <button id="btn">Submit</button>
+      <div class ="main">  
+        <div class="tip-jar-title" data-translate="tipJarTitle">TIP JAR</div>
+        <input type="text" id="tipInput" placeholder="$123.00" data-translate-placeholder="tipInputPlaceholder" style="text-align: center; width: 7.5rem;"><br>
+        <button id="btn" data-translate="submitBtn">Submit</button>
       </div>
-
       
   <div class ="content">
          <div class="content1"></div><div class="content2"></div><div class="content3"></div>         
@@ -1509,14 +1510,14 @@ body::before {
 </div>
 
 <div id="tableContainer" class="tableContainer">
- <h2 style="text-align:center;">Who worked? How many hours?</h2>
+ <h2 style="text-align:center;" data-translate="tableHeaderTitle">Who worked? How many hours?</h2>
  <div class="table-scroll-wrapper">
  <table id="myTable">
   <thead>
    <tr>
-    <th>Name</th>
-    <th>Hours</th>
-    <th class="hidden-column" id="headerResult">Yer Dough</th>
+    <th data-translate="thName">Name</th>
+    <th data-translate="thHours">Hours</th>
+    <th class="hidden-column" id="headerResult" data-translate="thYerDough">Yer Dough</th>
   </tr>
 </thead>
 <tbody id="tableBody">
@@ -1525,89 +1526,212 @@ body::before {
     <td><input type="number"  class="row-input"  min="0" step="any"></td>
     <td class="hidden-column"><input type="text"  class="row-input" readonly></td>
   </tr>
- </tbody>
- 
-  
+</tbody>
 </table>
 </div>
 <div class="action-footer">
-<button id="bypassBtn" onclick="runBypass()" style="background-color: #6c757d; color: white; position: relative; z-index: 9999;">OR<br> Skip to TipOut</button>
-    <button id="finishBtn">Finish and Calculate</button>
-    <button id="printBtn">Print</button>
-    <button id="clearBtn">Clear All</button>   
+<button id="bypassBtn" onclick="runBypass()" style="background-color: #6c757d; color: white; position: relative; z-index: 9999;" data-translate="bypassBtn">OR<br> Skip to TipOut</button>
+    <button id="finishBtn" data-translate="finishBtn">Finish and Calculate</button>
+    <button id="printBtn" data-translate="printBtn">Print</button>
+    <button id="clearBtn" data-translate="clearBtn">Clear All</button>    
 <a href="manager_office.html" id="managerDoorway" onclick="openManagerDoor(event)">
-    <div class="door-sign">Manager</div>
+    <div class="door-sign" data-translate="managerDoor">Manager</div>
 </a>
 </div>
 
-
-
 <div id="result" style="text-align:center; font-weight:bold; margin-top:0.625rem"></div>
-
 
 <!-- Centered Warning Overlay -->
 <div id="choiceContainer" style="display: none; align-items: center; justify-content: center; gap: 1.875rem; margin: 1.25rem 0; width: 100%; position: relative; left: 0; padding: 0;">
     
     <!-- Yellow Warning Diamond -->
     <div id="coworkerTrigger" class="diamond-warning">
-      <span><center>WAIT!<center><br>Don't be a Stooge! <br> Press here to <br>tip your fellow coworkers!</span>
+      <span><center><span data-translate="warningWait">WAIT!</span><center><br><span data-translate="warningStooge">Don't be a Stooge!</span> <br> <span data-translate="warningPress">Press here to</span> <br><span data-translate="warningTip">tip your fellow coworkers!</span></span>
     </div>
 
     <!-- The OR Text -->
-    <div style="font-weight: bold; font-family: Arial; font-size: 1.5rem; color: black;">OR</div>
+    <div style="font-weight: bold; font-family: Arial; font-size: 1.5rem; color: black;" data-translate="textOr">OR</div>
 
     <!-- Green End Diamond -->
     <div id="endTrigger" class="diamond-end">
-        <span>THE END</span>
+        <span data-translate="textTheEnd">THE END</span>
     </div>
 
 </div>
-
 
 <!-- The Coworker Table Container -->
 <div id="coworkerContainer" class="secondary-table hidden">
   <table id="coworkerTable" border="1">
     <thead>
         <tr>
-          <th>Enter Sales</th>
-          <th>Enter %</th>
-          <th>TipOut</th>
+            <th data-translate="cwSalesHeader">Enter Sales</th>
+            <th data-translate="cwPercentHeader">Enter %</th>
+            <th data-translate="cwTipOutHeader">TipOut</th>
         </tr>
     </thead>
     <tbody>
         <!-- Kitchen Row -->
         <tr>
-          <td><input type="number" id="sales_kitchen" placeholder="Kitchen $" min="0" step="0.1" oninput="calculateTipOut('kitchen')" /></td>
-          <td><input type="number" id="tip_kitchen" placeholder="%" min="0" step="0.1" oninput="calculateTipOut('kitchen')" /></td>
-          <td><input type="text" id="tipout_kitchen" value="0.00" readonly /></td>
+            <td><input type="number" id="sales_kitchen" placeholder="Kitchen $" data-translate-placeholder="kitchenPlaceholder" min="0" step="0.1" oninput="calculateTipOut('kitchen')" /></td>
+            <td><input type="number" id="tip_kitchen" placeholder="%" min="0" step="0.1" oninput="calculateTipOut('kitchen')" /></td>
+            <td><input type="text" id="tipout_kitchen" value="0.00" readonly /></td>
         </tr>
 
         <!-- Bartender Row -->
         <tr>
-          <td><input type="number" id="sales_bartender" placeholder="Bartender $" min="0" step="0.1" oninput="calculateTipOut('bartender')" /></td>
-          <td><input type="number" id="tip_bartender" placeholder="%" min="0" step="0.1" oninput="calculateTipOut('bartender')" /></td>
-          <td><input type="text" id="tipout_bartender" value="0.00" readonly /></td>
+            <td><input type="number" id="sales_bartender" placeholder="Bartender $" data-translate-placeholder="bartenderPlaceholder" min="0" step="0.1" oninput="calculateTipOut('bartender')" /></td>
+            <td><input type="number" id="tip_bartender" placeholder="%" min="0" step="0.1" oninput="calculateTipOut('bartender')" /></td>
+            <td><input type="text" id="tipout_bartender" value="0.00" readonly /></td>
         </tr>
 
         <!-- Hostess Row -->
         <tr>
-          <td><input type="number" id="sales_hostess" placeholder="Hostess $" min="0" step="0.1" oninput="calculateTipOut('hostess')" /></td>
-          <td><input type="number" id="tip_hostess" placeholder="%" min="0" step="0.1" oninput="calculateTipOut('hostess')" /></td>
-          <td><input type="text" id="tipout_hostess" value="0.00" readonly /></td>
+            <td><input type="number" id="sales_hostess" placeholder="Hostess $" data-translate-placeholder="hostessPlaceholder" min="0" step="0.1" oninput="calculateTipOut('hostess')" /></td>
+            <td><input type="number" id="tip_hostess" placeholder="%" min="0" step="0.1" oninput="calculateTipOut('hostess')" /></td>
+            <td><input type="text" id="tipout_hostess" value="0.00" readonly /></td>
         </tr>
 
         <!-- Runner Row -->
         <tr>
-          <td><input type="number" id="sales_runner" placeholder="Runner $" min="0" step="0.1" oninput="calculateTipOut('runner')" /></td>
-          <td><input type="number" id="tip_runner" placeholder="%" min="0" step="0.1" oninput="calculateTipOut('runner')" /></td>
-          <td><input type="text" id="tipout_runner" value="0.00" readonly /></td>
+            <td><input type="number" id="sales_runner" placeholder="Runner $" data-translate-placeholder="runnerPlaceholder" min="0" step="0.1" oninput="calculateTipOut('runner')" /></td>
+            <td><input type="number" id="tip_runner" placeholder="%" min="0" step="0.1" oninput="calculateTipOut('runner')" /></td>
+            <td><input type="text" id="tipout_runner" value="0.00" readonly /></td>
         </tr>
     </tbody>
   </table>
   <div style="text-align:center; margin-top:0.9375rem;">
-    <button id="finalFinishBtn" style="background-color: #28a745; color: white; padding: 0.625rem 1.25rem;">All Staff Tipped!</button>
+    <button id="finalFinishBtn" style="background-color: #28a745; color: white; padding: 0.625rem 1.25rem;" data-translate="finalFinishBtn">All Staff Tipped!</button>
   </div>
 </div>
+
+<script>
+  const translations = {
+    en: {
+      backHome: "←Back",
+      thankYouNote: "Thank you for your hard work",
+      restaurantGods1: "the restaurant",
+      restaurantGods2: "gods",
+      restaurantGods3: "are appeased",
+      tipJarTitle: "TIP JAR",
+      tipInputPlaceholder: "$123.00",
+      submitBtn: "Submit",
+      tableHeaderTitle: "Who worked? How many hours?",
+      thName: "Name",
+      thHours: "Hours",
+      thYerDough: "Yer Dough",
+      bypassBtn: "OR<br> Skip to TipOut",
+      finishBtn: "Finish and Calculate",
+      printBtn: "Print",
+      clearBtn: "Clear All",
+      managerDoor: "Manager",
+      warningWait: "WAIT!",
+      warningStooge: "Don't be a Stooge!",
+      warningPress: "Press here to",
+      warningTip: "tip your fellow coworkers!",
+      textOr: "OR",
+      textTheEnd: "THE END",
+      cwSalesHeader: "Enter Sales",
+      cwPercentHeader: "Enter %",
+      cwTipOutHeader: "TipOut",
+      kitchenPlaceholder: "Kitchen $",
+      bartenderPlaceholder: "Bartender $",
+      hostessPlaceholder: "Hostess $",
+      runnerPlaceholder: "Runner $",
+      finalFinishBtn: "All Staff Tipped!"
+    },
+    fr: {
+      backHome: "←Retour",
+      thankYouNote: "Merci pour votre travail acharné",
+      restaurantGods1: "les dieux",
+      restaurantGods2: "du restaurant",
+      restaurantGods3: "sont apaisés",
+      tipJarTitle: "POT À POURBOIRE",
+      tipInputPlaceholder: "123,00 $",
+      submitBtn: "Soumettre",
+      tableHeaderTitle: "Qui a travaillé ? Combien d'heures ?",
+      thName: "Nom",
+      thHours: "Heures",
+      thYerDough: "Votre magot",
+      bypassBtn: "OU<br> Passer au TipOut",
+      finishBtn: "Terminer et calculer",
+      printBtn: "Imprimer",
+      clearBtn: "Tout effacer",
+      managerDoor: "Gérant",
+      warningWait: "ATTENDEZ !",
+      warningStooge: "Ne soyez pas naïf !",
+      warningPress: "Appuyez ici pour",
+      warningTip: "donner un pourboire à vos collègues !",
+      textOr: "OU",
+      textTheEnd: "LA FIN",
+      cwSalesHeader: "Entrer les ventes",
+      cwPercentHeader: "Entrer %",
+      cwTipOutHeader: "TipOut",
+      kitchenPlaceholder: "Cuisine $",
+      bartenderPlaceholder: "Barman $",
+      hostessPlaceholder: "Hôte(sse) $",
+      runnerPlaceholder: "Runner $",
+      finalFinishBtn: "Tout le personnel a reçu son pourboire !"
+    },
+    es: {
+      backHome: "←Volver",
+      thankYouNote: "Gracias por tu gran esfuerzo",
+      restaurantGods1: "los dioses",
+      restaurantGods2: "del restaurante",
+      restaurantGods3: "están apaciguados",
+      tipJarTitle: "TARRO DE PROPINAS",
+      tipInputPlaceholder: "$123.00",
+      submitBtn: "Enviar",
+      tableHeaderTitle: "¿Quién trabajó? ¿Cuántas horas?",
+      thName: "Nombre",
+      thHours: "Horas",
+      thYerDough: "Tu Dinero",
+      bypassBtn: "O<br> Saltar a TipOut",
+      finishBtn: "Terminar y Calcular",
+      printBtn: "Imprimir",
+      clearBtn: "Borrar Todo",
+      managerDoor: "Gerente",
+      warningWait: "¡ESPERA!",
+      warningStooge: "¡No seas tonto!",
+      warningPress: "¡Presiona aquí para",
+      warningTip: "dar propina a tus compañeros!",
+      textOr: "O",
+      textTheEnd: "EL FIN",
+      cwSalesHeader: "Ingresar Ventas",
+      cwPercentHeader: "Ingresar %",
+      cwTipOutHeader: "TipOut",
+      kitchenPlaceholder: "Cocina $",
+      bartenderPlaceholder: "Bartender $",
+      hostessPlaceholder: "Anfitriona $",
+      runnerPlaceholder: "Runner $",
+      finalFinishBtn: "¡Todo el personal propinado!"
+    }
+  };
+
+  function setLanguage(lang) {
+    localStorage.setItem('preferredLang', lang);
+    applyLanguage(lang);
+  }
+
+  function applyLanguage(lang) {
+    document.querySelectorAll('[data-translate]').forEach(el => {
+      const key = el.getAttribute('data-translate');
+      if (translations[lang] && translations[lang][key]) {
+        el.innerHTML = translations[lang][key];
+      }
+    });
+    document.querySelectorAll('[data-translate-placeholder]').forEach(el => {
+      const key = el.getAttribute('data-translate-placeholder');
+      if (translations[lang] && translations[lang][key]) {
+        el.placeholder = translations[lang][key];
+      }
+    });
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('preferredLang') || 'en';
+    applyLanguage(savedLang);
+  });
+</script>
 
 <script>
 // --- MUST BE AT THE VERY TOP ---

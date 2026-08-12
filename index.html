@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Waiter World</title>
     
-    <!-- Google tag (gtag.js) - Paste your script right here -->
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-K19DK3BH20"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -134,12 +134,13 @@
         <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0-2-.9-2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/>
       </svg>
     </a>
+
     <!-- Language Switcher Pill in Top Right -->
-<div id="language-switcher" style="position: fixed; top: 1.5rem; right: 1.5rem; display: flex; align-items: center; gap: 0.25rem; background: #2c4a6f; padding: 0.3rem 0.6rem; border-radius: 9999rem; box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2); z-index: 1000; border: 1px solid #d4b886;">
-  <button onclick="setLanguage('en')" title="English" style="background: none; border: none; color: #f4eee1; cursor: pointer; font-size: 0.85rem; font-weight: bold; padding: 0.2rem 0.4rem; border-radius: 9999rem; transition: transform 0.2s ease;">EN</button>
-  <button onclick="setLanguage('fr')" title="Français (Québec)" style="background: none; border: none; cursor: pointer; font-size: 1.1rem; padding: 0.2rem 0.4rem; border-radius: 9999rem; transition: transform 0.2s ease; display: inline-flex; align-items: center; justify-content: center; width: 1.5rem; height: 1.5rem; background-color: #003366; color: #ffffff; border-radius: 50%;">⚜️</button>
-  <button onclick="setLanguage('es')" title="Español (México)" style="background: none; border: none; color: #f4eee1; cursor: pointer; font-size: 1.1rem; padding: 0.2rem 0.4rem; border-radius: 9999rem; transition: transform 0.2s ease;">🇲🇽</button>
-</div>
+    <div id="language-switcher" style="position: fixed; top: 1.5rem; right: 1.5rem; display: flex; align-items: center; gap: 0.25rem; background: #2c4a6f; padding: 0.3rem 0.6rem; border-radius: 9999rem; box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2); z-index: 1000; border: 1px solid #d4b886;">
+      <button onclick="setLanguage('en')" title="English" style="background: none; border: none; color: #f4eee1; cursor: pointer; font-size: 0.85rem; font-weight: bold; padding: 0.2rem 0.4rem; border-radius: 9999rem; transition: transform 0.2s ease;">EN</button>
+      <button onclick="setLanguage('fr')" title="Français (Québec)" style="background: none; border: none; cursor: pointer; font-size: 1.1rem; padding: 0.2rem 0.4rem; border-radius: 9999rem; transition: transform 0.2s ease; display: inline-flex; align-items: center; justify-content: center; width: 1.5rem; height: 1.5rem; background-color: #003366; color: #ffffff; border-radius: 50%;">⚜️</button>
+      <button onclick="setLanguage('es')" title="Español (México)" style="background: none; border: none; color: #f4eee1; cursor: pointer; font-size: 1.1rem; padding: 0.2rem 0.4rem; border-radius: 9999rem; transition: transform 0.2s ease;">🇲🇽</button>
+    </div>
     
     <div class="header-container">
         <h1 class="arched-title">
@@ -148,54 +149,92 @@
         </h1>
     </div>
     <div>
-        <h2 style="text-align: center;">Two Apps. Same Functionality.</h2>
-        <h2 style="text-align: center;">Choose Your Mood</h2>
+        <h2 data-translate="subtitle1" style="text-align: center;">Two Apps. Same Functionality.</h2>
+        <h2 data-translate="subtitle2" style="text-align: center;">Choose Your Mood</h2>
     </div>
     <div class="main-content">
         <!-- Classic Card -->
-<div class="card">
-    <a href="waiter.html" style="text-decoration: none; color: #333; display: flex; flex-direction: column; align-items: center; gap: 1rem;">
-        <img src="icon-classic.png" alt="Classic" style="width: 6rem; height: 6rem;">
-        <h3 style="margin: 0;">Classic</h3>
-    </a>
-    <a href="waiter.html" class="launch-btn">Launch</a>
-    <a href="waiter-world.zip" download="waiter-world.zip" style="color: #666; font-size: 0.8rem; text-decoration: underline; background: none; border: none; cursor: pointer; text-align: center; margin-top: 0.5rem;">OR<br>Download</a>
-</div>
+        <div class="card">
+            <a href="waiter.html" style="text-decoration: none; color: #333; display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+                <img src="icon-classic.png" alt="Classic" style="width: 6rem; height: 6rem;">
+                <h3 data-translate="classicTitle" style="margin: 0;">Classic</h3>
+            </a>
+            <a href="waiter.html" data-translate="classicLaunch" class="launch-btn">Launch</a>
+            <a href="waiter-world.zip" download="waiter-world.zip" data-translate="downloadText" style="color: #666; font-size: 0.8rem; text-decoration: underline; background: none; border: none; cursor: pointer; text-align: center; margin-top: 0.5rem;">OR<br>Download</a>
+        </div>
 
         <!-- Iconoclast Card -->
-<div class="card">
-    <a href="app.html" style="text-decoration: none; color: #333; display: flex; flex-direction: column; align-items: center; gap: 1rem;">
-        <img src="icon-512.png" alt="Iconoclast" style="width: 6rem; height: 6rem;">
-        <h3 style="margin: 0;">Iconoclastic</h3>
-    </a>
-    <a href="app.html" class="launch-btn">Launch</a>
-    <a href="waiter-world.zip" download="waiter-world.zip" style="color: #666; font-size: 0.8rem; text-decoration: underline; background: none; border: none; cursor: pointer; text-align: center; margin-top: 0.5rem;">OR<br>Download</a>
-</div>
+        <div class="card">
+            <a href="app.html" style="text-decoration: none; color: #333; display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+                <img src="icon-512.png" alt="Iconoclast" style="width: 6rem; height: 6rem;">
+                <h3 data-translate="iconoclastTitle" style="margin: 0;">Iconoclastic</h3>
+            </a>
+            <a href="app.html" data-translate="iconoclastLaunch" class="launch-btn">Launch</a>
+            <a href="waiter-world.zip" download="waiter-world.zip" data-translate="downloadText" style="color: #666; font-size: 0.8rem; text-decoration: underline; background: none; border: none; cursor: pointer; text-align: center; margin-top: 0.5rem;">OR<br>Download</a>
+        </div>
     </div>
 
     <footer>
-        © 2026 Waiter World. All rights reserved.
+        <span data-translate="footerText">© 2026 Waiter World. All rights reserved.</span>
     </footer>
-<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "f3bae60bc3da4e11b35bd3f850f97d3b"}'></script><!-- End Cloudflare Web Analytics -->  
-<script>
-  function setLanguage(lang) {
-    localStorage.setItem('preferredLang', lang);
-    applyLanguage(lang);
-  }
 
-  function applyLanguage(lang) {
-    document.querySelectorAll('[data-translate]').forEach(el => {
-      const key = el.getAttribute('data-translate');
-      if (typeof translations !== 'undefined' && translations[lang] && translations[lang][key]) {
-        el.innerText = translations[lang][key];
+    <!-- Cloudflare Web Analytics -->
+    <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "f3bae60bc3da4e11b35bd3f850f97d3b"}'></script>
+    
+    <!-- Translation Dictionary and Script -->
+    <script>
+      const translations = {
+        en: {
+          subtitle1: "Two Apps. Same Functionality.",
+          subtitle2: "Choose Your Mood",
+          classicTitle: "Classic",
+          classicLaunch: "Launch",
+          downloadText: "OR<br>Download",
+          iconoclastTitle: "Iconoclastic",
+          iconoclastLaunch: "Launch",
+          footerText: "© 2026 Waiter World. All rights reserved."
+        },
+        fr: {
+          subtitle1: "Deux applications. Même fonctionnalité.",
+          subtitle2: "Choisissez votre style",
+          classicTitle: "Classique",
+          classicLaunch: "Lancer",
+          downloadText: "OU<br>Télécharger",
+          iconoclastTitle: "Iconoclaste",
+          iconoclastLaunch: "Lancer",
+          footerText: "© 2026 Waiter World. Tous droits réservés."
+        },
+        es: {
+          subtitle1: "Dos aplicaciones. Misma funcionalidad.",
+          subtitle2: "Elige tu estilo",
+          classicTitle: "Clásico",
+          classicLaunch: "Iniciar",
+          downloadText: "O<br>Descargar",
+          iconoclastTitle: "Iconoclasta",
+          iconoclastLaunch: "Iniciar",
+          footerText: "© 2026 Waiter World. Todos los derechos reservados."
+        }
+      };
+
+      function setLanguage(lang) {
+        localStorage.setItem('preferredLang', lang);
+        applyLanguage(lang);
       }
-    });
-  }
 
-  window.addEventListener('DOMContentLoaded', () => {
-    const savedLang = localStorage.getItem('preferredLang') || 'en';
-    applyLanguage(savedLang);
-  });
-</script>    
+      function applyLanguage(lang) {
+        document.querySelectorAll('[data-translate]').forEach(el => {
+          const key = el.getAttribute('data-translate');
+          if (translations[lang] && translations[lang][key]) {
+            // Use innerHTML so the <br> in the download text renders correctly
+            el.innerHTML = translations[lang][key];
+          }
+        });
+      }
+
+      window.addEventListener('DOMContentLoaded', () => {
+        const savedLang = localStorage.getItem('preferredLang') || 'en';
+        applyLanguage(savedLang);
+      });
+    </script>
 </body>
 </html>

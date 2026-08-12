@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manager Inventory</title>
+    <title data-translate="pageTitle">Manager Inventory</title>
     <style>
         body { font-family: sans-serif; margin: 0; padding: 1.5rem; background: #f4f4f4; }
         .no-print { margin-bottom: 1.5rem; display: flex; gap: 0.8rem; }
         
         button { padding: 0.8rem 1.6rem; border: none; border-radius: 0.5rem; cursor: pointer; font-weight: bold; }
-        .exit-btn { position: fixed; top: 1.5rem; right: 1.5rem; background: #c0392b; color: white; box-shadow: 0 0.3rem 0.45rem rgba(0,0,0,0.3); z-index: 1000; }
+        .exit-btn { position: fixed; top: 1.5rem; right: 8.5rem; background: #c0392b; color: white; box-shadow: 0 0.3rem 0.45rem rgba(0,0,0,0.3); z-index: 1000; }
         
         .category-block { margin-bottom: 2rem; }
         .category-block h2 { color: white; padding: 0.8rem 1rem; margin: 0; }
@@ -25,50 +25,187 @@
         .item-name { width: 100%; min-width: 10rem; flex-grow: 1; }
         .small-input { width: 4rem; }
         @media print {
-            .no-print, button { display: none !important; }
+            .no-print, button, #language-switcher { display: none !important; }
             body { background: white !important; padding: 0 !important; }
         }
     </style>
 </head>
 <body>
 
-<button class="exit-btn no-print" onclick="window.location.href='manager_office.html'">✖ EXIT TO OFFICE</button>
+<!-- Language Switcher Pill in Top Right -->
+<div id="language-switcher" style="position: fixed; top: 1.5rem; right: 1.5rem; display: flex; align-items: center; gap: 0.25rem; background: #2c4a6f; padding: 0.3rem 0.6rem; border-radius: 9999rem; box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2); z-index: 1000; border: 1px solid #d4b886;">
+  <button onclick="setLanguage('en')" title="English" style="background: none; border: none; color: #f4eee1; cursor: pointer; font-size: 0.85rem; font-weight: bold; padding: 0.2rem 0.4rem; border-radius: 9999rem; transition: transform 0.2s ease;">EN</button>
+  <button onclick="setLanguage('fr')" title="Français (Québec)" style="background: none; border: none; cursor: pointer; font-size: 1.1rem; padding: 0.2rem 0.4rem; border-radius: 9999rem; transition: transform 0.2s ease; display: inline-flex; align-items: center; justify-content: center; width: 1.5rem; height: 1.5rem; background-color: #003366; color: #ffffff; border-radius: 50%;">⚜️</button>
+  <button onclick="setLanguage('es')" title="Español (México)" style="background: none; border: none; color: #f4eee1; cursor: pointer; font-size: 1.1rem; padding: 0.2rem 0.4rem; border-radius: 9999rem; transition: transform 0.2s ease;">🇲🇽</button>
+</div>
+
+<button class="exit-btn no-print" onclick="window.location.href='manager_office.html'" data-translate="exitBtn">✖ EXIT TO OFFICE</button>
 
 <div class="no-print">
-    <button onclick="window.print()" style="background: #2ecc71; color: white;">📄 Save to PDF / Print</button>
-    <button onclick="forwardToFootman()" style="background: #e67e22; color: white;">➡️ Forward to Footman</button>
-    <button onclick="clearCounts()" style="background: #95a5a6; color: white;">🧹 Clear Weekly Counts</button>
+    <button onclick="window.print()" style="background: #2ecc71; color: white;" data-translate="savePdfBtn">📄 Save to PDF / Print</button>
+    <button onclick="forwardToFootman()" style="background: #e67e22; color: white;" data-translate="forwardBtn">➡️ Forward to Footman</button>
+    <button onclick="clearCounts()" style="background: #95a5a6; color: white;" data-translate="clearBtn">🧹 Clear Weekly Counts</button>
 </div>
 
 <div id="inventory-page">
-    <h1>📊 Bar & Dry Storage Inventory</h1>
+    <h1 data-translate="mainHeader">📊 Bar & Dry Storage Inventory</h1>
 
-    <div class="category-block"><h2 style="background:#2c3e50;">🍺 Beer</h2><div id="beer-section"></div></div>
-    <div class="category-block"><h2 style="background:#722f37;">🍷 Wine</h2><div id="wine-sections"></div></div>
-    <div class="category-block"><h2 style="background:#6d4c41;">🥃 Hard Liquor</h2><div id="liquor-sub-sections"></div></div>
-    <div class="category-block"><h2 style="background:#8e44ad;">🍸 Liqueurs</h2><div id="liqueur-section"></div></div>
-    <div class="category-block"><h2 style="background:#27ae60;">🥤 Hard Sodas & Coolers</h2><div id="soda-section"></div></div>
-    <div class="category-block"><h2 style="background:#d35400;">📦 Dry Storage</h2><div id="dry-section"></div></div>
+    <div class="category-block"><h2 style="background:#2c3e50;" data-translate="catBeer">🍺 Beer</h2><div id="beer-section"></div></div>
+    <div class="category-block"><h2 style="background:#722f37;" data-translate="catWine">🍷 Wine</h2><div id="wine-sections"></div></div>
+    <div class="category-block"><h2 style="background:#6d4c41;" data-translate="catLiquor">🥃 Hard Liquor</h2><div id="liquor-sub-sections"></div></div>
+    <div class="category-block"><h2 style="background:#8e44ad;" data-translate="catLiqueurs">🍸 Liqueurs</h2><div id="liqueur-section"></div></div>
+    <div class="category-block"><h2 style="background:#27ae60;" data-translate="catSodas">🥤 Hard Sodas & Coolers</h2><div id="soda-section"></div></div>
+    <div class="category-block"><h2 style="background:#d35400;" data-translate="catDry">📦 Dry Storage</h2><div id="dry-section"></div></div>
 </div>
 
 <script>
-const wineTypes = ["Red Wine", "White Wine", "Rosé"];
-const liquorTypes = ["Canadian Whisky", "Scotch Whisky", "Irish Whiskey", "Bourbon", "Vodka", "Gin", "Rum", "Tequila"];
+const translations = {
+  en: {
+    pageTitle: "Manager Inventory",
+    exitBtn: "✖ EXIT TO OFFICE",
+    savePdfBtn: "📄 Save to PDF / Print",
+    forwardBtn: "➡️ Forward to Footman",
+    clearBtn: "🧹 Clear Weekly Counts",
+    mainHeader: "📊 Bar & Dry Storage Inventory",
+    catBeer: "🍺 Beer",
+    catWine: "🍷 Wine",
+    catLiquor: "🥃 Hard Liquor",
+    catLiqueurs: "🍸 Liqueurs",
+    catSodas: "🥤 Hard Sodas & Coolers",
+    catDry: "📦 Dry Storage",
+    thItem: "Item",
+    thPar: "Par",
+    thCount: "Count",
+    thOrder: "Order",
+    addBtnPrefix: "+ Add to ",
+    placeholderItem: "Item Name",
+    placeholderNum: "0",
+    orderListHeader: "📋 *INVENTORY ORDER LIST*\n",
+    orderCopiedAlert: "✅ Order List Copied!",
+    resetConfirm: "Reset counts?",
+    wineTypes: ["Red Wine", "White Wine", "Rosé"],
+    liquorTypes: ["Canadian Whisky", "Scotch Whisky", "Irish Whiskey", "Bourbon", "Vodka", "Gin", "Rum", "Tequila"],
+    categoryNames: {
+      "Beer": "Beer",
+      "Liqueurs": "Liqueurs",
+      "Hard Sodas": "Hard Sodas",
+      "Dry Storage": "Dry Storage"
+    }
+  },
+  fr: {
+    pageTitle: "Inventaire du gérant",
+    exitBtn: "✖ QUITTER VERS LE BUREAU",
+    savePdfBtn: "📄 Enregistrer en PDF / Imprimer",
+    forwardBtn: "➡️ Transférer au valet",
+    clearBtn: "🧹 Effacer les comptes hebdomadaires",
+    mainHeader: "📊 Inventaire du bar et de l'épicerie sèche",
+    catBeer: "🍺 Bière",
+    catWine: "🍷 Vin",
+    catLiquor: "🥃 Alcools forts",
+    catLiqueurs: "🍸 Liqueurs",
+    catSodas: "🥤 Sodas alcoolisés et panachés",
+    catDry: "📦 Épicerie sèche",
+    thItem: "Article",
+    thPar: "Stock idéal",
+    thCount: "Compte",
+    thOrder: "Commander",
+    addBtnPrefix: "+ Ajouter à ",
+    placeholderItem: "Nom de l'article",
+    placeholderNum: "0",
+    orderListHeader: "📋 *LISTE DE COMMANDE D'INVENTAIRE*\n",
+    orderCopiedAlert: "✅ Liste de commande copiée !",
+    resetConfirm: "Réinitialiser les comptes ?",
+    wineTypes: ["Vin rouge", "Vin blanc", "Rosé"],
+    liquorTypes: ["Whisky canadien", "Whisky écossais", "Whisky irlandais", "Bourbon", "Vodka", "Gin", "Rhum", "Tequila"],
+    categoryNames: {
+      "Beer": "Bière",
+      "Liqueurs": "Liqueurs",
+      "Hard Sodas": "Sodas alcoolisés",
+      "Dry Storage": "Épicerie sèche"
+    }
+  },
+  es: {
+    pageTitle: "Inventario del Gerente",
+    exitBtn: "✖ SALIR A LA OFICINA",
+    savePdfBtn: "📄 Guardar como PDF / Imprimir",
+    forwardBtn: "➡️ Enviar al Mozo",
+    clearBtn: "🧹 Borrar Conteo Semanal",
+    mainHeader: "📊 Inventario de Barra y Almacén Seco",
+    catBeer: "🍺 Cerveza",
+    catWine: "🍷 Vino",
+    catLiquor: "🥃 Licor Fuerte",
+    catLiqueurs: "🍸 Cremas y Licores",
+    catSodas: "🥤 Sodas Alcohólicas y Coolers",
+    catDry: "📦 Almacén Seco",
+    thItem: "Artículo",
+    thPar: "Par",
+    thCount: "Conteo",
+    thOrder: "Pedido",
+    addBtnPrefix: "+ Agregar a ",
+    placeholderItem: "Nombre del artículo",
+    placeholderNum: "0",
+    orderListHeader: "📋 *LISTA DE PEDIDOS DE INVENTARIO*\n",
+    orderCopiedAlert: "✅ ¡Lista de pedidos copiada!",
+    resetConfirm: "¿Restablecer conteos?",
+    wineTypes: ["Vino Tinto", "Vino Blanco", "Rosado"],
+    liquorTypes: ["Whisky Canadiense", "Whisky Escocés", "Whisky Irlandés", "Bourbon", "Vodka", "Ginebra", "Ron", "Tequila"],
+    categoryNames: {
+      "Beer": "Cerveza",
+      "Liqueurs": "Licores",
+      "Hard Sodas": "Sodas Alcohólicas",
+      "Dry Storage": "Almacén Seco"
+    }
+  }
+};
+
+function getCurrentLang() {
+  return localStorage.getItem('preferredLang') || 'en';
+}
+
+function getTranslatedName(name) {
+  const lang = getCurrentLang();
+  const t = translations[lang];
+  
+  // Check wine types
+  const defaultWines = ["Red Wine", "White Wine", "Rosé"];
+  const wineIdx = defaultWines.indexOf(name);
+  if (wineIdx !== -1) return t.wineTypes[wineIdx];
+
+  // Check liquor types
+  const defaultLiquors = ["Canadian Whisky", "Scotch Whisky", "Irish Whiskey", "Bourbon", "Vodka", "Gin", "Rum", "Tequila"];
+  const liquorIdx = defaultLiquors.indexOf(name);
+  if (liquorIdx !== -1) return t.liquorTypes[liquorIdx];
+
+  // Check generic category names
+  if (t.categoryNames && t.categoryNames[name]) {
+    return t.categoryNames[name];
+  }
+
+  return name;
+}
 
 function createTableHtml(name) {
     const safeId = "table-" + name.toLowerCase().replace(/ /g, "-");
+    const lang = getCurrentLang();
+    const t = translations[lang];
+    const translatedName = getTranslatedName(name);
+
     return `
-        <div style="background:white; padding:0.8rem; border-radius:0.5rem; border:0.05rem solid #ddd; margin-bottom:0.8rem;">
-            <h4 style="margin:0 0 0.8rem 0;">${name}</h4>
+        <div style="background:white; padding:0.8rem; border-radius:0.5rem; border:0.05rem solid #ddd; margin-bottom:0.8rem;" data-base-name="${name}">
+            <h4 style="margin:0 0 0.8rem 0;" class="table-title">${translatedName}</h4>
             <table id="${safeId}">
                 <thead>
                     <tr style="font-size:0.8rem; background:#f8f9fa;">
-                        <th style="width:50%;">Item</th><th>Par</th><th>Count</th><th>Order</th><th></th>
+                        <th style="width:50%;" data-translate="thItem">${t.thItem}</th>
+                        <th data-translate="thPar">${t.thPar}</th>
+                        <th data-translate="thCount">${t.thCount}</th>
+                        <th data-translate="thOrder">${t.thOrder}</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody></tbody>
             </table>
-            <button onclick="addRow('${safeId}')" style="width:100%; background:#3498db; color:white;">+ Add to ${name}</button>
+            <button onclick="addRow('${safeId}')" style="width:100%; background:#3498db; color:white;" class="add-row-btn" data-base-name="${name}">${t.addBtnPrefix}${translatedName}</button>
         </div>
     `;
 }
@@ -77,10 +214,13 @@ function addRow(tableId) {
     var table = document.getElementById(tableId);
     var tbody = table.getElementsByTagName('tbody')[0];
     var newRow = tbody.insertRow(-1);
+    const lang = getCurrentLang();
+    const t = translations[lang];
+
     newRow.innerHTML = `
-        <td><input type="text" placeholder="Item Name" class="item-name"></td>
-        <td><input type="number" placeholder="0" class="item-par small-input"></td>
-        <td><input type="number" placeholder="0" class="item-count small-input"></td>
+        <td><input type="text" placeholder="${t.placeholderItem}" class="item-name"></td>
+        <td><input type="number" placeholder="${t.placeholderNum}" class="item-par small-input"></td>
+        <td><input type="number" placeholder="${t.placeholderNum}" class="item-count small-input"></td>
         <td><span class="item-order" style="font-weight:bold; color:#27ae60;">0</span></td>
         <td><button onclick="this.parentElement.parentElement.remove(); saveInventory();" style="color:red; background:none; cursor:pointer;">X</button></td>
     `;
@@ -94,23 +234,38 @@ function calculateOrder(row) {
 }
 
 function setupInventory() {
-    document.getElementById('wine-sections').innerHTML = wineTypes.map(createTableHtml).join('');
-    document.getElementById('liquor-sub-sections').innerHTML = liquorTypes.map(createTableHtml).join('');
+    const lang = getCurrentLang();
+    const t = translations[lang];
+
+    document.getElementById('wine-sections').innerHTML = t.wineTypes.map(name => createTableHtml(t.wineTypes[t.wineTypes.indexOf(name)] == name ? wineOriginalName(name) : name)).join('');
+    document.getElementById('liquor-sub-sections').innerHTML = t.liquorTypes.map(name => createTableHtml(t.liquorTypes[t.liquorTypes.indexOf(name)] == name ? liquorOriginalName(name) : name)).join('');
     document.getElementById('beer-section').innerHTML = createTableHtml('Beer');
     document.getElementById('liqueur-section').innerHTML = createTableHtml('Liqueurs');
     document.getElementById('soda-section').innerHTML = createTableHtml('Hard Sodas');
     document.getElementById('dry-section').innerHTML = createTableHtml('Dry Storage');
-    // Removed the automatic addRow() here
+}
+
+// Helpers to map translated titles back to original keys for generation
+function wineOriginalName(translated) {
+    const idx = translations[getCurrentLang()].wineTypes.indexOf(translated);
+    return ["Red Wine", "White Wine", "Rosé"][idx !== -1 ? idx : 0];
+}
+
+function liquorOriginalName(translated) {
+    const idx = translations[getCurrentLang()].liquorTypes.indexOf(translated);
+    return ["Canadian Whisky", "Scotch Whisky", "Irish Whiskey", "Bourbon", "Vodka", "Gin", "Rum", "Tequila"][idx !== -1 ? idx : 0];
 }
 
 function forwardToFootman() {
-    let message = "📋 *INVENTORY ORDER LIST*\n";
+    const lang = getCurrentLang();
+    const t = translations[lang];
+    let message = t.orderListHeader;
     document.querySelectorAll('tbody tr').forEach(row => {
         const name = row.querySelector('.item-name').value;
         const amt = parseFloat(row.querySelector('.item-order').innerText);
         if (name && amt > 0) message += `• ${name}: ${amt}\n`;
     });
-    navigator.clipboard.writeText(message).then(() => alert("✅ Order List Copied!"));
+    navigator.clipboard.writeText(message).then(() => alert(t.orderCopiedAlert));
 }
 
 function saveInventory() {
@@ -124,10 +279,32 @@ function saveInventory() {
 }
 
 window.onload = () => {
+    initPage();
+};
+
+function initPage() {
+    const lang = getCurrentLang();
+    
+    // Save current user-entered input values before re-rendering structure
+    let currentInputs = {};
+    document.querySelectorAll('tbody tr').forEach((row, idx) => {
+        const tableId = row.closest('table').id;
+        if (!currentInputs[tableId]) currentInputs[tableId] = [];
+        currentInputs[tableId].push({
+            name: row.querySelector('.item-name').value,
+            par: row.querySelector('.item-par').value,
+            count: row.querySelector('.item-count').value
+        });
+    });
+
     setupInventory();
+    applyLanguage(lang);
+
     const saved = JSON.parse(localStorage.getItem('managerInventory') || "[]");
     
     if (saved.length > 0) {
+        // Clear default empty rows first
+        document.querySelectorAll('tbody').forEach(tb => tb.innerHTML = '');
         saved.forEach(item => {
             const table = document.getElementById(item.tableId);
             if (table) {
@@ -142,14 +319,61 @@ window.onload = () => {
     } else {
         document.querySelectorAll('table').forEach(t => addRow(t.id));
     }
-};
+}
 
 function clearCounts() {
-    if (confirm("Reset counts?")) {
+    const lang = getCurrentLang();
+    const t = translations[lang];
+    if (confirm(t.resetConfirm)) {
         document.querySelectorAll('.item-count').forEach(i => i.value = "");
         document.querySelectorAll('tbody tr').forEach(calculateOrder);
         saveInventory();
     }
+}
+
+function setLanguage(lang) {
+    localStorage.setItem('preferredLang', lang);
+    initPage();
+}
+
+function applyLanguage(lang) {
+    const t = translations[lang];
+    if (!t) return;
+
+    // Translate static elements with data-translate
+    document.querySelectorAll('[data-translate]').forEach(el => {
+        const key = el.getAttribute('data-translate');
+        if (t[key]) {
+            el.innerText = t[key];
+        }
+    });
+
+    // Translate document title
+    document.title = t.pageTitle;
+
+    // Update dynamic block headers & table titles/buttons based on data-base-name
+    document.querySelectorAll('.category-block').forEach(block => {
+        const h2 = block.querySelector('h2');
+        if (h2) {
+            const text = h2.innerText;
+            // Map back or match keys
+            if (text.includes("Beer") || text.includes("Bière") || text.includes("Cerveza")) h2.innerText = t.catBeer;
+            if (text.includes("Wine") || text.includes("Vin") || text.includes("Vino")) h2.innerText = t.catWine;
+            if (text.includes("Hard Liquor") || text.includes("Alcools") || text.includes("Licor")) h2.innerText = t.catLiquor;
+            if (text.includes("Liqueurs")) h2.innerText = t.catLiqueurs;
+            if (text.includes("Hard Sodas") || text.includes("Sodas") || text.includes("Coolers")) h2.innerText = t.catSodas;
+            if (text.includes("Dry Storage") || text.includes("Épicerie") || text.includes("Almacén")) h2.innerText = t.catDry;
+        }
+    });
+
+    document.querySelectorAll('[data-base-name]').forEach(wrapper => {
+        const baseName = wrapper.getAttribute('data-base-name');
+        const translated = getTranslatedName(baseName);
+        const titleEl = wrapper.querySelector('.table-title');
+        const btnEl = wrapper.querySelector('.add-row-btn');
+        if (titleEl) titleEl.innerText = translated;
+        if (btnEl) btnEl.innerText = t.addBtnPrefix + translated;
+    });
 }
 </script>
 </body>

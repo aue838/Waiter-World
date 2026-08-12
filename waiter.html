@@ -71,37 +71,44 @@
 </head>
 <body>
 <div id="bloodOverlay"></div>
+
+<!-- Language Switcher Pill in Top Right -->
+<div id="language-switcher" style="position: fixed; top: 1.5rem; right: 1.5rem; display: flex; align-items: center; gap: 0.25rem; background: #2c4a6f; padding: 0.3rem 0.6rem; border-radius: 9999rem; box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2); z-index: 1000; border: 1px solid #d4b886;">
+  <button onclick="setLanguage('en')" title="English" style="background: none; border: none; color: #f4eee1; cursor: pointer; font-size: 0.85rem; font-weight: bold; padding: 0.2rem 0.4rem; border-radius: 9999rem; transition: transform 0.2s ease;">EN</button>
+  <button onclick="setLanguage('fr')" title="Français (Québec)" style="background: none; border: none; cursor: pointer; font-size: 1.1rem; padding: 0.2rem 0.4rem; border-radius: 9999rem; transition: transform 0.2s ease; display: inline-flex; align-items: center; justify-content: center; width: 1.5rem; height: 1.5rem; background-color: #003366; color: #ffffff; border-radius: 50%;">⚜️</button>
+  <button onclick="setLanguage('es')" title="Español (México)" style="background: none; border: none; color: #f4eee1; cursor: pointer; font-size: 1.1rem; padding: 0.2rem 0.4rem; border-radius: 9999rem; transition: transform 0.2s ease;">🇲🇽</button>
+</div>
+
 <div class="container">
     <h1>fairNsquare</h1>
     
     <div id="instructionBox" class="mascot-box">
         <span class="mascot-emoji">🤡👉</span> 
-        <span>Enter Total Tips First! Then proceed to fill out the table</span>
+        <span data-translate="instructionText">Enter Total Tips First! Then proceed to fill out the table</span>
     </div>
 
     <table class="header-table">
         <tr>
-            <th><input type="number" id="firstNumber" placeholder="Total Tips" oninput="ClassicApp.calculateHourlyWage()" /><br><small>Total Tips</small></th>
+            <th><input type="number" id="firstNumber" placeholder="Total Tips" oninput="ClassicApp.calculateHourlyWage()" /><br><small data-translate="totalTipsLabel">Total Tips</small></th>
             <th onmouseover="showHint()" onmouseout="hideHint()">
                 <input type="number" id="secondNumber" placeholder="Total Hrs" oninput="ClassicApp.calculateHourlyWage()" /><br>
-                <small>Total Hrs of<br>All Workers</small>
-                <div id="hourHint" class="hint-text">🤡👉 Enter combined total hours of all employees!<br>(e.g. Olivia=4, Jeff=6, Grace=7; 4+6+7=17 total)</div>
+                <small data-translate="totalHrsLabel">Total Hrs of<br>All Workers</small>
+                <div id="hourHint" class="hint-text"><span data-translate="hintMain">🤡👉 Enter combined total hours of all employees!</span><br><span data-translate="hintExample">(e.g. Olivia=4, Jeff=6, Grace=7; 4+6+7=17 total)</span></div>
             </th>
-            <th><input type="text" id="hourlyWage" placeholder="Wage" readonly /><br><small>Hourly Wage</small></th>
+            <th><input type="text" id="hourlyWage" placeholder="Wage" readonly /><br><small data-translate="hourlyWageLabel">Hourly Wage</small></th>
         </tr>
     </table>
 
     <div id="warningContainer">
-        <div id="hourWarning">TOO MANY HOURS!</div>
+        <div id="hourWarning" data-translate="warningText">TOO MANY HOURS!</div>
         <table id="employeeTable">
-            <tr><th>Name</th><th>Hours</th><th>Take</th></tr>
+            <tr><th data-translate="thName">Name</th><th data-translate="thHours">Hours</th><th data-translate="thTake">Take</th></tr>
             <script>
                 for(let i = 1; i <= 8; i++) {
                     document.write(`<tr>
                         <td><input type="text" id="employee${i}" /></td>
                         <td><input type="number" id="hours${i}" oninput="ClassicApp.updateTake(${i})" /></td>
                         <td><input type="text" id="take${i}" readonly /></td>
-                        
                     </tr>`);
                 }
             </script>
@@ -109,13 +116,14 @@
     </div>
 
     <table id="tipOutTable">
-        <tr><th>Role</th><th>Sales</th><th>%</th><th>TipOut</th></tr>
+        <tr><th data-translate="thRole">Role</th><th data-translate="thSales">Sales</th><th>%</th><th data-translate="thTipOut">TipOut</th></tr>
         <script>
             const roles = ['Kitchen', 'Bartender', 'Hostess', 'Runner'];
             roles.forEach(role => {
                 let r = role.toLowerCase();
+                let translateKey = 'role' + role;
                 document.write(`<tr>
-                    <td>${role}</td>
+                    <td data-translate="${translateKey}">${role}</td>
                     <td><input type="number" id="sales_${r}" oninput="ClassicApp.calculateTipOut('${r}')" /></td>
                     <td><input type="number" id="tip_${r}" oninput="ClassicApp.calculateTipOut('${r}')" /></td>
                     <td><input type="text" id="tipout_${r}" readonly /></td>
@@ -125,12 +133,97 @@
     </table>
 
     <footer>
-        <a href="index.html" class="back-link">← Back to Waiter World</a>
-        <p>Lrn<span class="trademark-e">E</span>© 2026. All rights reserved.</p>
+        <a href="index.html" class="back-link" data-translate="backLink">← Back to Waiter World</a>
+        <p>Lrn<span class="trademark-e">E</span><span data-translate="footerText">© 2026. All rights reserved.</span></p>
     </footer>
 </div>
 
 <script>
+  const translations = {
+    en: {
+      instructionText: "Enter Total Tips First! Then proceed to fill out the table",
+      totalTipsLabel: "Total Tips",
+      totalHrsLabel: "Total Hrs of<br>All Workers",
+      hintMain: "🤡👉 Enter combined total hours of all employees!",
+      hintExample: "(e.g. Olivia=4, Jeff=6, Grace=7; 4+6+7=17 total)",
+      hourlyWageLabel: "Hourly Wage",
+      warningText: "TOO MANY HOURS!",
+      thName: "Name",
+      thHours: "Hours",
+      thTake: "Take",
+      thRole: "Role",
+      thSales: "Sales",
+      thTipOut: "TipOut",
+      roleKitchen: "Kitchen",
+      roleBartender: "Bartender",
+      roleHostess: "Hostess",
+      roleRunner: "Runner",
+      backLink: "← Back to Waiter World",
+      footerText: "© 2026. All rights reserved."
+    },
+    fr: {
+      instructionText: "Entrez d'abord le total des pourboires ! Ensuite, remplissez le tableau.",
+      totalTipsLabel: "Total pourboires",
+      totalHrsLabel: "Total d'heures<br>de tous les employés",
+      hintMain: "🤡👉 Entrez le total combiné des heures de tous les employés !",
+      hintExample: "(ex. Olivia=4, Jeff=6, Grace=7 ; 4+6+7=17 au total)",
+      hourlyWageLabel: "Salaire horaire",
+      warningText: "TROP D'HEURES !",
+      thName: "Nom",
+      thHours: "Heures",
+      thTake: "Montant",
+      thRole: "Rôle",
+      thSales: "Ventes",
+      thTipOut: "Remise (TipOut)",
+      roleKitchen: "Cuisine",
+      roleBartender: "Barman",
+      roleHostess: "Hôte(sse)",
+      roleRunner: "Runner",
+      backLink: "← Retour à Waiter World",
+      footerText: "© 2026. Tous droits réservés."
+    },
+    es: {
+      instructionText: "¡Ingresa las propinas totales primero! Luego procede a llenar la tabla",
+      totalTipsLabel: "Propinas Totales",
+      totalHrsLabel: "Horas totales de<br>todos los trabajadores",
+      hintMain: "🤡👉 ¡Ingresa las horas totales combinadas de todos los empleados!",
+      hintExample: "(ej. Olivia=4, Jeff=6, Grace=7; 4+6+7=17 total)",
+      hourlyWageLabel: "Salario por hora",
+      warningText: "¡DEMASIADAS HORAS!",
+      thName: "Nombre",
+      thHours: "Horas",
+      thTake: "Llevar",
+      thRole: "Rol",
+      thSales: "Ventas",
+      thTipOut: "TipOut",
+      roleKitchen: "Cocina",
+      roleBartender: "Bartender",
+      roleHostess: "Anfitriona",
+      roleRunner: "Corredor",
+      backLink: "← Volver a Waiter World",
+      footerText: "© 2026. Todos los derechos reservados."
+    }
+  };
+
+  function setLanguage(lang) {
+    localStorage.setItem('preferredLang', lang);
+    applyLanguage(lang);
+  }
+
+  function applyLanguage(lang) {
+    document.querySelectorAll('[data-translate]').forEach(el => {
+      const key = el.getAttribute('data-translate');
+      if (translations[lang] && translations[lang][key]) {
+        el.innerHTML = translations[lang][key];
+      }
+    });
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('preferredLang') || 'en';
+    applyLanguage(savedLang);
+  });
+
 var ClassicApp = {
     timers: {},
     init: function() {
@@ -192,5 +285,4 @@ function hideHint() { document.getElementById('hourHint').style.display = 'none'
 
 </body>
 </html>
-
 

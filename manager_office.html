@@ -225,126 +225,133 @@ body.modal-open {
  <audio id="scream-audio" src="cry.mp3"></audio>
   <div id="entrance-overlay"></div>
   <canvas id="three-canvas"></canvas>
-         
+    
+ <div class="language-selector-container" style="position: fixed; top: 1.5rem; right: 1.5rem; z-index: 10000;">
+    <select id="languageSelect" onchange="switchLanguage(this.value)" style="padding: 0.5rem 1rem; background: rgba(44, 62, 80, 0.9); color: #ecf0f1; border: 0.1rem solid #7f8c8d; border-radius: 1.5rem; cursor: pointer; font-size: 0.85rem; backdrop-filter: blur(0.3rem);">
+        <option value="en">English</option>
+        <option value="fr">Français (QC)</option>
+        <option value="es">Español (MX)</option>
+    </select>
+</div>        
 
 <div class="exit-sign-container">
-    <a href="app.html" class="btn-back">Back to Tip Jar</a>
+    <a href="app.html" class="btn-back" data-i18n="back_tip_jar">Back to Tip Jar</a>
 </div>
 
 <div id="resourcesModal" class="skeleton-modal">
-    <button class="close-skeleton" onclick="closeResourcesModal()">&times; EXIT</button>
+    <button class="close-skeleton" onclick="closeResourcesModal()">&times; <span data-i18n="exit_caps">EXIT</span></button>
     
     <div id="graveyardContainer"></div>
 </div>
 
 <div id="cabinet-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:30000; color:white; overflow-y:auto;">
     <div style="max-width:30rem; margin:5rem auto; padding:2rem; background:#2c3e50; border: 0.2rem solid #34495e; border-radius:1rem;">
-        <h2 style="text-align:center;">📁 COMPANY RESOURCES</h2>
+        <h2 style="text-align:center;" data-i18n="company_resources_title">📁 COMPANY RESOURCES</h2>
             
         <div style="background:#34495e; padding:1rem; border-radius:0.6rem; margin-bottom:0.8rem;">
-            <h3 style="margin-top:0;">📘 Employee Handbook</h3>
+            <h3 style="margin-top:0;" data-i18n="employee_handbook_title">📘 Employee Handbook</h3>
             <div style="display:flex; gap:0.5rem;">
-                <input type="text" id="link-handbook" placeholder="Paste link..." style="flex:1; padding:0.5rem;">
-                <button onclick="saveLink('handbook')" style="background:#27ae60; color:white; border:none; padding:0.4rem 0.8rem; cursor:pointer;">Save</button>
-                <button onclick="viewLink('handbook')" style="background:#2980b9; color:white; border:none; padding:0.4rem 0.8rem; cursor:pointer;">VIEW</button>
+                <input type="text" id="link-handbook" data-i18n-placeholder="paste_link_placeholder" placeholder="Paste link..." style="flex:1; padding:0.5rem;">
+                <button onclick="saveLink('handbook')" style="background:#27ae60; color:white; border:none; padding:0.4rem 0.8rem; cursor:pointer;" data-i18n="save_btn">Save</button>
+                <button onclick="viewLink('handbook')" style="background:#2980b9; color:white; border:none; padding:0.4rem 0.8rem; cursor:pointer;" data-i18n="view_btn">VIEW</button>
             </div>
         </div>
         
-     <button onclick="document.getElementById('cabinet-modal').style.display='none'" style="width:100%; margin-top:0.8rem; background:#95a5a6; padding:0.8rem;">CLOSE CABINET</button>
+     <button onclick="document.getElementById('cabinet-modal').style.display='none'" style="width:100%; margin-top:0.8rem; background:#95a5a6; padding:0.8rem;" data-i18n="close_cabinet_btn">CLOSE CABINET</button>
     </div>
 </div>
 
 <div id="todo-modal" onmousedown="event.stopPropagation()" onclick="event.stopPropagation()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:99999; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
     <div style="max-width:28rem; margin:4rem auto; background:#fff; border-radius:1rem; overflow:hidden; box-shadow: 0 1.5rem 3rem rgba(0,0,0,0.5); border: 0.3rem solid #c0392b;">
         <div style="background:#c0392b; color:white; padding:1.5rem; text-align:center;">
-            <h2 style="margin:0; font-size:1.5rem;">🎅 Santa's Closing List</h2>
-            <p style="margin:0.4rem 0 0; font-size:0.8rem; opacity:0.9;">Check it twice before heading home!</p>
+            <h2 style="margin:0; font-size:1.5rem;" data-i18n="santas_closing_list">🎅 Santa's Closing List</h2>
+            <p style="margin:0.4rem 0 0; font-size:0.8rem; opacity:0.9;" data-i18n="check_it_twice">Check it twice before heading home!</p>
         </div>
         
         <div id="todo-container" style="padding:1.5rem; max-height:30rem; overflow-y:auto; background:#f9f9f9;"></div>
 
 <div style="padding:1.2rem; background:#eee; display:flex; gap:0.6rem;">
-    <input type="text" id="new-task-input" placeholder="Add custom task..." style="flex:1; padding:0.8rem; border:0.1rem solid #ccc; border-radius:0.3rem;">
-    <button onclick="addTask()" style="background:#27ae60; color:white; border:none; padding:0.8rem 1.2rem; border-radius:0.3rem; font-weight:bold; cursor:pointer;">ADD</button>
+    <input type="text" id="new-task-input" data-i18n-placeholder="add_custom_task_placeholder" placeholder="Add custom task..." style="flex:1; padding:0.8rem; border:0.1rem solid #ccc; border-radius:0.3rem;">
+    <button onclick="addTask()" style="background:#27ae60; color:white; border:none; padding:0.8rem 1.2rem; border-radius:0.3rem; font-weight:bold; cursor:pointer;" data-i18n="add_btn">ADD</button>
 </div>
 
 <div style="padding:1.2rem; text-align:center; background:#fff;">
-        <button onclick="closeTodo(event)" style="background:#555; color:white; border:none; padding:0.8rem 2.4rem; border-radius:2rem; cursor:pointer; font-weight:bold;">Close List</button>
+        <button onclick="closeTodo(event)" style="background:#555; color:white; border:none; padding:0.8rem 2.4rem; border-radius:2rem; cursor:pointer; font-weight:bold;" data-i18n="close_list_btn">Close List</button>
     </div>
     </div>
 </div>
 
 <div id="law-modal" onmousedown="event.stopPropagation()" onclick="event.stopPropagation()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:40000;">
     <div style="max-width:30rem; margin:5rem auto; background:#222; color:white; border: 0.15rem solid #3498db; border-radius:1rem; padding:2rem; font-family:sans-serif;">
-        <h2 style="color:#3498db; text-align:center; margin-top:0;">⚖️ Labour Law Resources</h2>
-        <p style="text-align:center; font-size:1rem; color:#bbb;">Select a link to view Federal or Provincial/State regulations.</p>
+        <h2 style="color:#3498db; text-align:center; margin-top:0;" data-i18n="labour_law_resources_title">⚖️ Labour Law Resources</h2>
+        <p style="text-align:center; font-size:1rem; color:#bbb;" data-i18n="select_link_regulations">Select a link to view Federal or Provincial/State regulations.</p>
         
        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem; margin:1rem 0;">
 <div style="display:flex; flex-direction:column; gap:0.5rem;">
-                <h4 style="margin:0 0 0.5rem 0; border-bottom:0.1rem solid #c0392b; color:#fbcfcf;">🇨🇦 CANADA</h4>
-                <a href="https://www.canada.ca/en/sr/srb.html#q=canada%20labour%20code" target="_blank" style="color:#ff4444; text-decoration:none; font-size:1rem;">• Federal Code</a>
-                <a href="https://www.ontario.ca/document/your-guide-employment-standards-act-0" target="_blank" style="color:#fff; text-decoration:none; font-size:1rem;">• Ontario (ESA)</a>
-                <a href="https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards" target="_blank" style="color:#fff; text-decoration:none; font-size:1rem;">• British Columbia</a>
-                <a href="https://www.cnesst.gouv.qc.ca/sites/default/files/documents/labour-standards-quebec.pdf" target="_blank" style="color:#fff; text-decoration:none; font-size:1rem;">• Québec</a>
+                <h4 style="margin:0 0 0.5rem 0; border-bottom:0.1rem solid #c0392b; color:#fbcfcf;" data-i18n="canada_header">🇨🇦 CANADA</h4>
+                <a href="https://www.canada.ca/en/sr/srb.html#q=canada%20labour%20code" target="_blank" style="color:#ff4444; text-decoration:none; font-size:1rem;" data-i18n="federal_code">• Federal Code</a>
+                <a href="https://www.ontario.ca/document/your-guide-employment-standards-act-0" target="_blank" style="color:#fff; text-decoration:none; font-size:1rem;" data-i18n="ontario_esa">• Ontario (ESA)</a>
+                <a href="https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards" target="_blank" style="color:#fff; text-decoration:none; font-size:1rem;" data-i18n="british_columbia">• British Columbia</a>
+                <a href="https://www.cnesst.gouv.qc.ca/sites/default/files/documents/labour-standards-quebec.pdf" target="_blank" style="color:#fff; text-decoration:none; font-size:1rem;" data-i18n="quebec">• Québec</a>
             </div>
 
             <div style="display:flex; flex-direction:column; gap:0.6rem;">
-                <h4 style="margin:0 0 0.4rem 0; border-bottom:0.1rem solid #2980b9; color:#cfe3fb;">🇺🇸 USA</h4>
-                <a href="https://www.dol.gov/general/aboutdol/majorlaws" target="_blank" style="color:#44aaff; text-decoration:none; font-size:0.85rem;">• Federal Laws</a>
-                <a href="https://www.labor.ny.gov/workerprotection/laborstandards/labor_standards.shtm" target="_blank" style="color:#fff; text-decoration:none; font-size:0.85rem;">• New York State</a>
-                <a href="https://www.laborcommissioner.com/home.html" target="_blank" style="color:#fff; text-decoration:none; font-size:0.85rem;">• Nevada</a>
-                <a href="https://www.dir.ca.gov/dlse/" target="_blank" style="color:#fff; text-decoration:none; font-size:0.85rem;">• California</a>
+                <h4 style="margin:0 0 0.4rem 0; border-bottom:0.1rem solid #2980b9; color:#cfe3fb;" data-i18n="usa_header">🇺🇸 USA</h4>
+                <a href="https://www.dol.gov/general/aboutdol/majorlaws" target="_blank" style="color:#44aaff; text-decoration:none; font-size:0.85rem;" data-i18n="federal_laws">• Federal Laws</a>
+                <a href="https://www.labor.ny.gov/workerprotection/laborstandards/labor_standards.shtm" target="_blank" style="color:#fff; text-decoration:none; font-size:0.85rem;" data-i18n="new_york_state">• New York State</a>
+                <a href="https://www.laborcommissioner.com/home.html" target="_blank" style="color:#fff; text-decoration:none; font-size:0.85rem;" data-i18n="nevada">• Nevada</a>
+                <a href="https://www.dir.ca.gov/dlse/" target="_blank" style="color:#fff; text-decoration:none; font-size:0.85rem;" data-i18n="california">• California</a>
             </div>
         </div>
 
         <div style="text-align:center; margin-1.5rem; padding-top:1rem; border-top:0.1rem solid #444;">
-            <button onclick="document.getElementById('law-modal').style.display='none'" style="background:#555; color:white; border:none; padding:0.8rem 1.5rem; border-radius:0.4rem; cursor:pointer; font-weight:bold;">Close Screen</button>
+            <button onclick="document.getElementById('law-modal').style.display='none'" style="background:#555; color:white; border:none; padding:0.8rem 1.5rem; border-radius:0.4rem; cursor:pointer; font-weight:bold;" data-i18n="close_screen_btn">Close Screen</button>
         </div>
     </div>
 </div>
 
 <div id="caselaw-modal" onmousedown="event.stopPropagation()" onclick="event.stopPropagation()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:40001; overflow-y:auto; -webkit-overflow-scrolling:touch;">
 <div style="max-width:30rem; margin:3rem auto; background:#1a1a1a; color:white; border: 0.15rem solid #f1c40f; border-radius:0.8rem; padding:2rem; font-family:sans-serif;">
-        <h2 style="color:#f1c40f; text-align:center; margin-top:0;">📖 Restaurant Case Law</h2>
-        <p>Courts tend to favour common decency and fairness. Think before you speak. Think before you act. Are you decent? That's the (potentially) $1.75 million dollar question!</p>
-        <p>A non-exhaustive list of rulings pertaining to restaurant work. Laws differ by regions so be sure to look up yours!</p>
-        <h3>Bedtime Stories for our Friends in the Service Industry</h3>
+        <h2 style="color:#f1c40f; text-align:center; margin-top:0;" data-i18n="restaurant_case_law_title">📖 Restaurant Case Law</h2>
+        <p data-i18n="case_law_intro_1">Courts tend to favour common decency and fairness. Think before you speak. Think before you act. Are you decent? That's the (potentially) $1.75 million dollar question!</p>
+        <p data-i18n="case_law_intro_2">A non-exhaustive list of rulings pertaining to restaurant work. Laws differ by regions so be sure to look up yours!</p>
+        <h3 data-i18n="bedtime_stories_header">Bedtime Stories for our Friends in the Service Industry</h3>
         <ul style="line-height:1.6;">
-            <p>Over-serving - Never a Good Idea</p>
-            <li>18 shots, 3 hrs 45 min = one fatality, 60 day suspension of liquor licence</li>
-            <li>17 beers, four hrs, one patron = one death, 60 day suspension of liquor licence</li>
-            <li>4 pitchers, 2 patrons, 2 hours = one death, 45 day suspension of liquor licence</li>
-            <li>10 beers, one patron = three deaths, two injured, $400,000 damages</li>
-            <li>One intoxicated driver, one passenger = quadriplegia and $1.75 million dollars</li>
-            <p>Be Nice</p>
-            <li>Verbal hostility, spreading rumours, systemic undermining = 18 months full salary plus $15,000 aggravated damages plus 'special damages'</li>
-            <li>False defamatory rumours, professional sabotage = 9 months full severance plus $10,000 aggravated damage plus $60,000 specifically for defamation</li>
-            <p>Be Nice to the Boss</p>
-            <li>Employee walked off the job claiming unfair environment = Restaurant won - voluntary resignation, no damages awarded</li>
-            <li>Employee 'jumps the gun' by quitting and suing = Judge rules in favour of the restaurant, no damages</li>
-            <p>Always Play Fair</p>
-            <li>Forced demotion, cut in pay, senior worker = 20 months full salary</li>
-            <li>Threatened with dismissal when leaving for pre-approved time off = $70,025 plus $20,000 in punitive damages paid by owner of restaurant</li>
+            <p data-i18n="overserving_header">Over-serving - Never a Good Idea</p>
+            <li data-i18n="story_1">18 shots, 3 hrs 45 min = one fatality, 60 day suspension of liquor licence</li>
+            <li data-i18n="story_2">17 beers, four hrs, one patron = one death, 60 day suspension of liquor licence</li>
+            <li data-i18n="story_3">4 pitchers, 2 patrons, 2 hours = one death, 45 day suspension of liquor licence</li>
+            <li data-i18n="story_4">10 beers, one patron = three deaths, two injured, $400,000 damages</li>
+            <li data-i18n="story_5">One intoxicated driver, one passenger = quadriplegia and $1.75 million dollars</li>
+            <p data-i18n="be_nice_header">Be Nice</p>
+            <li data-i18n="story_6">Verbal hostility, spreading rumours, systemic undermining = 18 months full salary plus $15,000 aggravated damages plus 'special damages'</li>
+            <li data-i18n="story_7">False defamatory rumours, professional sabotage = 9 months full severance plus $10,000 aggravated damage plus $60,000 specifically for defamation</li>
+            <p data-i18n="be_nice_to_boss_header">Be Nice to the Boss</p>
+            <li data-i18n="story_8">Employee walked off the job claiming unfair environment = Restaurant won - voluntary resignation, no damages awarded</li>
+            <li data-i18n="story_9">Employee 'jumps the gun' by quitting and suing = Judge rules in favour of the restaurant, no damages</li>
+            <p data-i18n="always_play_fair_header">Always Play Fair</p>
+            <li data-i18n="story_10">Forced demotion, cut in pay, senior worker = 20 months full salary</li>
+            <li data-i18n="story_11">Threatened with dismissal when leaving for pre-approved time off = $70,025 plus $20,000 in punitive damages paid by owner of restaurant</li>
         </ul>
-        <p style="text-align:center; font-size:0.9rem; color:#bbb;">Precedents and rulings specific to the hospitality industry.</p>
+        <p style="text-align:center; font-size:0.9rem; color:#bbb;" data-i18n="precedents_hospitality">Precedents and rulings specific to the hospitality industry.</p>
         
         <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1.5rem; margin:1.5rem 0;">
             <div style="display:flex; flex-direction:column; gap:0.6rem;">
-                <h4 style="margin:0 0 0.5vh 0; border-bottom:0.1vh solid #f1c40f; color:#fdf2d0;">🛡️ LIABILITY</h4>
-                <a href="https://www.canlii.org/en/" target="_blank" style="color:#fff; text-decoration:none; font-size:0.85rem;">• Slip & Fall Rulings</a>
-                <a href="https://www.canlii.org/en/" target="_blank" style="color:#fff; text-decoration:none; font-size:0.85rem;">• Food Safety Claims</a>
-                <a href="https://www.canlii.org/en/" target="_blank" style="color:#fff; text-decoration:none; font-size:0.85rem;">• Liquor Liability</a>
+                <h4 style="margin:0 0 0.5vh 0; border-bottom:0.1vh solid #f1c40f; color:#fdf2d0;" data-i18n="liability_header">🛡️ LIABILITY</h4>
+                <a href="https://www.canlii.org/en/" target="_blank" style="color:#fff; text-decoration:none; font-size:0.85rem;" data-i18n="slip_fall">• Slip & Fall Rulings</a>
+                <a href="https://www.canlii.org/en/" target="_blank" style="color:#fff; text-decoration:none; font-size:0.85rem;" data-i18n="food_safety">• Food Safety Claims</a>
+                <a href="https://www.canlii.org/en/" target="_blank" style="color:#fff; text-decoration:none; font-size:0.85rem;" data-i18n="liquor_liability">• Liquor Liability</a>
             </div>
             <div style="display:flex; flex-direction:column; gap:0.6rem;">
-                <h4 style="margin:0 0 0.5vh 0; border-bottom:0.1vh solid #e67e22; color:#fbe5d1;">👥 WORKPLACE</h4>
-                <a href="https://www.canlii.org/en/" target="_blank" style="color:#fff; text-decoration:none; font-size:0.85rem;">• Tip Pooling Disputes</a>
-                <a href="https://www.canlii.org/en/" target="_blank" style="color:#fff; text-decoration:none; font-size:0.85rem;">• Overtime Precedents</a>
-                <a href="https://www.canlii.org/en/" target="_blank" style="color:#fff; text-decoration:none; font-size:0.85rem;">• Constructive Dismissal</a>
+                <h4 style="margin:0 0 0.5vh 0; border-bottom:0.1vh solid #e67e22; color:#fbe5d1;" data-i18n="workplace_header">👥 WORKPLACE</h4>
+                <a href="https://www.canlii.org/en/" target="_blank" style="color:#fff; text-decoration:none; font-size:0.85rem;" data-i18n="tip_pooling">• Tip Pooling Disputes</a>
+                <a href="https://www.canlii.org/en/" target="_blank" style="color:#fff; text-decoration:none; font-size:0.85rem;" data-i18n="overtime_precedents">• Overtime Precedents</a>
+                <a href="https://www.canlii.org/en/" target="_blank" style="color:#fff; text-decoration:none; font-size:0.85rem;" data-i18n="constructive_dismissal">• Constructive Dismissal</a>
             </div>
         </div>
 
         <div style="text-align:center; margin-top:1.5rem; padding-top:1rem; border-top:0.1rem solid #444;">
-            <button onclick="document.getElementById('caselaw-modal').style.display='none'" style="background:#f1c40f; color:#000; border:none; padding:0.8rem 1.5rem; border-radius:0.4rem; cursor:pointer; font-weight:bold;">Close Library</button>
+            <button onclick="document.getElementById('caselaw-modal').style.display='none'" style="background:#f1c40f; color:#000; border:none; padding:0.8rem 1.5rem; border-radius:0.4rem; cursor:pointer; font-weight:bold;" data-i18n="close_library_btn">Close Library</button>
         </div>
     </div>
 </div>
@@ -352,21 +359,21 @@ body.modal-open {
 <div id="handbook-modal" onmousedown="event.stopPropagation()" onclick="event.stopPropagation()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:50000; font-family: sans-serif; overflow-y: auto;">
     <div style="max-width:35rem; margin:3rem auto; background:#fff; color:#333; border-radius:1rem; padding:2rem; position:relative; box-shadow: 0 1.5rem 3rem rgba(0,0,0,0.5);">
         <button onclick="document.getElementById('handbook-modal').style.display='none'" style="position:absolute; top:1rem; right:1.5rem; background:none; border:none; font-size:2rem; cursor:pointer;">&times;</button>
-        <h1 style="text-align:center; color:#2c3e50; border-bottom:0.2rem solid #f1c40f; padding-bottom:0.8rem;">Employee Handbook</h1>
+        <h1 style="text-align:center; color:#2c3e50; border-bottom:0.2rem solid #f1c40f; padding-bottom:0.8rem;" data-i18n="employee_handbook_main_title">Employee Handbook</h1>
         
         <section style="margin-top:1.5rem; background:#f9f9f9; padding:1.5rem; border-radius:0.6rem; border-left:0.4rem solid #2c3e50;">
-            <h2 style="margin-top:0;">👔 Appearance & Punctuality</h2>
+            <h2 style="margin-top:0;" data-i18n="appearance_punctuality_title">👔 Appearance & Punctuality</h2>
             <ul style="line-height:1.6;">
-                <li><strong>Dress Code:</strong> black pants, black shoes, and <b>black socks</b>.</li>
-                <li><strong>Hair:</strong> Must be tied back, off the face, and off the shoulders.</li>
-                <li><strong>Punctuality:</strong> Clock in <b>before</b> your scheduled start time.</li>
-                <li><strong>Harassment:</strong> No <b>swearing/yelling</b>; civility is a <b>legal</b> requirement.</li>
-                <li><strong>Poisoned Work Environment:</strong> The <b>employer </b>can be held liable.</li>
+                <li><strong data-i18n="dress_code_label">Dress Code:</strong> <span data-i18n="dress_code_desc">black pants, black shoes, and</span> <b>black socks</b>.</li>
+                <li><strong data-i18n="hair_label">Hair:</strong> <span data-i18n="hair_desc">Must be tied back, off the face, and off the shoulders.</span></li>
+                <li><strong data-i18n="punctuality_label">Punctuality:</strong> <span data-i18n="punctuality_desc">Clock in</span> <b data-i18n="before_bold">before</b> <span data-i18n="scheduled_start_desc">your scheduled start time.</span></li>
+                <li><strong data-i18n="harassment_label">Harassment:</strong> <span data-i18n="no_bold">No</span> <b data-i18n="swearing_yelling">swearing/yelling</b>; <span data-i18n="civility_desc">civility is a</span> <b data-i18n="legal_bold">legal</b> <span data-i18n="requirement_desc">requirement.</span></li>
+                <li><strong data-i18n="poisoned_env_label">Poisoned Work Environment:</strong> <span data-i18n="the_bold">The</span> <b data-i18n="employer_bold">employer </b><span data-i18n="liability_desc_2">can be held liable.</span></li>
             </ul>
         </section>
-        <p>Always remember, regardless of your position we are all here for one reason - to earn a living. Let's work well together!</p>
+        <p data-i18n="handbook_footer_msg">Always remember, regardless of your position we are all here for one reason - to earn a living. Let's work well together!</p>
 
-        <button onclick="document.getElementById('handbook-modal').style.display='none'" style="display:block; width:100%; padding:1rem; margin-top:1.5rem; background:#2c3e50; color:white; border:none; border-radius:0.5rem; cursor:pointer; font-weight:bold;">I Understand the Handbook</button>
+        <button onclick="document.getElementById('handbook-modal').style.display='none'" style="display:block; width:100%; padding:1rem; margin-top:1.5rem; background:#2c3e50; color:white; border:none; border-radius:0.5rem; cursor:pointer; font-weight:bold;" data-i18n="i_understand_handbook_btn">I Understand the Handbook</button>
     </div>
 </div>
     
@@ -1040,6 +1047,278 @@ document.addEventListener('visibilitychange', () => {
   }
 });
 
+</script>
+<script>
+    const translations = {
+        en: {
+            back_tip_jar: "Back to Tip Jar",
+            exit_caps: "EXIT",
+            company_resources_title: "📁 COMPANY RESOURCES",
+            employee_handbook_title: "📘 Employee Handbook",
+            paste_link_placeholder: "Paste link...",
+            save_btn: "Save",
+            view_btn: "VIEW",
+            close_cabinet_btn: "CLOSE CABINET",
+            santas_closing_list: "🎅 Santa's Closing List",
+            check_it_twice: "Check it twice before heading home!",
+            add_custom_task_placeholder: "Add custom task...",
+            add_btn: "ADD",
+            close_list_btn: "Close List",
+            labour_law_resources_title: "⚖️ Labour Law Resources",
+            select_link_regulations: "Select a link to view Federal or Provincial/State regulations.",
+            canada_header: "🇨🇦 CANADA",
+            federal_code: "• Federal Code",
+            ontario_esa: "• Ontario (ESA)",
+            british_columbia: "• British Columbia",
+            quebec: "• Québec",
+            usa_header: "🇺🇸 USA",
+            federal_laws: "• Federal Laws",
+            new_york_state: "• New York State",
+            nevada: "• Nevada",
+            california: "• California",
+            close_screen_btn: "Close Screen",
+            restaurant_case_law_title: "📖 Restaurant Case Law",
+            case_law_intro_1: "Courts tend to favour common decency and fairness. Think before you speak. Think before you act. Are you decent? That's the (potentially) $1.75 million dollar question!",
+            case_law_intro_2: "A non-exhaustive list of rulings pertaining to restaurant work. Laws differ by regions so be sure to look up yours!",
+            bedtime_stories_header: "Bedtime Stories for our Friends in the Service Industry",
+            overserving_header: "Over-serving - Never a Good Idea",
+            story_1: "18 shots, 3 hrs 45 min = one fatality, 60 day suspension of liquor licence",
+            story_2: "17 beers, four hrs, one patron = one death, 60 day suspension of liquor licence",
+            story_3: "4 pitchers, 2 patrons, 2 hours = one death, 45 day suspension of liquor licence",
+            story_4: "10 beers, one patron = three deaths, two injured, $400,000 damages",
+            story_5: "One intoxicated driver, one passenger = quadriplegia and $1.75 million dollars",
+            be_nice_header: "Be Nice",
+            story_6: "Verbal hostility, spreading rumours, systemic undermining = 18 months full salary plus $15,000 aggravated damages plus 'special damages'",
+            story_7: "False defamatory rumours, professional sabotage = 9 months full severance plus $10,000 aggravated damage plus $60,000 specifically for defamation",
+            be_nice_to_boss_header: "Be Nice to the Boss",
+            story_8: "Employee walked off the job claiming unfair environment = Restaurant won - voluntary resignation, no damages awarded",
+            story_9: "Employee 'jumps the gun' by quitting and suing = Judge rules in favour of the restaurant, no damages",
+            always_play_fair_header: "Always Play Fair",
+            story_10: "Forced demotion, cut in pay, senior worker = 20 months full salary",
+            story_11: "Threatened with dismissal when leaving for pre-approved time off = $70,025 plus $20,000 in punitive damages paid by owner of restaurant",
+            precedents_hospitality: "Precedents and rulings specific to the hospitality industry.",
+            liability_header: "🛡️ LIABILITY",
+            slip_fall: "• Slip & Fall Rulings",
+            food_safety: "• Food Safety Claims",
+            liquor_liability: "• Liquor Liability",
+            workplace_header: "👥 WORKPLACE",
+            tip_pooling: "• Tip Pooling Disputes",
+            overtime_precedents: "• Overtime Precedents",
+            constructive_dismissal: "• Constructive Dismissal",
+            close_library_btn: "Close Library",
+            employee_handbook_main_title: "Employee Handbook",
+            appearance_punctuality_title: "👔 Appearance & Punctuality",
+            dress_code_label: "Dress Code:",
+            dress_code_desc: "black pants, black shoes, and",
+            hair_label: "Hair:",
+            hair_desc: "Must be tied back, off the face, and off the shoulders.",
+            punctuality_label: "Punctuality:",
+            punctuality_desc: "Clock in",
+            before_bold: "before",
+            scheduled_start_desc: "your scheduled start time.",
+            harassment_label: "Harassment:",
+            no_bold: "No",
+            swearing_yelling: "swearing/yelling",
+            civility_desc: "civility is a",
+            legal_bold: "legal",
+            requirement_desc: "requirement.",
+            poisoned_env_label: "Poisoned Work Environment:",
+            the_bold: "The",
+            employer_bold: "employer",
+            liability_desc_2: "can be held liable.",
+            handbook_footer_msg: "Always remember, regardless of your position we are all here for one reason - to earn a living. Let's work well together!",
+            i_understand_handbook_btn: "I Understand the Handbook"
+        },
+        fr: {
+            back_tip_jar: "Retour au Pot à Pourboires",
+            exit_caps: "QUITTER",
+            company_resources_title: "📁 RESSOURCES DE L'ENTREPRISE",
+            employee_handbook_title: "📘 Manuel de l'employé",
+            paste_link_placeholder: "Coller le lien...",
+            save_btn: "Enregistrer",
+            view_btn: "VOIR",
+            close_cabinet_btn: "FERMER LE CABINET",
+            santas_closing_list: "🎅 Liste de fermeture du Père Noël",
+            check_it_twice: "Vérifiez deux fois avant de rentrer à la maison !",
+            add_custom_task_placeholder: "Ajouter une tâche personnalisée...",
+            add_btn: "AJOUTER",
+            close_list_btn: "Fermer la liste",
+            labour_law_resources_title: "⚖️ Ressources en droit du travail",
+            select_link_regulations: "Sélectionnez un lien pour consulter les règlements fédéraux ou provinciaux/d'état.",
+            canada_header: "🇨🇦 CANADA",
+            federal_code: "• Code fédéral",
+            ontario_esa: "• Ontario (LNE)",
+            british_columbia: "• Colombie-Britannique",
+            quebec: "• Québec",
+            usa_header: "🇺🇸 ÉTATS-UNIS",
+            federal_laws: "• Lois fédérales",
+            new_york_state: "• État de New York",
+            nevada: "• Nevada",
+            california: "• Californie",
+            close_screen_btn: "Fermer l'écran",
+            restaurant_case_law_title: "📖 Jurisprudence en restauration",
+            case_law_intro_1: "Les tribunaux ont tendance à privilégier la décence commune et l'équité. Réfléchissez avant de parler. Réfléchissez avant d'agir. Êtes-vous correct ? C'est la question (potentiellement) de 1,75 million de dollars !",
+            case_law_intro_2: "Une liste non exhaustive de jugements relatifs au travail en restauration. Les lois diffèrent selon les régions, assurez-vous de vérifier les vôtres !",
+            bedtime_stories_header: "Contes de fées pour nos amis de l'industrie de la service",
+            overserving_header: "Servir de l'alcool en excès - Jamais une bonne idée",
+            story_1: "18 verres, 3 h 45 min = un décès, suspension de 60 jours du permis d'alcool",
+            story_2: "17 bières, quatre heures, un client = un décès, suspension de 60 jours du permis d'alcool",
+            story_3: "4 pichets, 2 clients, 2 heures = un décès, suspension de 45 jours du permis d'alcool",
+            story_4: "10 bières, un client = trois décès, deux blessés, 400 000 $ de dommages",
+            story_5: "Un conducteur intoxiqué, un passager = quadriplégie et 1,75 million de dollars",
+            be_nice_header: "Soyez gentil",
+            story_6: "Hostilité verbale, propagation de rumeurs, sabotage systémique = 18 mois de salaire complet plus 15 000 $ de dommages-intérêts",
+            story_7: "Fausses rumeurs diffamatoires, sabotage professionnel = 9 mois de indemnité de départ complète plus 10 000 $ de dommages-intérêts plus 60 000 $ spécifiquement pour diffamation",
+            be_nice_to_boss_header: "Soyez gentil avec le patron",
+            story_8: "Un employé a quitté son poste en invoquant un environnement inéquitable = Le restaurant a gagné - démission volontaire, aucun dommage accordé",
+            story_9: "Un employé démissionne impulsivement et poursuit en justice = Le juge statue en faveur du restaurant, aucun dommage",
+            always_play_fair_header: "Jouez toujours franc jeu",
+            story_10: "Rétrogradation forcée, baisse de salaire, travailleur senior = 20 mois de salaire complet",
+            story_11: "Menace de licenciement lors d'un congé pré-approuvé = 70 025 $ plus 20 000 $ de dommages punitifs payés par le propriétaire",
+            precedents_hospitality: "Précédents et jugements spécifiques à l'industrie hôtelière.",
+            liability_header: "🛡️ RESPONSABILITÉ",
+            slip_fall: "• Jugements Glissades et Chutes",
+            food_safety: "• Réclamations Salubrité des aliments",
+            liquor_liability: "• Responsabilité liée à l'alcool",
+            workplace_header: "👥 LIEU DE TRAVAIL",
+            tip_pooling: "• Litiges de Partage de Pourboires",
+            overtime_precedents: "• Précédents sur les Heures Supplémentaires",
+            constructive_dismissal: "• Congédiement Déguisé",
+            close_library_btn: "Fermer la bibliothèque",
+            employee_handbook_main_title: "Manuel de l'employé",
+            appearance_punctuality_title: "👔 Apparence et Ponctualité",
+            dress_code_label: "Code vestimentaire :",
+            dress_code_desc: "pantalons noirs, chaussures noires et",
+            hair_label: "Cheveux :",
+            hair_desc: "Doivent être attachés, loin du visage et des épaules.",
+            punctuality_label: "Ponctualité :",
+            punctuality_desc: "Pointez",
+            before_bold: "avant",
+            scheduled_start_desc: "votre heure de début prévue.",
+            harassment_label: "Harcèlement :",
+            no_bold: "Pas de",
+            swearing_yelling: "jurons/cris",
+            civility_desc: "la civilité est une exigence",
+            legal_bold: "légale",
+            requirement_desc: ".",
+            poisoned_env_label: "Environnement de travail toxique :",
+            the_bold: "L'",
+            employer_bold: "employeur",
+            liability_desc_2: "peut être tenu responsable.",
+            handbook_footer_msg: "Rappelez-vous toujours, peu importe votre poste, nous sommes tous ici pour gagner notre vie. Travaillons bien ensemble !",
+            i_understand_handbook_btn: "Je comprends le manuel"
+        },
+        es: {
+            back_tip_jar: "Volver al Tarro de Propinas",
+            exit_caps: "SALIR",
+            company_resources_title: "📁 RECURSOS DE LA EMPRESA",
+            employee_handbook_title: "📘 Manual del Empleado",
+            paste_link_placeholder: "Pegar enlace...",
+            save_btn: "Guardar",
+            view_btn: "VER",
+            close_cabinet_btn: "CERRAR ARMARIO",
+            santas_closing_list: "🎅 Lista de Cierre de Santa",
+            check_it_twice: "¡Revísala dos veces antes de irte a casa!",
+            add_custom_task_placeholder: "Añadir tarea personalizada...",
+            add_btn: "AÑADIR",
+            close_list_btn: "Cerrar Lista",
+            labour_law_resources_title: "⚖️ Recursos de Derecho Laboral",
+            select_link_regulations: "Seleccione un enlace para ver regulaciones federales o estatales/provinciales.",
+            canada_header: "🇨🇦 CANADÁ",
+            federal_code: "• Código Federal",
+            ontario_esa: "• Ontario (ESA)",
+            british_columbia: "• Columbia Británica",
+            quebec: "• Quebec",
+            usa_header: "🇺🇸 EE. UU.",
+            federal_laws: "• Leyes Federales",
+            new_york_state: "• Estado de Nueva York",
+            nevada: "• Nevada",
+            california: "• California",
+            close_screen_btn: "Cerrar Pantalla",
+            restaurant_case_law_title: "📖 Jurisprudencia de Restaurantes",
+            case_law_intro_1: "Los tribunales tienden a favorecer la decencia común y la equidad. Piensa antes de hablar. Piensa antes de actuar. ¿Eres decente? ¡Ese es el (potencialmente) millón y medio de dólares de pregunta!",
+            case_law_intro_2: "Una lista no exhaustiva de fallos relacionados con el trabajo en restaurantes. ¡Las leyes difieren según la región, asegúrate de consultar la tuya!",
+            bedtime_stories_header: "Cuentos para Dormir para Nuestros Amigos de la Industria de Servicios",
+            overserving_header: "Servir Alcohol en Exceso - Nunca es Buena Idea",
+            story_1: "18 tragos, 3 h 45 min = una víctima mortal, suspensión de licencia de alcohol por 60 días",
+            story_2: "17 cervezas, cuatro horas, un cliente = una muerte, suspensión de licencia por 60 días",
+            story_3: "4 jarras, 2 clientes, 2 horas = una muerte, suspensión de licencia por 45 días",
+            story_4: "10 cervezas, un cliente = tres muertes, dos heridos, 400,000 $ en daños",
+            story_5: "Un conductor intoxicado, un pasajero = cuadriplejía y 1.75 millones de dólares",
+            be_nice_header: "Sé Amable",
+            story_6: "Hostilidad verbal, propagación de rumores, sabotaje sistémico = 18 meses de salario completo más 15,000 $ por daños agravados",
+            story_7: "Falsos rumores difamatorios, sabotaje profesional = 9 meses de indemnización completa más 10,000 $ por daños agravados más 60,000 $ específicamente por difamación",
+            be_nice_to_boss_header: "Sé Amable con el Jefe",
+            story_8: "Empleado abandonó el trabajo alegando ambiente injusto = El restaurante ganó - renuncia voluntaria, sin indemnización",
+            story_9: "Empleado renuncia impulsivamente y demanda = El juez falla a favor del restaurante, sin indemnización",
+            always_play_fair_header: "Juega Siempre Limpio",
+            story_10: "Degradación forzada, reducción salarial, trabajador veterano = 20 meses de salario completo",
+            story_11: "Amenaza de despido al tomar un permiso preaprobado = 70,025 $ más 20,000 $ en daños punitivos pagados por el propietario",
+            precedents_hospitality: "Precedentes y fallos específicos de la industria de la hospitalidad.",
+            liability_header: "🛡️ RESPONSABILIDAD CIVIL",
+            slip_fall: "• Fallos por Resbalones y Caídas",
+            food_safety: "• Reclamaciones por Seguridad Alimentaria",
+            liquor_liability: "• Responsabilidad por Bebidas Alcohólicas",
+            workplace_header: "👥 LUGAR DE TRABAJO",
+            tip_pooling: "• Disputas sobre Fondo de Propinas",
+            overtime_precedents: "• Precedentes de Horas Extra",
+            constructive_dismissal: "• Despido Constructivo",
+            close_library_btn: "Cerrar Biblioteca",
+            employee_handbook_main_title: "Manual del Empleado",
+            appearance_punctuality_title: "👔 Apariencia y Puntualidad",
+            dress_code_label: "Código de Vestimenta:",
+            dress_code_desc: "pantalones negros, zapatos negros y",
+            hair_label: "Cabello:",
+            hair_desc: "Debe estar recogido, fuera de la cara y de los hombros.",
+            punctuality_label: "Puntualidad:",
+            punctuality_desc: "Registra tu entrada",
+            before_bold: "antes",
+            scheduled_start_desc: "de tu hora de inicio programada.",
+            harassment_label: "Acoso:",
+            no_bold: "No",
+            swearing_yelling: "insultos/gritos",
+            civility_desc: "la civilidad es un requisito",
+            legal_bold: "legal",
+            requirement_desc: ".",
+            poisoned_env_label: "Ambiente Laboral Tóxico:",
+            the_bold: "El",
+            employer_bold: "empleador",
+            liability_desc_2: "puede ser considerado responsable.",
+            handbook_footer_msg: "Recuerda siempre, sin importar tu puesto, todos estamos aquí por una sola razón: ganarnos la vida. ¡Trabajemos bien juntos!",
+            i_understand_handbook_btn: "Entiendo el Manual"
+        }
+    };
+
+    function switchLanguage(lang) {
+        localStorage.setItem('preferred_language', lang);
+        document.documentElement.lang = lang;
+        
+        // Update all elements with data-i18n
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (translations[lang] && translations[lang][key]) {
+                el.innerText = translations[lang][key];
+            }
+        });
+
+        // Update inputs with data-i18n-placeholder
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+            const key = el.getAttribute('data-i18n-placeholder');
+            if (translations[lang] && translations[lang][key]) {
+                el.placeholder = translations[lang][key];
+            }
+        });
+    }
+
+    // On page load, apply saved language preference if it exists
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedLang = localStorage.getItem('preferred_language') || 'en';
+        const selectEl = document.getElementById('languageSelect');
+        if (selectEl) {
+            selectEl.value = savedLang;
+        }
+        switchLanguage(savedLang);
+    });
 </script>
 </body>
 </html>

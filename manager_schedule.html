@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staff Schedule - Monthly View</title>
+    <title data-translate="pageTitle">Staff Schedule - Monthly View</title>
     <style>
         :root {
             --calendar-bg: #fdfaf0;
@@ -30,6 +30,8 @@ body {
             margin-bottom: 1.25rem;
             display: flex;
             gap: 0.625rem;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         button {
@@ -131,6 +133,8 @@ body {
     background: #2c3e50;
     display: flex;
     justify-content: flex-start;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .btn-return {
@@ -217,18 +221,25 @@ body {
 </head>
 <body>
 
+    <!-- Language Switcher Pill in Top Right -->
+    <div id="language-switcher" style="position: fixed; top: 1.5rem; right: 1.5rem; display: flex; align-items: center; gap: 0.25rem; background: #2c4a6f; padding: 0.3rem 0.6rem; border-radius: 9999rem; box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2); z-index: 30000; border: 1px solid #d4b886;">
+      <button onclick="setLanguage('en')" title="English" style="background: none; border: none; color: #f4eee1; cursor: pointer; font-size: 0.85rem; font-weight: bold; padding: 0.2rem 0.4rem; border-radius: 9999rem; transition: transform 0.2s ease;">EN</button>
+      <button onclick="setLanguage('fr')" title="Français (Québec)" style="background: none; border: none; cursor: pointer; font-size: 1.1rem; padding: 0.2rem 0.4rem; border-radius: 9999rem; transition: transform 0.2s ease; display: inline-flex; align-items: center; justify-content: center; width: 1.5rem; height: 1.5rem; background-color: #003366; color: #ffffff; border-radius: 50%;">⚜️</button>
+      <button onclick="setLanguage('es')" title="Español (México)" style="background: none; border: none; color: #f4eee1; cursor: pointer; font-size: 1.1rem; padding: 0.2rem 0.4rem; border-radius: 9999rem; transition: transform 0.2s ease;">🇲🇽</button>
+    </div>
+
 <div class="nav-container">
-    <a href="manager_office.html" class="btn-return">←EXIT</a>
+    <a href="manager_office.html" class="btn-return" data-translate="exitBtn">←EXIT</a>
 </div>
 
     <div class="controls"> 
-        <button onclick="toggleViewMode()" style="background: #888;">VIEW MODE</button>
-        <button onclick="saveSchedule()">SAVE</button>
-        <button onclick="exportToPDF()">EXPORT TO PDF</button>
-        <button onclick="forwardSchedule()">FORWARD</button>
-        <button onclick="clearEntireSchedule()" style="background: #a00;">CLEAR ALL</button>
-        <button onclick="window.location.href='manager_office.html'" style="background: #888;">BACK</button>
-        <button onclick="copyPreviousWeek()" style="background: #2c3e50;">COPY PREVIOUS WEEK</button>
+        <button onclick="toggleViewMode()" style="background: #888;" data-translate="viewModeBtn">VIEW MODE</button>
+        <button onclick="saveSchedule()" data-translate="saveBtn">SAVE</button>
+        <button onclick="exportToPDF()" data-translate="exportPdfBtn">EXPORT TO PDF</button>
+        <button onclick="forwardSchedule()" data-translate="forwardBtn">FORWARD</button>
+        <button onclick="clearEntireSchedule()" style="background: #a00;" data-translate="clearAllBtn">CLEAR ALL</button>
+        <button onclick="window.location.href='manager_office.html'" style="background: #888;" data-translate="backBtn">BACK</button>
+        <button onclick="copyPreviousWeek()" style="background: #2c3e50;" data-translate="copyPrevWeekBtn">COPY PREVIOUS WEEK</button>
     </div>
 
 <div id="calendar-container">
@@ -236,13 +247,13 @@ body {
         </div>
 
     <div class="day-headers" style="display: grid; grid-template-columns: repeat(7, 1fr); background: var(--header-bg); color: white;">
-        <div class="day-label">Sun</div>
-        <div class="day-label">Mon</div>
-        <div class="day-label">Tue</div>
-        <div class="day-label">Wed</div>
-        <div class="day-label">Thu</div>
-        <div class="day-label">Fri</div>
-        <div class="day-label">Sat</div>
+        <div class="day-label" data-translate="daySun">Sun</div>
+        <div class="day-label" data-translate="dayMon">Mon</div>
+        <div class="day-label" data-translate="dayTue">Tue</div>
+        <div class="day-label" data-translate="dayWed">Wed</div>
+        <div class="day-label" data-translate="dayThu">Thu</div>
+        <div class="day-label" data-translate="dayFri">Fri</div>
+        <div class="day-label" data-translate="daySat">Sat</div>
     </div>
 
     <div class="calendar-grid" id="days-grid">
@@ -250,6 +261,156 @@ body {
 </div>
 
 <script>
+  const translations = {
+    en: {
+      pageTitle: "Staff Schedule - Monthly View",
+      exitBtn: "←EXIT",
+      viewModeBtn: "VIEW MODE",
+      saveBtn: "SAVE",
+      exportPdfBtn: "EXPORT TO PDF",
+      forwardBtn: "FORWARD",
+      clearAllBtn: "CLEAR ALL",
+      backBtn: "BACK",
+      copyPrevWeekBtn: "COPY PREVIOUS WEEK",
+      daySun: "Sun",
+      dayMon: "Mon",
+      dayTue: "Tue",
+      dayWed: "Wed",
+      dayThu: "Thu",
+      dayFri: "Fri",
+      daySat: "Sat",
+      months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+      staffBadge: "Staff",
+      totalHoursLabel: "Total:",
+      modalEventPlaceholder: "Special Event (e.g. Inventory, Holiday)",
+      customSettingsTitle: "Set your 3 custom shortcuts:",
+      custom1Placeholder: "Custom 1",
+      custom2Placeholder: "Custom 2",
+      custom3Placeholder: "Custom 3",
+      saveCustomBtn: "Save Custom Labels",
+      editCustomBtn: "⚙️ EDIT CUSTOM BUTTONS",
+      addStaffBtn: "+ ADD STAFF MEMBER",
+      saveDayBtn: "SAVE DAY",
+      namePlaceholder: "Name",
+      timePlaceholder: "Time",
+      viewOnlyIndicator: "VIEW-ONLY MODE",
+      alertClearAll: "Are you sure? This will wipe the ENTIRE month.",
+      alertViewMode: "Switch to View-Only mode? (Refresh the page to return to Manager mode)",
+      alertCopyWeek: "This will copy shifts from 7 days ago into the current days. Continue?",
+      alertWeekCopied: "Shifts and Events copied from last week!",
+      alertLabelsSaved: "Labels saved! They will appear on new rows.",
+      alertBackupDownloaded: "Schedule Backup Downloaded!",
+      whatsappMsg: "The Staff Schedule has been updated in the Manager Portal. Please check the portal for your specific shifts."
+    },
+    fr: {
+      pageTitle: "Horaire du personnel - Vue mensuelle",
+      exitBtn: "←SORTIE",
+      viewModeBtn: "MODE AFFICHAGE",
+      saveBtn: "ENREGISTRER",
+      exportPdfBtn: "EXPORTER EN PDF",
+      forwardBtn: "TRANSMETTRE",
+      clearAllBtn: "TOUT EFFACER",
+      backBtn: "RETOUR",
+      copyPrevWeekBtn: "COPIER LA SEMAINE PRÉCÉDENTE",
+      daySun: "Dim",
+      dayMon: "Lun",
+      dayTue: "Mar",
+      dayWed: "Mer",
+      dayThu: "Jeu",
+      dayFri: "Ven",
+      daySat: "Sam",
+      months: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+      staffBadge: "Employés",
+      totalHoursLabel: "Total:",
+      modalEventPlaceholder: "Événement spécial (ex. Inventaire, Congé)",
+      customSettingsTitle: "Définissez vos 3 raccourcis personnalisés :",
+      custom1Placeholder: "Personnalisé 1",
+      custom2Placeholder: "Personnalisé 2",
+      custom3Placeholder: "Personnalisé 3",
+      saveCustomBtn: "Enregistrer les étiquettes",
+      editCustomBtn: "⚙️ MODIFIER LES BOUTONS PERSONNALISÉS",
+      addStaffBtn: "+ AJOUTER UN MEMBRE DU PERSONNEL",
+      saveDayBtn: "ENREGISTRER LA JOURNÉE",
+      namePlaceholder: "Nom",
+      timePlaceholder: "Heure",
+      viewOnlyIndicator: "MODE AFFICHAGE SEULEMENT",
+      alertClearAll: "Êtes-vous sûr ? Cela effacera TOUT le mois.",
+      alertViewMode: "Passer en mode affichage seulement ? (Rafraîchissez la page pour revenir au mode gestionnaire)",
+      alertCopyWeek: "Cela copiera les quarts d'il y a 7 jours dans les jours actuels. Continuer ?",
+      alertWeekCopied: "Quarts et événements copiés de la semaine dernière !",
+      alertLabelsSaved: "Étiquettes enregistrées ! Elles apparaîtront sur les nouvelles lignes.",
+      alertBackupDownloaded: "Sauvegarde de l'horaire téléchargée !",
+      whatsappMsg: "L'horaire du personnel a été mis à jour dans le portail du gestionnaire. Veuillez vérifier le portail pour vos quarts spécifiques."
+    },
+    es: {
+      pageTitle: "Horario del personal - Vista mensual",
+      exitBtn: "←SALIR",
+      viewModeBtn: "MODO VISTA",
+      saveBtn: "GUARDAR",
+      exportPdfBtn: "EXPORTAR A PDF",
+      forwardBtn: "ENVIAR",
+      clearAllBtn: "BORRAR TODO",
+      backBtn: "ATRÁS",
+      copyPrevWeekBtn: "COPIAR SEMANA ANTERIOR",
+      daySun: "Dom",
+      dayMon: "Lun",
+      dayTue: "Mar",
+      dayWed: "Mié",
+      dayThu: "Jue",
+      dayFri: "Vie",
+      daySat: "Sáb",
+      months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+      staffBadge: "Personal",
+      totalHoursLabel: "Total:",
+      modalEventPlaceholder: "Evento especial (ej. Inventario, Día festivo)",
+      customSettingsTitle: "Configura tus 3 accesos directos personalizados:",
+      custom1Placeholder: "Personalizado 1",
+      custom2Placeholder: "Personalizado 2",
+      custom3Placeholder: "Personalizado 3",
+      saveCustomBtn: "Guardar etiquetas personalizadas",
+      editCustomBtn: "⚙️ EDITAR BOTONES PERSONALIZADOS",
+      addStaffBtn: "+ AÑADIR MIEMBRO DEL PERSONAL",
+      saveDayBtn: "GUARDAR DÍA",
+      namePlaceholder: "Nombre",
+      timePlaceholder: "Hora",
+      viewOnlyIndicator: "MODO DE SOLO VISTA",
+      alertClearAll: "¿Estás seguro? Esto borrará TODO el mes.",
+      alertViewMode: "¿Cambiar al modo de solo vista? (Actualiza la página para volver al modo de gerente)",
+      alertCopyWeek: "Esto copiará los turnos de hace 7 días en los días actuales. ¿Continuar?",
+      alertWeekCopied: "¡Turnos y eventos copiados de la semana pasada!",
+      alertLabelsSaved: "¡Etiquetas guardadas! Aparecerán en las nuevas filas.",
+      alertBackupDownloaded: "¡Copia de seguridad del horario descargada!",
+      whatsappMsg: "El horario del personal se ha actualizado en el portal del gerente. Por favor, revisa el portal para tus turnos específicos."
+    }
+  };
+
+  function setLanguage(lang) {
+    localStorage.setItem('preferredLang', lang);
+    applyLanguage(lang);
+    initCalendar(); // Re-render calendar to update dynamic strings & months
+  }
+
+  function applyLanguage(lang) {
+    const t = translations[lang];
+    if (!t) return;
+
+    document.title = t.pageTitle;
+
+    document.querySelectorAll('[data-translate]').forEach(el => {
+      const key = el.getAttribute('data-translate');
+      if (t[key]) {
+        el.innerHTML = t[key];
+      }
+    });
+
+    document.querySelectorAll('[data-translate-placeholder]').forEach(el => {
+      const key = el.getAttribute('data-translate-placeholder');
+      if (t[key]) {
+        el.placeholder = t[key];
+      }
+    });
+  }
+
 const grid = document.getElementById('days-grid');
 const monthLabel = document.getElementById('month-name');
 let currentEditingDay = null;
@@ -260,9 +421,10 @@ function initCalendar() {
     const month = now.getMonth();
     const today = now.getDate();
 
- const monthNames = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"];
-    monthLabel.innerText = `${monthNames[month]} ${year}`;
+    const lang = localStorage.getItem('preferredLang') || 'en';
+    const t = translations[lang];
+
+    monthLabel.innerText = `${t.months[month]} ${year}`;
 
     const firstDayIndex = new Date(year, month, 1).getDay();
     const lastDayOfMonth = new Date(year, month + 1, 0).getDate();
@@ -313,7 +475,7 @@ const savedData = JSON.parse(localStorage.getItem(`shifts-${displayYear}-${displ
             .map(s => s.name.trim().toLowerCase());
 
         const staffCount = savedData.length;
-        const badgeHTML = staffCount > 0 ? `<span style="float:right; background:#4b2c15; color:white; font-size:0.6rem; padding:0.125rem 0.3125rem; border-radius:0.625rem;">${staffCount} Staff</span>` : '';
+        const badgeHTML = staffCount > 0 ? `<span style="float:right; background:#4b2c15; color:white; font-size:0.6rem; padding:0.125rem 0.3125rem; border-radius:0.625rem;">${staffCount} ${t.staffBadge}</span>` : '';
 
         let shiftListHTML = '<div style="margin-top:0.3125rem; font-size:0.7rem; line-height:1.2; clear:both;">';
         
@@ -332,7 +494,7 @@ const savedData = JSON.parse(localStorage.getItem(`shifts-${displayYear}-${displ
             else if (time !== "") totalHours += 4;
         });
 
-        const budgetHTML = totalHours > 0 ? `<div style="font-size:0.6rem; color:#666; font-style:italic; margin-top:0.125rem; border-top:0.0625rem solid #ddd; padding-top:0.125rem;">Total: ${totalHours} hrs</div>` : '';
+        const budgetHTML = totalHours > 0 ? `<div style="font-size:0.6rem; color:#666; font-style:italic; margin-top:0.125rem; border-top:0.0625rem solid #ddd; padding-top:0.125rem;">${t.totalHoursLabel} ${totalHours} hrs</div>` : '';
         savedData.forEach(shift => {
             const currentName = shift.name.trim().toLowerCase();
             const currentTime = shift.time.toLowerCase();
@@ -364,9 +526,9 @@ const savedData = JSON.parse(localStorage.getItem(`shifts-${displayYear}-${displ
 
             shiftListHTML += `
                 <div style="background:${finalBg}; 
-                          border:${borderColor}; 
-                          box-shadow:${shadowStyle};
-                          padding:0.125rem 0.25rem; margin-bottom:0.0625rem; border-radius:0.125rem; color:#333;">
+                        border:${borderColor}; 
+                        box-shadow:${shadowStyle};
+                        padding:0.125rem 0.25rem; margin-bottom:0.0625rem; border-radius:0.125rem; color:#333;">
                     ${isClopen ? '<strong>⚠️ </strong>' : ''}<strong>${shift.time}</strong> ${shift.name}
                 </div>`;
         });
@@ -387,9 +549,10 @@ const savedData = JSON.parse(localStorage.getItem(`shifts-${displayYear}-${displ
 // MODAL LOGIC
 function openModal(day, month, year) {
     currentEditingDay = { day, month, year };
-    const monthNames = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"];
-    document.getElementById('modal-date-title').innerText = `${monthNames[month]} ${day}, ${year}`;
+    const lang = localStorage.getItem('preferredLang') || 'en';
+    const t = translations[lang];
+
+    document.getElementById('modal-date-title').innerText = `${t.months[month]} ${day}, ${year}`;
     
     const list = document.getElementById('shift-list');
     list.innerHTML = '';
@@ -414,10 +577,13 @@ function addShiftRow(name = '', time = '') {
     const c2 = localStorage.getItem('custom-label-2') || 'Custom 2';
     const c3 = localStorage.getItem('custom-label-3') || 'Custom 3';
 
+    const lang = localStorage.getItem('preferredLang') || 'en';
+    const t = translations[lang];
+
     row.innerHTML = `
         <div style="display: flex; gap: 0.3125rem; margin-bottom: 0.5rem;">
-            <input type="text" placeholder="Name" value="${name}" style="flex:2; padding:0.5rem;">
-            <input type="text" class="time-input" placeholder="Time" value="${time}" 
+            <input type="text" placeholder="${t.namePlaceholder}" value="${name}" style="flex:2; padding:0.5rem;">
+            <input type="text" class="time-input" placeholder="${t.timePlaceholder}" value="${time}" 
                    onfocus="this.parentElement.nextElementSibling.style.display='grid'" 
                    style="flex:1; padding:0.5rem;">
             <button onclick="this.parentElement.parentElement.remove()" style="background:#a00; padding:0.3125rem 0.625rem; border:none; color:white; border-radius:0.25rem;">X</button>
@@ -482,7 +648,8 @@ function saveCustomLabels() {
     localStorage.setItem('custom-label-2', c2);
     localStorage.setItem('custom-label-3', c3);
     
-    alert("Labels saved! They will appear on new rows.");
+    const lang = localStorage.getItem('preferredLang') || 'en';
+    alert(translations[lang].alertLabelsSaved);
     document.getElementById('custom-settings').style.display = 'none';
 }
 
@@ -505,7 +672,8 @@ function saveSchedule() {
     downloadAnchorNode.click();
     downloadAnchorNode.remove();
     
-    alert("Schedule Backup Downloaded!");
+    const lang = localStorage.getItem('preferredLang') || 'en';
+    alert(translations[lang].alertBackupDownloaded);
 }
 
 function exportToPDF() {
@@ -523,7 +691,10 @@ function exportToPDF() {
 
 // TOP CONTROLS
 function clearEntireSchedule() {
-    if (confirm("Are you sure? This will wipe the ENTIRE month.")) {
+    const lang = localStorage.getItem('preferredLang') || 'en';
+    const t = translations[lang];
+
+    if (confirm(t.alertClearAll)) {
         const now = new Date();
         const year = now.getFullYear();
         const month = now.getMonth();
@@ -537,7 +708,8 @@ function clearEntireSchedule() {
 }
 
 function forwardSchedule() {
-    const message = encodeURIComponent("The Staff Schedule has been updated in the Manager Portal. Please check the portal for your specific shifts.");
+    const lang = localStorage.getItem('preferredLang') || 'en';
+    const message = encodeURIComponent(translations[lang].whatsappMsg);
     
     // Using the 'send' API which is more aggressive at opening the desktop app
     const whatsappUrl = `https://api.whatsapp.com/send?text=${message}`;
@@ -546,7 +718,10 @@ function forwardSchedule() {
 }
 
 function toggleViewMode() {
-    const isViewMode = confirm("Switch to View-Only mode? (Refresh the page to return to Manager mode)");
+    const lang = localStorage.getItem('preferredLang') || 'en';
+    const t = translations[lang];
+
+    const isViewMode = confirm(t.alertViewMode);
     
     if (isViewMode) {
         // 1. Hide the top control buttons
@@ -559,16 +734,19 @@ function toggleViewMode() {
             day.style.cursor = 'default';
         });
         
-        // 3. Add a small "View Only" indicator
+        // 3. Add a small indicator
         const indicator = document.createElement('div');
-        indicator.innerHTML = "<strong>VIEW-ONLY MODE</strong>";
+        indicator.innerHTML = `<strong>${t.viewOnlyIndicator}</strong>`;
         indicator.style.cssText = "color: white; background: #c00; padding: 0.3125rem 1.25rem; border-radius: 1.25rem; margin-bottom: 0.625rem;";
         document.body.prepend(indicator);
     }
 }
 
 function copyPreviousWeek() {
-    if (!confirm("This will copy shifts from 7 days ago into the current days. Continue?")) return;
+    const lang = localStorage.getItem('preferredLang') || 'en';
+    const t = translations[lang];
+
+    if (!confirm(t.alertCopyWeek)) return;
 
     const now = new Date();
     const year = now.getFullYear();
@@ -601,12 +779,16 @@ function copyPreviousWeek() {
         }
     }
 
-    alert("Shifts and Events copied from last week!");
+    alert(t.alertWeekCopied);
     initCalendar(); // Refresh the view
 }
 
-// Start
-initCalendar();
+// On page load, apply saved language and initialize calendar
+window.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('preferredLang') || 'en';
+    applyLanguage(savedLang);
+    initCalendar();
+});
 
 </script>
  
@@ -616,22 +798,22 @@ initCalendar();
         
         <h2 id="modal-date-title" style="color:var(--neon-accent);">April 16, 2026</h2>
         <hr>
-       <input type="text" id="event-name" placeholder="Special Event (e.g. Inventory, Holiday)" style="width:100%; padding:0.625rem; margin-bottom:0.9375rem; background:#444; color:white; border:0.0625rem solid #666; border-radius:0.25rem;"> 
- <div id="shift-list">
+       <input type="text" id="event-name" placeholder="Special Event (e.g. Inventory, Holiday)" data-translate-placeholder="modalEventPlaceholder" style="width:100%; padding:0.625rem; margin-bottom:0.9375rem; background:#444; color:white; border:0.0625rem solid #666; border-radius:0.25rem;"> 
+<div id="shift-list">
             </div>
 
         <div id="custom-settings" style="margin-top:1.25rem; padding:0.625rem; border:0.0625rem dashed #666; border-radius:0.5rem; display:none;">
-            <p style="font-size:0.8rem; margin-bottom:0.625rem; color:#ccc;">Set your 3 custom shortcuts:</p>
-            <input type="text" id="custom-1" placeholder="Custom 1" style="width:30%; font-size:0.7rem; padding:0.3125rem;">
-            <input type="text" id="custom-2" placeholder="Custom 2" style="width:30%; font-size:0.7rem; padding:0.3125rem;">
-            <input type="text" id="custom-3" placeholder="Custom 3" style="width:30%; font-size:0.7rem; padding:0.3125rem;">
-            <button onclick="saveCustomLabels()" style="width:100%; margin-top:0.625rem; background:#444; font-size:0.8rem;">Save Custom Labels</button>
+            <p style="font-size:0.8rem; margin-bottom:0.625rem; color:#ccc;" data-translate="customSettingsTitle">Set your 3 custom shortcuts:</p>
+            <input type="text" id="custom-1" placeholder="Custom 1" data-translate-placeholder="custom1Placeholder" style="width:30%; font-size:0.7rem; padding:0.3125rem;">
+            <input type="text" id="custom-2" placeholder="Custom 2" data-translate-placeholder="custom2Placeholder" style="width:30%; font-size:0.7rem; padding:0.3125rem;">
+            <input type="text" id="custom-3" placeholder="Custom 3" data-translate-placeholder="custom3Placeholder" style="width:30%; font-size:0.7rem; padding:0.3125rem;">
+            <button onclick="saveCustomLabels()" style="width:100%; margin-top:0.625rem; background:#444; font-size:0.8rem;" data-translate="saveCustomBtn">Save Custom Labels</button>
         </div>
 
-        <button onclick="document.getElementById('custom-settings').style.display='block'" style="background:none; color:var(--neon-accent); border:0.0625rem solid var(--neon-accent); width:100%; margin-top:1.25rem; font-size:0.8rem;">⚙️ EDIT CUSTOM BUTTONS</button>
+        <button onclick="document.getElementById('custom-settings').style.display='block'" style="background:none; color:var(--neon-accent); border:0.0625rem solid var(--neon-accent); width:100%; margin-top:1.25rem; font-size:0.8rem;" data-translate="editCustomBtn">⚙️ EDIT CUSTOM BUTTONS</button>
         
-        <button onclick="addShiftRow()" style="background:#28a745; width:100%; margin-top:0.625rem;">+ ADD STAFF MEMBER</button>
-        <button onclick="saveDailyShifts()" style="background:var(--neon-accent); color:#88aadd; width:100%; margin-top:0.625rem;">SAVE DAY</button>        
+        <button onclick="addShiftRow()" style="background:#28a745; width:100%; margin-top:0.625rem;" data-translate="addStaffBtn">+ ADD STAFF MEMBER</button>
+        <button onclick="saveDailyShifts()" style="background:var(--neon-accent); color:#88aadd; width:100%; margin-top:0.625rem;" data-translate="saveDayBtn">SAVE DAY</button>        
 
     </div>
 </div>

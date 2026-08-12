@@ -44,6 +44,33 @@
         min-height: 100vh;
     }
     
+.feedback-bubble {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  width: 3rem;
+  height: 3rem;
+  background-color: #d89614;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  z-index: 1000;
+}
+
+.feedback-bubble svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.feedback-bubble:hover {
+  background-color: #555;
+  transform: scale(1.05);
+}
+    
     h2  {
         font-size: 1rem;
         letter-spacing: 0.25rem
@@ -103,7 +130,11 @@
 </style>
 </head>
 <body>
-
+    <a href="mailto:waiterworld@proton.me?subject=Waiter%20World%20Feedback" class="feedback-bubble" aria-label="Feedback">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0-2-.9-2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/>
+      </svg>
+    </a>
     <div class="header-container">
         <h1 class="arched-title">
             <span class="char1">W</span><span class="char2">A</span><span class="char3">I</span><span class="char4">T</span><span class="char5">E</span><span class="char6">R</span>

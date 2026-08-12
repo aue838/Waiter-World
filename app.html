@@ -54,6 +54,33 @@ body {
     position: relative;
 }
 
+.mute-button {
+  position: fixed;
+  top: 1.5rem;
+  left: 1.5rem;
+  padding: 0.4rem 0.8rem;
+  background-color: #5c6370;
+  color: #fff;
+  border: none;
+  border-radius: 9999rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  z-index: 1000;
+  transition: transform 0.2s ease;
+}
+
+.mute-button:hover {
+  transform: scale(1.05);
+}
+
+.mute-button svg {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
 /* This layer holds your sky and grass perfectly stationary */
 .scenery-bg {
     position: fixed;
@@ -1373,10 +1400,16 @@ body::before {
 </style>   
 <link rel="apple-touch-icon" sizes="11.25rem" href="icon-512.png">
 <link rel="manifest" href="manifest.json">
-
 </head>
 
 <body>
+<button id="mute-btn" class="mute-button" aria-label="Toggle Mute">
+  <svg id="speaker-icon" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
+    <path id="sound-waves" d="M16.5 7.5c1.1 1.1 1.1 2.9 0 4m2.5-6c2.2 2.2 2.2 5.8 0 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <path id="mute-x" d="M3 3l18 18" stroke="#fff" stroke-width="2.5" stroke-linecap="round" display="none"/>
+  </svg>
+</button>
 <div class="scenery-bg"></div>
 <div class="sunbeam-path"></div>
     <a href="index.html" class="back-home-button">←Back</a>
@@ -2276,25 +2309,30 @@ setTimeout(() => {
 });
 
 </script>
-
 <script>
-  // This function starts the music safely
+// This function starts the music safely
   function startCircusMusic() {
     const music = document.getElementById('bg-music');
     // Lower the volume slightly so it's not blastingly loud (0.0 to 1.0)
     music.volume = 0.4; 
-    const muteBtn = document.getElementById('app-mute-btn');
+    const muteBtn = document.getElementById('mute-btn'); // Updated ID to match the new button
+    
     if (muteBtn && !muteBtn.dataset.listenerAdded) {
       muteBtn.dataset.listenerAdded = "true";
       
       const toggleMute = (e) => {
         e.stopPropagation();
+        const x = document.getElementById('mute-x');
+        const waves = document.getElementById('sound-waves');
+
         if (music.muted) {
           music.muted = false;
-          muteBtn.innerText = "🔊 Mute";
+          x.style.display = 'none';
+          waves.style.display = 'block';
         } else {
           music.muted = true;
-          muteBtn.innerText = "🔇 Unmute";
+          x.style.display = 'block';
+          waves.style.display = 'none';
         }
       };
 
@@ -2330,9 +2368,7 @@ setTimeout(() => {
   window.addEventListener('click', startCircusMusic);
   window.addEventListener('touchstart', startCircusMusic, { passive: true });
 </script>
-
-<button id="app-mute-btn" style="position: fixed; top: 1.25rem; left: 1.25rem; z-index: 1000; padding: 0.625rem; font-size: 1.2rem; cursor: pointer; background: rgba(0,0,0,0.6); color: white; border: 0.0625rem solid white; border-radius: 0.3125rem;">🔊 Mute</button>
-
+          
 <div id="transition-overlay"></div>
 
 <!-- Back to Hub Navigation -->
